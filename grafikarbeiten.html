@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>THE PIZZARY — Grafikarbeiten · Briefing</title>
+<meta name="description" content="Alle Grafik-Deliverables für THE PIZZARY Berlin: Print, Store, Digital, Opening." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --base:#F1F2EC;--cheesy:#E8EC8B;--veggie:#9FC8A0;--blue:#5B6FD6;--tomato:#C9202A;
+  --black:#0A0A0A;--pink:#D87ACF;--asphalt:#A99FC2;--green-ink:#2EA24B;--ink:#0A0A0A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--base);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5;}
+h1,h2,h3,.display{font-family:'Archivo',sans-serif;font-weight:900;letter-spacing:-.02em;line-height:.92;text-transform:uppercase;}
+.marker{font-family:'Permanent Marker',cursive;font-weight:400;text-transform:none;letter-spacing:0;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);mix-blend-mode:difference;color:#fff;pointer-events:none;}
+nav .wm{font-family:'Archivo';font-weight:900;font-size:1.1rem;letter-spacing:.02em;pointer-events:auto;}
+nav .links{display:flex;gap:clamp(10px,2vw,28px);font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;align-items:center;}
+nav .links a{opacity:.7;transition:opacity .25s;white-space:nowrap;}
+nav .links a:hover,nav .links a.active{opacity:1;}
+.burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:36px;height:30px;background:none;border:none;cursor:pointer;pointer-events:auto;padding:0;}
+.burger span{display:block;height:3px;width:100%;background:#fff;border-radius:3px;transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .2s;}
+body.menu-open .burger span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+body.menu-open .burger span:nth-child(2){opacity:0;}
+body.menu-open .burger span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:1000px){nav .links{display:none;}.burger{display:flex;}}
+
+.overlay{position:fixed;inset:0;z-index:99;background:var(--black);color:var(--base);display:flex;flex-direction:column;justify-content:center;padding:90px clamp(24px,8vw,110px) 0;transform:translateY(-101%);transition:transform .6s cubic-bezier(.76,0,.24,1);overflow:hidden;}
+body.menu-open{overflow:hidden;}
+body.menu-open .overlay{transform:none;}
+.overlay .om-eyebrow{font-weight:800;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5;margin-bottom:24px;}
+.overlay a.ol{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(1.8rem,7vw,4rem);line-height:1.04;color:var(--base);display:flex;align-items:baseline;gap:18px;padding:4px 0;opacity:0;transform:translateY(34px);transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1),color .2s;}
+.overlay a.ol .idx{font-family:'Hanken Grotesk';font-weight:700;font-size:.85rem;opacity:.4;letter-spacing:.05em;}
+body.menu-open .overlay a.ol{opacity:1;transform:none;}
+body.menu-open .overlay a.ol:nth-child(2){transition-delay:.14s}
+body.menu-open .overlay a.ol:nth-child(3){transition-delay:.19s}
+body.menu-open .overlay a.ol:nth-child(4){transition-delay:.24s}
+body.menu-open .overlay a.ol:nth-child(5){transition-delay:.29s}
+body.menu-open .overlay a.ol:nth-child(6){transition-delay:.34s}
+body.menu-open .overlay a.ol:nth-child(7){transition-delay:.39s}
+body.menu-open .overlay a.ol:nth-child(8){transition-delay:.44s}
+body.menu-open .overlay a.ol:nth-child(9){transition-delay:.49s}
+.overlay a.ol:hover{color:var(--tomato);}
+.overlay a.ol:hover .idx{color:var(--cheesy);opacity:1;}
+.overlay .om-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:22px 0;flex-wrap:wrap;gap:14px;}
+.overlay .om-band{position:absolute;bottom:0;left:0;right:0;height:14px;display:grid;grid-template-columns:repeat(8,1fr);}
+.progress{position:fixed;top:0;left:0;height:4px;background:var(--tomato);width:0;z-index:101;}
+
+/* LAYOUT */
+section{padding:clamp(60px,9vh,120px) clamp(20px,5vw,64px);position:relative;}
+.wide{max-width:1380px;margin:0 auto;}
+.eyebrow{font-weight:800;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-bottom:18px;}
+.lead{font-size:clamp(1.05rem,2vw,1.35rem);font-weight:500;max-width:60ch;}
+.r{opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.r.in{opacity:1;transform:none;}
+.r.d1{transition-delay:.07s}.r.d2{transition-delay:.14s}.r.d3{transition-delay:.21s}
+.r.d4{transition-delay:.28s}.r.d5{transition-delay:.35s}
+@media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none;}}
+
+/* HERO */
+.hero{min-height:88svh;display:flex;flex-direction:column;justify-content:center;padding-top:120px;padding-bottom:clamp(70px,13vh,130px);overflow:hidden;}
+.farbband{position:absolute;bottom:0;left:0;right:0;height:clamp(70px,12vh,130px);display:grid;grid-template-columns:repeat(8,1fr);}
+.farbband span{transform:scaleY(0);transform-origin:bottom;animation:tile .8s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes tile{to{transform:scaleY(1);}}
+.hero-inner{position:relative;z-index:2;}
+.hero h1{font-size:clamp(3rem,12vw,9.5rem);}
+.hero h1 .out{-webkit-text-stroke:2.5px var(--ink);color:transparent;}
+.hero h1 .red{color:var(--tomato);}
+.hero .tag{display:inline-block;margin-top:26px;background:var(--tomato);color:#fff;font-family:'Archivo';font-weight:900;font-size:clamp(.85rem,2vw,1.1rem);padding:8px 18px;text-transform:uppercase;transform:rotate(-1.5deg);}
+.hero .lead{margin-top:22px;}
+
+/* COUNTER STRIP */
+.counter-strip{background:var(--black);color:var(--base);padding:clamp(30px,5vh,56px) clamp(20px,5vw,64px);}
+.counters{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1380px;margin:0 auto;}
+.ct{padding:20px 26px;border-right:1px solid rgba(255,255,255,.12);}
+.ct:last-child{border-right:none;}
+.ct .cv{font-family:'Archivo';font-weight:900;font-size:clamp(2rem,5vw,3.6rem);color:var(--cheesy);line-height:.85;}
+.ct .cl{font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;margin-top:8px;opacity:.65;}
+
+/* SECTION HEAD */
+.shead{margin-bottom:40px;}
+.shead h2{font-size:clamp(2rem,5.5vw,3.8rem);margin-top:8px;}
+.snum{font-family:'Archivo';font-weight:900;font-size:clamp(2rem,5.5vw,3.8rem);color:var(--tomato);line-height:.85;}
+.shead .marker{color:var(--green-ink);font-size:clamp(1.1rem,2.5vw,1.7rem);display:block;margin-top:10px;}
+
+/* CARD GRID */
+.grid-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.grid-cards.four{grid-template-columns:repeat(4,1fr);}
+.gcard{border-radius:10px;padding:26px 24px 22px;display:flex;flex-direction:column;gap:12px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;position:relative;overflow:hidden;min-height:210px;}
+.gcard:hover{transform:translateY(-7px);}
+.gcard .gc-num{font-family:'Archivo';font-weight:900;font-size:.85rem;opacity:.45;}
+.gcard h3{font-size:clamp(1.1rem,1.9vw,1.4rem);text-transform:uppercase;line-height:1;flex:1;}
+.gcard p{font-weight:500;font-size:.88rem;opacity:.85;line-height:1.4;}
+.gcard .prio{align-self:flex-start;font-weight:800;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-top:4px;}
+.gcard .status{align-self:flex-start;font-weight:800;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;border-radius:999px;border:2px solid currentColor;cursor:pointer;transition:background .18s,color .18s,transform .1s;margin-top:auto;}
+.gcard .status:active{transform:scale(.94);}
+.gcard .status[data-s="todo"]{background:transparent;}
+.gcard .status[data-s="wip"]{background:var(--cheesy);color:#000;border-color:var(--cheesy);}
+.gcard .status[data-s="done"]{background:var(--green-ink);color:#fff;border-color:var(--green-ink);}
+
+/* COLORS */
+.c-base{background:#fff;border:2.5px solid var(--ink);color:var(--ink);}
+.c-base .prio{background:var(--cheesy);color:#000;}
+.c-base .status{color:var(--ink);}
+.c-cheesy{background:var(--cheesy);color:var(--ink);}
+.c-cheesy .status{color:var(--ink);}
+.c-veggie{background:var(--veggie);color:var(--ink);}
+.c-veggie .status{color:var(--ink);}
+.c-blue{background:var(--blue);color:#fff;}
+.c-blue .status{color:#fff;}
+.c-pink{background:var(--pink);color:#fff;}
+.c-pink .status{color:#fff;}
+.c-tomato{background:var(--tomato);color:#fff;}
+.c-tomato .status{color:#fff;}
+.c-asphalt{background:var(--asphalt);color:#fff;}
+.c-asphalt .status{color:#fff;}
+.c-black{background:var(--black);color:var(--base);}
+.c-black .status{color:var(--base);}
+.c-black .prio{background:var(--cheesy);color:#000;}
+
+/* PRIO BADGE */
+.hot-badge{position:absolute;top:16px;right:16px;background:var(--tomato);color:#fff;font-weight:800;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;}
+
+/* FEATURED CARD */
+.feat-card{grid-column:span 2;flex-direction:row;flex-wrap:wrap;gap:22px;align-items:flex-start;min-height:unset;}
+.feat-card .fc-content{flex:1;min-width:200px;}
+.feat-card .fc-size{padding:14px 20px;border-radius:8px;font-weight:800;font-size:.82rem;opacity:.8;background:rgba(255,255,255,.15);width:fit-content;}
+
+/* DIVIDER */
+.div-band{height:6px;background:linear-gradient(90deg,var(--cheesy),var(--veggie),var(--blue),var(--tomato),var(--pink),var(--asphalt),var(--cheesy),var(--blue));}
+
+/* LEGEND */
+.legend{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:28px;align-items:center;}
+.leg{display:flex;align-items:center;gap:7px;font-weight:700;font-size:.76rem;}
+.leg .dot{width:14px;height:14px;border-radius:50%;}
+.leg .todo .dot{background:var(--base);border:2px solid var(--ink);}
+.leg .wip .dot{background:var(--cheesy);}
+.leg .done .dot{background:var(--green-ink);}
+
+/* FOOTER */
+footer{background:var(--black);color:var(--base);padding:clamp(56px,8vh,100px) clamp(20px,5vw,64px) 36px;}
+footer .big{font-size:clamp(2rem,7vw,5.5rem);font-family:'Archivo';font-weight:900;text-transform:uppercase;line-height:.9;}
+footer .big em{font-style:normal;color:var(--tomato);}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:flex-end;margin-top:36px;padding-top:26px;border-top:1px solid rgba(255,255,255,.2);}
+footer .meta{font-weight:600;font-size:.92rem;opacity:.8;line-height:1.8;}
+footer .logo{width:140px;}
+
+/* marq */
+.marq{background:var(--tomato);color:#fff;overflow:hidden;padding:14px 0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);}
+.marq div{display:inline-flex;white-space:nowrap;animation:roll 28s linear infinite;font-family:'Archivo';font-weight:900;font-size:clamp(1rem,2vw,1.6rem);text-transform:uppercase;}
+.marq span{padding:0 24px;}
+.marq .o{color:var(--cheesy);}
+@keyframes roll{to{transform:translateX(-50%);}}
+
+@media(max-width:960px){.grid-cards,.grid-cards.four{grid-template-columns:repeat(2,1fr);}.feat-card{grid-column:span 2;}.counters{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.grid-cards,.grid-cards.four{grid-template-columns:1fr;}.feat-card{grid-column:span 1;}.counters{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+<nav>
+  <a href="onepager.html" class="wm">THE PIZZARY</a>
+  <div class="links">
+    <a href="onepager.html#plan">Fahrplan</a>
+    <a href="onepager.html#kanaele">Kanäle</a>
+    <a href="menuekarte.html">Menükarte</a>
+    <a href="grafikarbeiten.html" class="active">Grafik</a>
+    <a href="google-marketing.html">Google</a>
+    <a href="strategie.html">Strategie</a>
+    <a href="strategie-small.html">Strategie Small</a>
+    <a href="glücksrad.html">Glücksrad</a>
+    <a href="onepager.html#go">28.08.</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="om-eyebrow">Navigation</div>
+  <a class="ol" href="onepager.html#top"><span class="idx">01</span> Start</a>
+  <a class="ol" href="onepager.html#ziele"><span class="idx">02</span> Ziele</a>
+  <a class="ol" href="onepager.html#plan"><span class="idx">03</span> Fahrplan</a>
+  <a class="ol" href="onepager.html#kanaele"><span class="idx">04</span> Kanäle</a>
+  <a class="ol" href="menuekarte.html"><span class="idx">05</span> Menükarte</a>
+  <a class="ol" href="grafikarbeiten.html"><span class="idx">06</span> Grafik</a>
+  <a class="ol" href="google-marketing.html"><span class="idx">07</span> Google</a>
+  <a class="ol" href="glücksrad.html"><span class="idx">09</span> Glücksrad</a>
+  <a class="ol" href="onepager.html#go"><span class="idx">10</span> 28.08.</a>
+  <div class="om-foot">
+    <span class="marker" style="color:var(--green-ink);font-size:1.4rem">Fast. Fresh. Pizza.</span>
+    <span style="font-weight:700;opacity:.6;font-size:.8rem">@thepizzary · Berlin</span>
+  </div>
+  <div class="om-band" id="omband" aria-hidden="true"></div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="farbband" id="heroband" aria-hidden="true"></div>
+  <div class="hero-inner wide">
+    <div class="eyebrow r">Grafik-Briefing · alle Deliverables</div>
+    <h1 class="r d1">GRAFIK<span class="out">AR</span><span class="red">BEITEN</span></h1>
+    <span class="tag r d2">4 Kategorien · 22 Deliverables</span>
+    <p class="lead r d3">Von Print bis Digital, von der Fensterbeklebung bis zum Wolt-Banner. Alles was wir produzieren müssen — mit Priorität, Format und Status zum Abhaken.</p>
+  </div>
+</header>
+
+<!-- COUNTER STRIP -->
+<div class="counter-strip">
+  <div class="counters">
+    <div class="ct r"><div class="cv">22</div><div class="cl">Grafik-Deliverables</div></div>
+    <div class="ct r d1"><div class="cv">4</div><div class="cl">Kategorien</div></div>
+    <div class="ct r d2"><div class="cv">8</div><div class="cl">Opening-Must-Haves</div></div>
+    <div class="ct r d3"><div class="cv">28.08</div><div class="cl">Deadline</div></div>
+  </div>
+</div>
+
+<!-- 1 PRINT & OUTDOOR -->
+<section id="print">
+  <div class="wide">
+    <div class="shead r">
+      <span class="snum">01</span>
+      <h2>PRINT &amp; OUTDOOR</h2>
+      <span class="marker">Alles was man anfassen und sehen kann.</span>
+    </div>
+    <div class="legend r">
+      <span class="leg"><span class="dot" style="background:var(--base);border:2px solid #000"></span> To Do</span>
+      <span class="leg"><span class="dot" style="background:var(--cheesy)"></span> In Progress</span>
+      <span class="leg"><span class="dot" style="background:var(--green-ink)"></span> Done</span>
+    </div>
+    <div class="grid-cards">
+      <div class="gcard c-tomato r d1">
+        <span class="hot-badge">Opening Must</span>
+        <div class="gc-num">01</div>
+        <h3>Werbeposter<br>Promotionen</h3>
+        <p>A1/A0 Poster für Aktionen, Deals und Highlights. Aufhängbar im Store und im Schaufenster.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-cheesy r d2">
+        <span class="hot-badge" style="background:var(--black)">Opening Must</span>
+        <div class="gc-num">02</div>
+        <h3>Flyer<br>A5/DIN lang</h3>
+        <p>Zum Verteilen & Auslegen. QR zum Glücksrad auf jeder Seite. Doppelseitig: Angebot vorne, Info hinten.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-veggie r d3">
+        <div class="gc-num">03</div>
+        <h3>Menükarte<br>Print</h3>
+        <p>Gedruckte Karte für Tisch und Theke. Laminiert oder als Heft. Konsistent mit allen anderen Formaten.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-black r d1">
+        <span class="hot-badge">Opening Must</span>
+        <div class="gc-num">04</div>
+        <h3>Kundenstopper<br>Poster</h3>
+        <p>A1 starkes Angebot für draussen. Erster Blick vom Gehsteig. Hook in 2 Sekunden.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-pink r d2">
+        <span class="hot-badge">Opening Must</span>
+        <div class="gc-num">05</div>
+        <h3>Fenster-<br>beklebung</h3>
+        <p>Store-Fenster als Werbefläche: Logo, Claim, Öffnungszeiten, vielleicht Gratis-Offer zur Eröffnung.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-blue r d3">
+        <div class="gc-num">06</div>
+        <h3>Opening Event<br>Poster</h3>
+        <p>Spezielles 28.08.-Poster: Datum, Free Food, Glücksrad — als Ankündigung und Souvenir.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-band"></div>
+
+<!-- 2 STORE & POS -->
+<section id="pos" style="background:#fff">
+  <div class="wide">
+    <div class="shead r">
+      <span class="snum">02</span>
+      <h2>STORE &amp; POS</h2>
+      <span class="marker">Was im Store kommuniziert.</span>
+    </div>
+    <div class="grid-cards four">
+      <div class="gcard c-cheesy r d1">
+        <span class="hot-badge" style="background:var(--black)">Opening Must</span>
+        <div class="gc-num">07</div>
+        <h3>Tischaufsteller<br>Table Tent</h3>
+        <p>QR für Google Review + Glücksrad direkt am Tisch. Klein, dreieckig, A5.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-veggie r d2">
+        <div class="gc-num">08</div>
+        <h3>Sticker &amp;<br>Aufkleber</h3>
+        <p>Markenaufkleber für Boxen, Bags, Fenster. Kleine Details, die als Werbung weiterwandern.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-asphalt r d3">
+        <div class="gc-num">09</div>
+        <h3>Loyalty Card<br>Stempelkarte</h3>
+        <p>10× kaufen, 1× gratis. Einfaches System, starkes Retention-Tool. Die Karte muss behalten-würdig sein.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-base r d4">
+        <div class="gc-num">10</div>
+        <h3>Packaging<br>Design</h3>
+        <p>Pizzabox, Papiertüten, Servietten. Jede Verpackung ist eine Werbefläche, die durch die Stadt getragen wird.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-black r d1">
+        <div class="gc-num">11</div>
+        <h3>Briefpapier &amp;<br>Rechnungs-Layout</h3>
+        <p>Professionell für Angebote, Lieferanten, Behörden. Einmal eingerichtet, immer wiederverwendbar.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-blue r d2">
+        <span class="hot-badge">Nice to Have</span>
+        <div class="gc-num">12</div>
+        <h3>Staff-Shirts<br>Druckvorlage</h3>
+        <p>Crew-Kleidung als Walking Advertisement. Logo auf Brust + Rücken-Print. Einheitlicher Look.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-pink r d3">
+        <div class="gc-num">13</div>
+        <h3>QR-Code<br>Design</h3>
+        <p>Schön gestaltete QR-Codes (nicht die Standard-Pixel-Klötzchen) fürs Review, Menü, Glücksrad.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-tomato r d4">
+        <div class="gc-num">14</div>
+        <h3>Ballons &amp;<br>Deko-Druck</h3>
+        <p>Bedruckte Ballons und Dekor-Elemente für den Eröffnungstag. Farbwelt: Tomatenrot + Cheesy.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marq" aria-hidden="true"><div>
+  <span>WERBEPOSTER</span><span class="o">●</span><span>FLYER</span><span class="o">●</span><span>WOLT BANNER</span><span class="o">●</span><span>FENSTERBEKLEBUNG</span><span class="o">●</span><span>INSTAGRAM</span><span class="o">●</span><span>PACKAGING</span><span class="o">●</span>
+  <span>WERBEPOSTER</span><span class="o">●</span><span>FLYER</span><span class="o">●</span><span>WOLT BANNER</span><span class="o">●</span><span>FENSTERBEKLEBUNG</span><span class="o">●</span><span>INSTAGRAM</span><span class="o">●</span><span>PACKAGING</span><span class="o">●</span>
+</div></div>
+
+<!-- 3 DIGITAL & DELIVERY -->
+<section id="digital">
+  <div class="wide">
+    <div class="shead r">
+      <span class="snum">03</span>
+      <h2>DIGITAL &amp;<br>DELIVERY</h2>
+      <span class="marker">Online-Präsenz und Bestell-Plattformen.</span>
+    </div>
+    <div class="grid-cards">
+      <div class="gcard c-cheesy feat-card r d1">
+        <span class="hot-badge" style="background:var(--black)">Opening Must</span>
+        <div class="fc-content">
+          <div class="gc-num">15</div>
+          <h3>Wolt / Lieferando<br>Hero Banner</h3>
+          <p>Das erste was Kunden auf der Plattform sehen. Hochformat + Querformat. Starkes Food-Foto, klarer Claim, Markenfarben. Wird direkt über Klickrate bewertet.</p>
+          <div class="fc-size" style="background:rgba(0,0,0,.12);margin-top:12px">Wolt: 1920×1080 · Lieferando: 1024×200</div>
+        </div>
+        <button class="status" data-s="todo" style="align-self:flex-end">To Do</button>
+      </div>
+      <div class="gcard c-blue r d2">
+        <span class="hot-badge">Opening Must</span>
+        <div class="gc-num">16</div>
+        <h3>Instagram<br>Templates</h3>
+        <p>Post-Vorlagen 1:1, Stories 9:16, Reels-Cover. Konsistenter Look für alle organischen Posts.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-veggie r d1">
+        <div class="gc-num">17</div>
+        <h3>Instagram<br>Menu Highlight</h3>
+        <p>Menükarte als Story-Slides im Highlight. Täglich abrufbar, immer aktuell. Icon dafür designen.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-asphalt r d2">
+        <div class="gc-num">18</div>
+        <h3>Google My Business<br>Cover &amp; Fotos</h3>
+        <p>Profilbild, Cover-Foto, Kategorie-Bilder. Erstes Bild das Leute sehen wenn sie „Pizza Berlin" googeln.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-pink r d3">
+        <div class="gc-num">19</div>
+        <h3>Website<br>Grafiken</h3>
+        <p>Hero-Banner, Menü-Sektion, About-Grafik. Alle Bildmaterialien für die Website im richtigen Format.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard c-black r d4">
+        <div class="gc-num">20</div>
+        <h3>E-Mail Newsletter<br>Header</h3>
+        <p>Branded Header für alle Mailings: Eröffnungs-Newsletter, Aktionen, Updates. 600px breit.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-band"></div>
+
+<!-- 4 OPENING SPECIALS -->
+<section id="opening" style="background:var(--black);color:var(--base)">
+  <div class="wide">
+    <div class="shead r">
+      <span class="snum" style="color:var(--cheesy)">04</span>
+      <h2 style="color:var(--base)">OPENING<br>SPECIALS</h2>
+      <span class="marker" style="color:var(--green-ink)">Nur für den 28.08. — danach Geschichte.</span>
+    </div>
+    <div class="grid-cards">
+      <div class="gcard r d1" style="background:var(--cheesy);color:var(--ink)">
+        <span class="hot-badge" style="background:var(--tomato)">Prio 1</span>
+        <div class="gc-num">21</div>
+        <h3>Goodie Bag<br>Design</h3>
+        <p>Tüte für Creator-Goodies beim Pre-Opening. Kann auch nach dem Event als Premium-Bag weitergenutzt werden.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard r d2" style="background:var(--veggie);color:var(--ink)">
+        <span class="hot-badge" style="background:var(--tomato)">Prio 1</span>
+        <div class="gc-num">22</div>
+        <h3>First Taste Club<br>Ticket Design</h3>
+        <p>Das Creator-Einladungsticket für den 27.08. Edel, sammelbar, screenshot-würdig. Digitale + Printversion.</p>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+      <div class="gcard r d3" style="background:#1a1a1a;color:var(--base);border:2px solid rgba(255,255,255,.15)">
+        <div class="gc-num" style="color:#fff;opacity:.3">+</div>
+        <h3 style="color:var(--asphalt)">Eigene Ideen<br>hinzufügen</h3>
+        <p style="opacity:.6">Noch ein Grafik-Deliverable das fehlt? Hier notieren.</p>
+        <button class="status" data-s="todo" style="color:var(--base)">To Do</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wide">
+    <div class="eyebrow r" style="opacity:.5">Grafik-Briefing · The Pizzary</div>
+    <div class="big r d1">EIN LOOK,<br><em>ÜBERALL.</em></div>
+    <div class="row r d2">
+      <div class="meta">
+        <span class="marker" style="color:var(--green-ink)">Fast. Fresh. Pizza.</span><br>
+        📍 [Adresse] · Berlin · 28.08.<br>
+        📲 @thepizzary
+      </div>
+      <img class="logo" src="assets/logo-white.png" alt="THE PIZZARY" onerror="this.style.display='none'"/>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* farbbands */
+(function(){
+  const order=['--cheesy','--veggie','--blue','--tomato','--pink','--asphalt','--cheesy','--blue'];
+  const cs=getComputedStyle(document.documentElement);
+  ['heroband','omband'].forEach(id=>{
+    const m=document.getElementById(id);if(!m)return;
+    order.forEach((c,i)=>{
+      const s=document.createElement('span');
+      s.style.background=cs.getPropertyValue(c).trim();
+      if(id==='heroband'){s.style.animationDelay=(0.15+i*0.07)+'s';}
+      else{s.style.transform='scaleY(1)';}
+      m.appendChild(s);
+    });
+  });
+})();
+
+/* burger */
+(function(){
+  const b=document.getElementById('burger');const ov=document.getElementById('overlay');if(!b)return;
+  const toggle=open=>{const o=open??!document.body.classList.contains('menu-open');document.body.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o);ov.setAttribute('aria-hidden',!o);};
+  b.addEventListener('click',()=>toggle());
+  ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggle(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false);});
+})();
+
+/* status cycle */
+(function(){
+  const cycle=['todo','wip','done'];const lbl={todo:'To Do',wip:'In Progress ⚡',done:'Done ✓'};
+  document.querySelectorAll('.status').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const nx=cycle[(cycle.indexOf(el.dataset.s)+1)%cycle.length];
+      el.dataset.s=nx;el.textContent=lbl[nx];
+    });
+  });
+})();
+
+/* reveal */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -5% 0px'});
+document.querySelectorAll('.r').forEach(el=>io.observe(el));
+
+/* progress */
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+</script>
+</body>
+</html>

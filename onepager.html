@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>THE PIZZARY — Opening 28.08. · Berlin</title>
+<meta name="description" content="Opening Playbook für THE PIZZARY. Große Eröffnung am 28.08. in Berlin. Fast. Fresh. Pizza." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet" />
+<style>
+/* ============ FARBWELT ============ */
+:root{
+  --base:#F1F2EC;        /* BASE */
+  --cheesy:#E8EC8B;      /* CHEESY */
+  --veggie:#9FC8A0;      /* VEGGIE GREENS */
+  --blue:#5B6FD6;        /* BLUE SKY */
+  --tomato:#C9202A;      /* TOMATO RED */
+  --black:#0A0A0A;       /* KONTRAST */
+  --pink:#D87ACF;        /* URBAN PINK */
+  --asphalt:#A99FC2;     /* BERLIN ASPHALT */
+  --green-ink:#2EA24B;   /* marker green */
+  --ink:#0A0A0A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Hanken Grotesk',sans-serif;background:var(--base);color:var(--ink);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5;
+}
+h1,h2,h3,.display{font-family:'Archivo',sans-serif;font-weight:900;letter-spacing:-.02em;line-height:.92;text-transform:uppercase;}
+.marker{font-family:'Permanent Marker',cursive;font-weight:400;text-transform:none;letter-spacing:0;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+
+/* ============ NAV ============ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(20px,5vw,64px);mix-blend-mode:difference;color:#fff;
+  pointer-events:none;
+}
+nav .wm{font-family:'Archivo';font-weight:900;font-size:1.1rem;letter-spacing:.02em;pointer-events:auto;}
+nav .links{display:flex;gap:clamp(14px,2.5vw,34px);font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;align-items:center;}
+nav .links a{opacity:.7;transition:opacity .25s;}
+nav .links a:hover,nav .links a.active{opacity:1;}
+
+/* burger */
+.burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:36px;height:30px;background:none;border:none;cursor:pointer;pointer-events:auto;padding:0;}
+.burger span{display:block;height:3px;width:100%;background:#fff;border-radius:3px;transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .2s;}
+body.menu-open .burger span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+body.menu-open .burger span:nth-child(2){opacity:0;}
+body.menu-open .burger span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:1200px){nav .links{display:none;}.burger{display:flex;}}
+
+/* overlay menu */
+.overlay{position:fixed;inset:0;z-index:99;background:var(--black);color:var(--base);display:flex;flex-direction:column;justify-content:center;padding:90px clamp(24px,8vw,110px) 0;transform:translateY(-101%);transition:transform .6s cubic-bezier(.76,0,.24,1);overflow:hidden;}
+body.menu-open{overflow:hidden;}
+body.menu-open .overlay{transform:none;}
+.overlay .om-eyebrow{font-weight:800;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5;margin-bottom:24px;}
+.overlay a.ol{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(2rem,8vw,4.4rem);line-height:1.04;color:var(--base);display:flex;align-items:baseline;gap:18px;padding:5px 0;opacity:0;transform:translateY(34px);transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1),color .2s;}
+.overlay a.ol .idx{font-family:'Hanken Grotesk';font-weight:700;font-size:.9rem;opacity:.4;letter-spacing:.05em;}
+body.menu-open .overlay a.ol{opacity:1;transform:none;}
+body.menu-open .overlay a.ol:nth-child(2){transition-delay:.18s}
+body.menu-open .overlay a.ol:nth-child(3){transition-delay:.24s}
+body.menu-open .overlay a.ol:nth-child(4){transition-delay:.3s}
+body.menu-open .overlay a.ol:nth-child(5){transition-delay:.36s}
+body.menu-open .overlay a.ol:nth-child(6){transition-delay:.42s}
+body.menu-open .overlay a.ol:nth-child(7){transition-delay:.48s}
+body.menu-open .overlay a.ol:nth-child(8){transition-delay:.54s}
+.overlay a.ol:hover{color:var(--tomato);}
+.overlay a.ol:hover .idx{color:var(--cheesy);opacity:1;}
+.overlay .om-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:28px 0;flex-wrap:wrap;gap:14px;}
+.overlay .om-foot .marker{color:var(--green-ink);font-size:1.4rem;}
+.overlay .om-band{position:absolute;bottom:0;left:0;right:0;height:14px;display:grid;grid-template-columns:repeat(8,1fr);}
+
+.progress{position:fixed;top:0;left:0;height:4px;background:var(--tomato);width:0;z-index:101;}
+
+/* ============ LAYOUT ============ */
+section{padding:clamp(70px,11vh,140px) clamp(20px,5vw,64px);position:relative;}
+.wide{max-width:1320px;margin:0 auto;}
+.eyebrow{font-weight:800;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-bottom:18px;}
+.lead{font-size:clamp(1.05rem,2vw,1.4rem);font-weight:500;max-width:60ch;}
+
+/* reveal */
+.r{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+.r.in{opacity:1;transform:none;}
+.r.d1{transition-delay:.08s}.r.d2{transition-delay:.16s}.r.d3{transition-delay:.24s}.r.d4{transition-delay:.32s}.r.d5{transition-delay:.4s}
+@media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none;}}
+
+/* ============ HERO ============ */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:120px;padding-bottom:clamp(110px,18vh,200px);overflow:hidden;}
+.farbband{position:absolute;bottom:0;left:0;right:0;height:clamp(80px,15vh,160px);z-index:0;display:grid;grid-template-columns:repeat(8,1fr);}
+.farbband span{transform:scaleY(0);transform-origin:bottom;animation:tile .8s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes tile{to{transform:scaleY(1);}}
+.hero-inner{position:relative;z-index:2;}
+.hero h1{font-size:clamp(3.2rem,14vw,11rem);color:var(--ink);}
+.hero h1 .out{-webkit-text-stroke:2.5px var(--ink);color:transparent;}
+.hero h1 .red{color:var(--tomato);}
+.hero .sub{display:flex;flex-wrap:wrap;gap:16px 26px;align-items:center;margin-top:30px;}
+.hero .date-chip{background:var(--tomato);color:#fff;font-family:'Archivo';font-weight:900;font-size:clamp(1rem,2.4vw,1.5rem);padding:8px 18px;transform:rotate(-2deg);text-transform:uppercase;}
+.hero .sub p{font-size:clamp(1rem,2vw,1.25rem);font-weight:600;max-width:38ch;}
+.scrolldown{position:absolute;bottom:clamp(96px,16vh,176px);left:clamp(20px,5vw,64px);z-index:3;font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+.scrolldown .ln{width:46px;height:2px;background:var(--ink);position:relative;overflow:hidden;}
+.scrolldown .ln::after{content:"";position:absolute;inset:0;background:var(--tomato);animation:sweep 1.8s infinite;}
+@keyframes sweep{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+/* ============ MANIFEST (black) ============ */
+.manifest{background:var(--black);color:var(--base);}
+.manifest h2{font-size:clamp(2.4rem,8vw,6.5rem);}
+.manifest h2 em{font-style:normal;color:var(--cheesy);}
+.manifest .lead{margin-top:26px;opacity:.85;}
+.dove{position:absolute;right:clamp(-40px,2vw,40px);top:50%;transform:translateY(-50%);width:clamp(180px,28vw,420px);opacity:.95;pointer-events:none;}
+
+/* ============ ZIELE ============ */
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;}
+.goal{padding:30px 26px 26px;border-radius:6px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;color:var(--ink);}
+.goal.c1{background:var(--cheesy);}
+.goal.c2{background:var(--blue);color:#fff;}
+.goal.c3{background:var(--tomato);color:#fff;}
+.goal .num{font-family:'Archivo';font-weight:900;font-size:clamp(2.8rem,6vw,4.6rem);line-height:.9;}
+.goal .gk{font-weight:800;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7;}
+.goal .gd{font-weight:600;font-size:.95rem;}
+
+/* ============ TIMELINE ============ */
+.tl-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;}
+.tl{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:3px solid var(--ink);}
+.phase{padding:24px 22px 30px;border-right:1px solid rgba(10,10,10,.15);position:relative;}
+.phase:last-child{border-right:none;}
+.phase::before{content:"";position:absolute;top:-3px;left:0;height:3px;background:var(--c,var(--tomato));width:0;transition:width 1s cubic-bezier(.16,1,.3,1);}
+.phase.in::before{width:100%;}
+.phase .pn{font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--c);}
+.phase .pw{font-family:'Archivo';font-weight:900;font-size:clamp(1.4rem,3vw,2rem);margin:8px 0 14px;text-transform:uppercase;}
+.phase ul{list-style:none;}
+.phase li{font-weight:600;font-size:.9rem;padding:7px 0;border-bottom:1px solid rgba(10,10,10,.08);}
+.phase.hot{background:#fff;}
+
+/* ============ KANÄLE ============ */
+.chan{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;}
+.ch{border-radius:6px;padding:28px 26px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1);}
+.ch:hover{transform:translateY(-8px);}
+.ch .emoji{font-size:2.2rem;}
+.ch h3{font-size:clamp(1.5rem,2.5vw,2rem);margin:14px 0 10px;}
+.ch p{font-weight:500;font-size:.95rem;}
+.ch .tag{margin-top:16px;font-weight:800;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;opacity:.7;}
+.ch.veggie{background:var(--veggie);}
+.ch.cheesy{background:var(--cheesy);}
+.ch.asphalt{background:var(--asphalt);color:#fff;}
+.ch.pink{background:var(--pink);color:#fff;}
+.ch.blue{background:var(--blue);color:#fff;}
+.ch.black{background:var(--black);color:var(--base);}
+
+/* ============ GLÜCKSRAD feature ============ */
+.feat{background:var(--pink);color:#fff;border-radius:0;}
+.feat .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;}
+.feat h2{font-size:clamp(2.4rem,7vw,5.5rem);}
+.feat .lead{margin:22px 0;color:#fff;}
+.feat .btn{display:inline-flex;align-items:center;gap:12px;background:var(--black);color:#fff;font-weight:800;padding:16px 28px;border-radius:999px;font-size:.95rem;letter-spacing:.04em;transition:transform .25s,background .25s;}
+.feat .btn:hover{transform:translateX(6px);background:#fff;color:var(--black);}
+.disc{aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--tomato) 0 45deg,var(--base) 45deg 90deg,var(--blue) 90deg 135deg,var(--cheesy) 135deg 180deg,var(--veggie) 180deg 225deg,var(--base) 225deg 270deg,var(--black) 270deg 315deg,var(--cheesy) 315deg 360deg);border:10px solid var(--black);box-shadow:0 30px 60px rgba(0,0,0,.3);animation:spin 26s linear infinite;position:relative;max-width:420px;margin:0 auto;}
+.disc::after{content:"🍕";position:absolute;inset:0;margin:auto;width:90px;height:90px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.4rem;border:5px solid var(--base);}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media(prefers-reduced-motion:reduce){.disc{animation:none;}}
+
+/* ============ BUDGET ============ */
+.budget{background:var(--black);color:var(--base);}
+.budget h2{font-size:clamp(2rem,6vw,4.5rem);}
+.bg-wrap{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;margin-top:40px;}
+.bg-num{font-family:'Archivo';font-weight:900;font-size:clamp(3.5rem,12vw,8rem);color:var(--cheesy);line-height:.85;}
+.bg-num span{display:block;font-size:.18em;letter-spacing:.16em;color:var(--base);opacity:.6;font-weight:800;}
+.bar{height:64px;border-radius:8px;overflow:hidden;display:flex;border:2px solid var(--base);}
+.bar .a{background:var(--tomato);width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;padding-left:20px;font-weight:800;color:#fff;white-space:nowrap;}
+.bar .b{background:var(--cheesy);width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1) .15s;display:flex;align-items:center;padding-left:20px;font-weight:800;color:var(--black);white-space:nowrap;}
+.budget .note{margin-top:18px;opacity:.65;font-weight:500;}
+
+/* ============ CHECKLIST ============ */
+.checks{columns:3;column-gap:30px;margin-top:40px;}
+.checks label{display:flex;gap:12px;align-items:flex-start;font-weight:600;font-size:1rem;padding:11px 0;border-bottom:1px solid rgba(10,10,10,.1);break-inside:avoid;cursor:pointer;}
+.checks input{appearance:none;-webkit-appearance:none;width:22px;height:22px;border:2px solid var(--ink);border-radius:5px;flex:0 0 auto;margin-top:1px;cursor:pointer;transition:background .2s;position:relative;}
+.checks input:checked{background:var(--green-ink);border-color:var(--green-ink);}
+.checks input:checked::after{content:"✓";position:absolute;inset:0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:900;}
+.checks label:has(input:checked){opacity:.45;text-decoration:line-through;}
+
+/* ============ FLAG ============ */
+.flag{background:var(--cheesy);border-left:8px solid var(--tomato);padding:22px 26px;border-radius:4px;font-weight:600;margin-top:30px;display:flex;gap:14px;align-items:flex-start;}
+.flag b{font-weight:800;}
+
+/* ============ MARQUEE ============ */
+.marq{background:var(--tomato);color:#fff;overflow:hidden;padding:16px 0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);}
+.marq div{display:inline-flex;white-space:nowrap;animation:roll 24s linear infinite;font-family:'Archivo';font-weight:900;font-size:clamp(1.1rem,2.4vw,1.8rem);text-transform:uppercase;}
+.marq span{padding:0 26px;}
+.marq .o{color:var(--cheesy);}
+@keyframes roll{to{transform:translateX(-50%);}}
+
+/* ============ FOOTER ============ */
+footer{background:var(--black);color:var(--base);padding:clamp(60px,9vh,110px) clamp(20px,5vw,64px) 40px;}
+footer .big{font-size:clamp(2.4rem,9vw,7rem);font-family:'Archivo';font-weight:900;text-transform:uppercase;line-height:.9;}
+footer .big em{font-style:normal;color:var(--tomato);}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:flex-end;margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,.2);}
+footer .meta{font-weight:600;font-size:.92rem;opacity:.8;line-height:1.8;}
+footer .logo{width:160px;}
+footer .marker{color:var(--green-ink);font-size:1.6rem;}
+
+@media(max-width:880px){
+  .goals,.chan,.tl{grid-template-columns:1fr;}
+  .tl{border-top:none;}
+  .phase{border-right:none;border-top:3px solid var(--c);}
+  .feat .grid{grid-template-columns:1fr;gap:34px;}
+  .bg-wrap{grid-template-columns:1fr;gap:24px;}
+  .checks{columns:1;}
+  .dove{position:static;transform:none;width:200px;margin:30px auto 0;}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+<nav>
+  <a href="#top" class="wm">THE PIZZARY</a>
+  <div class="links">
+    <a href="#ziele">Ziele</a>
+    <a href="#plan">Plan</a>
+    <a href="#kanaele">Kanäle</a>
+    <a href="menuekarte.html">Menükarte</a>
+    <a href="grafikarbeiten.html">Grafik</a>
+    <a href="google-marketing.html">Google</a>
+    <a href="strategie.html">Strategie</a>
+    <a href="strategie-small.html">Strategie Small</a>
+    <a href="#rad">Glücksrad</a>
+    <a href="#go" class="cta">28.08.</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="om-eyebrow">Navigation</div>
+  <a class="ol" href="#top"><span class="idx">01</span> Start</a>
+  <a class="ol" href="#ziele"><span class="idx">02</span> Ziele</a>
+  <a class="ol" href="#plan"><span class="idx">03</span> Fahrplan</a>
+  <a class="ol" href="#kanaele"><span class="idx">04</span> Kanäle</a>
+  <a class="ol" href="menuekarte.html"><span class="idx">05</span> Menükarte</a>
+  <a class="ol" href="grafikarbeiten.html"><span class="idx">06</span> Grafik</a>
+  <a class="ol" href="google-marketing.html"><span class="idx">07</span> Google</a>
+  <a class="ol" href="glücksrad.html"><span class="idx">09</span> Glücksrad</a>
+  <a class="ol" href="#go"><span class="idx">09</span> 28.08.</a>
+  <div class="om-foot">
+    <span class="marker">Fast. Fresh. Pizza.</span>
+    <span style="font-weight:700;opacity:.6;font-size:.8rem">@thepizzary · Berlin</span>
+  </div>
+  <div class="om-band" id="omband" aria-hidden="true"></div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="farbband" id="mosaic" aria-hidden="true"></div>
+  <div class="hero-inner wide">
+    <div class="eyebrow r">Opening Playbook · Berlin</div>
+    <h1 class="r d1">DREH DIE<br><span class="out">STADT</span> <span class="red">AUF.</span></h1>
+    <div class="sub r d2">
+      <span class="date-chip">GROSSE ERÖFFNUNG · FR 28.08.</span>
+      <p>Fast. Fresh. Pizza. Ein Opening, das Berlin spürt. Schlange vor der Tür, die Stadt voll mit Content.</p>
+    </div>
+  </div>
+  <div class="scrolldown r d3"><span class="ln"></span> Scroll</div>
+</header>
+
+<!-- MANIFEST -->
+<section class="manifest" id="why">
+  <div class="wide">
+    <div class="eyebrow r" style="opacity:.6">Warum wir das machen</div>
+    <h2 class="r d1">EIN OPENING<br>IST KEIN TAG.<br><em>ES IST EIN MOMENT.</em></h2>
+    <p class="lead r d2">Ziel: am 28.08. eine Schlange vor der Tür, die Stadt voll mit Pizzary-Content, Start mit 100+ Google Reviews und einer Mailingliste, die ab Tag 1 läuft. Wir verschenken nicht nur Pizza. Wir verschenken einen Grund, dabei gewesen zu sein.</p>
+    <img class="dove r d3" src="assets/dove.png" alt="" onerror="this.style.display='none'"/>
+  </div>
+</section>
+
+<!-- ZIELE -->
+<section id="ziele">
+  <div class="wide">
+    <div class="eyebrow r">Die 3 Ziele · woran wir Erfolg messen</div>
+    <h2 class="r d1" style="font-size:clamp(2rem,6vw,4rem)">WAS AM 28.08.<br>STEHEN MUSS</h2>
+    <div class="goals">
+      <div class="goal c1 r d1">
+        <div class="gk">Anlaufen</div>
+        <div><div class="num" data-count="100" data-suffix="x">0x</div></div>
+        <div class="gd">Gratis-Plätze ausgeschöpft + Schlange in den ersten 3 Tagen.</div>
+      </div>
+      <div class="goal c2 r d2">
+        <div class="gk">Sichtbarkeit</div>
+        <div><div class="num" data-count="250" data-suffix="k+">0</div></div>
+        <div class="gd">Views organisch + Creator bis zum Eröffnungstag.</div>
+      </div>
+      <div class="goal c3 r d3">
+        <div class="gk">Substanz</div>
+        <div><div class="num" data-count="100" data-suffix="+">0+</div></div>
+        <div class="gd">Google Reviews & 500+ Leads über das Glücksrad.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="plan" style="background:#fff">
+  <div class="wide">
+    <div class="tl-head">
+      <div>
+        <div class="eyebrow r">Der Fahrplan</div>
+        <h2 class="r d1" style="font-size:clamp(2rem,6vw,4rem)">VIER PHASEN<br>BIS ZUM KNALL</h2>
+      </div>
+      <p class="marker r d2" style="color:var(--green-ink);font-size:clamp(1.2rem,3vw,2rem)">Rückwärts ab 28.08. geplant.</p>
+    </div>
+    <div class="tl">
+      <div class="phase r" style="--c:var(--veggie)">
+        <div class="pn">Phase 1</div><div class="pw">Teaser</div>
+        <ul><li>Countdown auf allen Kanälen</li><li>Organic Skits 3×/Woche</li><li>Glücksrad live + QR-Codes</li><li>Creator-Liste & Tickets</li></ul>
+      </div>
+      <div class="phase hot r d1" style="--c:var(--blue)">
+        <div class="pn">Phase 2 · 27.08. Creator</div><div class="pw">Pre-Opening</div>
+        <ul><li>First Taste Club (Creator)</li><li>Goodie Bags für alle</li><li>Eigener Presse-Slot</li><li>Reels vorab live</li></ul>
+      </div>
+      <div class="phase hot r d2" style="--c:var(--tomato)">
+        <div class="pn">Phase 3 · 28.08.</div><div class="pw">Eröffnung</div>
+        <ul><li>Erste 100 essen gratis</li><li>Glücksrad live im Store</li><li>Entertainment + Free Merch</li><li>Review-Push startet</li></ul>
+      </div>
+      <div class="phase r d3" style="--c:var(--asphalt)">
+        <div class="pn">Phase 4</div><div class="pw">Nachglühen</div>
+        <ul><li>Best-of Content raus</li><li>Ads: „Du hast es verpasst?“</li><li>Reviews weiter pushen</li><li>Erster Newsletter</li></ul>
+      </div>
+    </div>
+    <div class="flag r">
+      <span style="font-size:1.4rem">⚠️</span>
+      <span><b>Bestätigt:</b> 26.08. Family &amp; Friends · 27.08. Creator Soft-Opening · 28.08. Große Eröffnung</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marq" aria-hidden="true"><div>
+  <span>GRATIS PIZZA</span><span class="o">●</span><span>2 FÜR 1</span><span class="o">●</span><span>FREE DRINK</span><span class="o">●</span><span>GRATIS MERCH</span><span class="o">●</span><span>GOLDENES TICKET</span><span class="o">●</span>
+  <span>GRATIS PIZZA</span><span class="o">●</span><span>2 FÜR 1</span><span class="o">●</span><span>FREE DRINK</span><span class="o">●</span><span>GRATIS MERCH</span><span class="o">●</span><span>GOLDENES TICKET</span><span class="o">●</span>
+</div></div>
+
+<!-- KANÄLE -->
+<section id="kanaele">
+  <div class="wide">
+    <div class="eyebrow r">Kanäle & Maßnahmen</div>
+    <h2 class="r d1" style="font-size:clamp(2rem,6vw,4rem)">SECHS HEBEL,<br>EIN ZIEL</h2>
+    <div class="chan">
+      <div class="ch veggie r d1">
+        <div class="emoji">📱</div>
+        <div><h3>Organic</h3><p>Hero-Skit „Michelle wartet im Schlafanzug auf die Eröffnung“. Dazu Behind the Dough, Crew, Polls, Glücksrad-Teaser.</p></div>
+        <div class="tag">3× pro Woche</div>
+      </div>
+      <div class="ch cheesy r d2">
+        <div class="emoji">💸</div>
+        <div><h3>Paid Ads</h3><p>2 Assets: Event-Fokus + Free-Meals-Fokus. Geo-Targeting Berlin, UTM-Tracking direkt auf das Glücksrad.</p></div>
+        <div class="tag">400 € · 2 Wochen</div>
+      </div>
+      <div class="ch asphalt r d3">
+        <div class="emoji">🪧</div>
+        <div><h3>Flyering</h3><p>Hotspots im Umkreis. Jeder Flyer trägt den QR zum Glücksrad: „Scan & dreh, bevor du überhaupt da bist.“</p></div>
+        <div class="tag">Dichteste Welle T-4</div>
+      </div>
+      <div class="ch pink r d1">
+        <div class="emoji">🎟️</div>
+        <div><h3>First Taste Club</h3><p>Creator-Pre-Opening am 27.08. Goodie Bags, Entertainment, Foto-Ecke. Bitte um ein Reel bis zum Opening.</p></div>
+        <div class="tag">Nur mit Ticket</div>
+      </div>
+      <div class="ch blue r d2">
+        <div class="emoji">📰</div>
+        <div><h3>Press Kit</h3><p>PDF + Drive: Profil, Eckdaten, Logos, Food-Fotos, Gründer-Statement, Presse-Kontakt. An lokale Medien & Foodblogger.</p></div>
+        <div class="tag">Lokale Reichweite</div>
+      </div>
+      <div class="ch black r d3">
+        <div class="emoji">🎡</div>
+        <div><h3>Glücksrad</h3><p>Physische Pizza-Scheibe + Website. Lead-Capture vorm Dreh, Gewinn-Code → Besuch im Store, Share danach.</p></div>
+        <div class="tag">Jeder gewinnt</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLÜCKSRAD FEATURE -->
+<section class="feat" id="rad">
+  <div class="wide grid">
+    <div>
+      <div class="eyebrow r" style="opacity:.7;color:#fff">Die Guerilla-Maschine</div>
+      <h2 class="r d1">DREH DIE<br>PIZZA.</h2>
+      <p class="lead r d2">Eine große Drehscheibe als Pizza-Scheibe vor dem Store und als Website per QR. Vor dem Dreh ein kurzes Formular: das ist dein Lead-Capture. Jeder gewinnt, jeder Gewinn bringt jemanden physisch rein, jeder Share bringt Reichweite.</p>
+      <a class="btn r d3" href="glücksrad.html">Glücksrad ansehen <span>→</span></a>
+    </div>
+    <div class="disc r d2" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section class="budget" id="budget">
+  <div class="wide">
+    <div class="eyebrow r" style="opacity:.6">Budget-Split · Paid</div>
+    <h2 class="r d1">400 € KLUG<br>VERTEILT</h2>
+    <div class="bg-wrap">
+      <div class="bg-num r d1">400€<span>≈ 28 €/TAG</span></div>
+      <div class="r d2" style="width:100%">
+        <div class="bar" id="bar"><div class="a" data-w="60">Free Meals 60%</div><div class="b" data-w="40">Event 40%</div></div>
+        <p class="note">Woche 1 beide Assets testen, dann Budget auf das stärkere umschichten. Alles auf Berlin getargetet, Erfolg per UTM-Link auf dem Glücksrad messbar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="todo">
+  <div class="wide">
+    <div class="eyebrow r">Checkliste · zum Abhaken</div>
+    <h2 class="r d1" style="font-size:clamp(2rem,6vw,4rem)">WAS NOCH<br>ZU TUN IST</h2>
+    <div class="checks r d1">
+      <label><input type="checkbox"> Datum & Adresse final bestätigen</label>
+      <label><input type="checkbox"> Glücksrad hosten + QR generieren</label>
+      <label><input type="checkbox"> Creator-Liste & First Taste Tickets</label>
+      <label><input type="checkbox"> Organic Skits drehen</label>
+      <label><input type="checkbox"> Posting-Plan aufsetzen</label>
+      <label><input type="checkbox"> Paid Ads aufsetzen (2 Assets)</label>
+      <label><input type="checkbox"> Tracking-Links (UTM)</label>
+      <label><input type="checkbox"> Press Kit fertig & versenden</label>
+      <label><input type="checkbox"> Flyer drucken (mit QR)</label>
+      <label><input type="checkbox"> Verteilplan Flyer</label>
+      <label><input type="checkbox"> Deko + Ballons in Markenfarben</label>
+      <label><input type="checkbox"> Glücksrad physisch bauen</label>
+      <label><input type="checkbox"> Entertainment buchen</label>
+      <label><input type="checkbox"> Google-Review-QR & Aufsteller</label>
+      <label><input type="checkbox"> Team-Briefing</label>
+      <label><input type="checkbox"> Eröffnungsvideo-Crew</label>
+      <label><input type="checkbox"> Goodie Bags packen</label>
+      <label><input type="checkbox"> Free Merch bereitstellen</label>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="go">
+  <div class="wide">
+    <div class="eyebrow r" style="opacity:.6">Save the date</div>
+    <div class="big r d1">DO <em>28.08.</em> BERLIN</div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:20px" class="r d1">
+      <div style="background:rgba(255,255,255,.08);padding:12px 20px;border-radius:8px"><span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.55;display:block">DI 26.08.</span><span style="font-family:'Archivo';font-weight:900;font-size:1.1rem">Family &amp; Friends</span></div>
+      <div style="background:rgba(255,255,255,.08);padding:12px 20px;border-radius:8px"><span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.55;display:block">MI 27.08.</span><span style="font-family:'Archivo';font-weight:900;font-size:1.1rem">Creator Soft-Opening</span></div>
+      <div style="background:var(--tomato);padding:12px 20px;border-radius:8px"><span style="font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.8;display:block">DO 28.08.</span><span style="font-family:'Archivo';font-weight:900;font-size:1.1rem">Große Eröffnung</span></div>
+    </div>
+    <div class="row r d2">
+      <div class="meta">
+        <span class="marker">Fast. Fresh. Pizza.</span><br>
+        📍 [Adresse einsetzen]<br>
+        🕒 Ab [Uhrzeit] · Erste 100 Gäste gratis<br>
+        📲 @thepizzary
+      </div>
+      <img class="logo" src="assets/logo-white.png" alt="THE PIZZARY" onerror="this.style.display='none'"/>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- hero farbband build ---- */
+(function(){
+  const order=['--cheesy','--veggie','--blue','--tomato','--pink','--asphalt','--cheesy','--blue'];
+  const cs=getComputedStyle(document.documentElement);
+  ['mosaic','omband'].forEach(id=>{
+    const m=document.getElementById(id);if(!m)return;
+    order.forEach((c,i)=>{
+      const s=document.createElement('span');
+      s.style.background=cs.getPropertyValue(c).trim();
+      if(id==='mosaic'){s.style.transform='scaleY(0)';s.style.transformOrigin='bottom';s.style.animation='tile .8s cubic-bezier(.16,1,.3,1) forwards';s.style.animationDelay=(0.15+i*0.07)+'s';}
+      m.appendChild(s);
+    });
+  });
+})();
+
+/* ---- burger menu ---- */
+(function(){
+  const b=document.getElementById('burger');const ov=document.getElementById('overlay');if(!b)return;
+  const toggle=open=>{const o=open??!document.body.classList.contains('menu-open');document.body.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o);ov.setAttribute('aria-hidden',!o);};
+  b.addEventListener('click',()=>toggle());
+  ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggle(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false);});
+})();
+
+/* ---- scroll reveal ---- */
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.18,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.r,.phase').forEach(el=>io.observe(el));
+
+/* ---- count up ---- */
+function countUp(el){
+  const end=+el.dataset.count, suf=el.dataset.suffix||'', dur=1400, t0=performance.now();
+  function f(t){const p=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-p,3);el.textContent=Math.round(end*e)+suf;if(p<1)requestAnimationFrame(f);}
+  requestAnimationFrame(f);
+}
+const cio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target);}});},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* ---- budget bar fill ---- */
+const bio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-w]').forEach(b=>b.style.width=b.dataset.w+'%');bio.unobserve(e.target);}});},{threshold:.5});
+const bar=document.getElementById('bar');if(bar)bio.observe(bar);
+
+/* ---- progress + nav active ---- */
+const prog=document.getElementById('prog');
+const secs=[...document.querySelectorAll('section[id],header[id],footer[id]')];
+const navlinks=[...document.querySelectorAll('nav .links a')];
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  let cur=secs[0]?.id;
+  for(const s of secs){ if(s.getBoundingClientRect().top<=120) cur=s.id; }
+  navlinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+</script>
+</body>
+</html>

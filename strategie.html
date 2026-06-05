@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>THE PIZZARY — Strategie · Zeitstrahl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --base:#F1F2EC;--cheesy:#E8EC8B;--veggie:#9FC8A0;--blue:#5B6FD6;--tomato:#C9202A;
+  --black:#0A0A0A;--pink:#D87ACF;--asphalt:#A99FC2;--green-ink:#2EA24B;--ink:#0A0A0A;
+  --p1:#C9202A;--p2:#5B6FD6;--p3:#E8EC8B;--p4:#D87ACF;--p5:#9FC8A0;--p6:#A99FC2;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--base);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+h1,h2,h3{font-family:'Archivo',sans-serif;font-weight:900;letter-spacing:-.02em;text-transform:uppercase;line-height:.92;}
+.marker{font-family:'Permanent Marker',cursive;font-weight:400;text-transform:none;letter-spacing:0;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,64px);mix-blend-mode:difference;color:#fff;pointer-events:none;}
+nav .wm{font-family:'Archivo';font-weight:900;font-size:1.05rem;pointer-events:auto;}
+nav .links{display:flex;gap:clamp(8px,1.4vw,22px);font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;pointer-events:auto;align-items:center;}
+nav .links a{opacity:.65;transition:opacity .2s;white-space:nowrap;}
+nav .links a:hover,nav .links a.active{opacity:1;}
+.burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:34px;height:28px;background:none;border:none;cursor:pointer;pointer-events:auto;padding:0;}
+.burger span{display:block;height:3px;width:100%;background:#fff;border-radius:3px;transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .2s;}
+body.menu-open .burger span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+body.menu-open .burger span:nth-child(2){opacity:0;}
+body.menu-open .burger span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:1100px){nav .links{display:none;}.burger{display:flex;}}
+.overlay{position:fixed;inset:0;z-index:99;background:var(--black);color:var(--base);display:flex;flex-direction:column;justify-content:center;padding:90px clamp(24px,8vw,100px) 0;transform:translateY(-101%);transition:transform .6s cubic-bezier(.76,0,.24,1);overflow:hidden;}
+body.menu-open{overflow:hidden;}
+body.menu-open .overlay{transform:none;}
+.overlay .om-eyebrow{font-weight:800;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.45;margin-bottom:22px;}
+.overlay a.ol{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,6vw,3.6rem);line-height:1.06;color:var(--base);display:flex;align-items:baseline;gap:16px;padding:3px 0;opacity:0;transform:translateY(28px);transition:opacity .45s,transform .45s cubic-bezier(.16,1,.3,1),color .2s;}
+.overlay a.ol .idx{font-family:'Hanken Grotesk';font-weight:700;font-size:.8rem;opacity:.4;}
+body.menu-open .overlay a.ol{opacity:1;transform:none;}
+body.menu-open .overlay a.ol:nth-child(2){transition-delay:.11s}body.menu-open .overlay a.ol:nth-child(3){transition-delay:.16s}
+body.menu-open .overlay a.ol:nth-child(4){transition-delay:.21s}body.menu-open .overlay a.ol:nth-child(5){transition-delay:.26s}
+body.menu-open .overlay a.ol:nth-child(6){transition-delay:.31s}body.menu-open .overlay a.ol:nth-child(7){transition-delay:.36s}
+body.menu-open .overlay a.ol:nth-child(8){transition-delay:.41s}body.menu-open .overlay a.ol:nth-child(9){transition-delay:.46s}
+body.menu-open .overlay a.ol:nth-child(10){transition-delay:.51s}
+.overlay a.ol:hover{color:var(--tomato);}
+.overlay .om-foot{margin-top:auto;padding:20px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.overlay .om-band{position:absolute;bottom:0;left:0;right:0;height:14px;display:grid;grid-template-columns:repeat(8,1fr);}
+.progress{position:fixed;top:0;left:0;height:4px;background:var(--tomato);width:0;z-index:101;transition:width .1s linear;}
+
+/* HERO */
+.hero{min-height:82svh;display:flex;flex-direction:column;justify-content:center;padding:clamp(100px,14vh,150px) clamp(20px,5vw,64px) clamp(60px,10vh,100px);position:relative;overflow:hidden;}
+.farbband{position:absolute;bottom:0;left:0;right:0;height:clamp(60px,10vh,110px);display:grid;grid-template-columns:repeat(8,1fr);}
+.farbband span{transform:scaleY(0);transform-origin:bottom;animation:tile .8s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes tile{to{transform:scaleY(1);}}
+.hero-inner{max-width:1380px;margin:0 auto;width:100%;position:relative;z-index:2;}
+.hero h1{font-size:clamp(3rem,12vw,9.5rem);}
+.hero h1 .out{-webkit-text-stroke:2.5px var(--ink);color:transparent;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;margin-top:28px;}
+.hero-meta .chip{font-family:'Archivo';font-weight:900;font-size:clamp(.82rem,1.8vw,1.05rem);padding:8px 18px;text-transform:uppercase;}
+.chip-r{background:var(--tomato);color:#fff;}
+.chip-b{background:var(--black);color:var(--base);}
+.hero-meta p{font-weight:600;font-size:clamp(.95rem,1.8vw,1.2rem);max-width:38ch;opacity:.85;}
+
+/* LEGEND */
+.legend-bar{background:var(--black);padding:16px clamp(20px,5vw,64px);}
+.legend-inner{max-width:1380px;margin:0 auto;display:flex;gap:22px;flex-wrap:wrap;align-items:center;}
+.leg{display:flex;align-items:center;gap:7px;font-weight:700;font-size:.72rem;letter-spacing:.06em;color:var(--base);}
+.leg .dot{width:12px;height:12px;border-radius:50%;}
+.leg-div{width:1px;height:18px;background:rgba(255,255,255,.18);margin:0 4px;}
+
+/* PROGRESS OVERVIEW */
+.prog-overview{max-width:1380px;margin:0 auto;padding:32px clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;}
+.prog-stats{display:flex;gap:28px;flex-wrap:wrap;}
+.ps{display:flex;flex-direction:column;gap:2px;}
+.ps .psv{font-family:'Archivo';font-weight:900;font-size:1.6rem;line-height:.9;}
+.ps .psl{font-weight:700;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;opacity:.55;}
+.prog-bar-wrap{flex:1;min-width:220px;}
+.prog-bar{height:36px;background:rgba(0,0,0,.08);border-radius:6px;overflow:hidden;display:flex;gap:2px;padding:3px;}
+.pb-done{background:var(--green-ink);border-radius:4px;transition:width 1.2s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;padding-left:8px;font-weight:800;font-size:.68rem;color:#fff;white-space:nowrap;overflow:hidden;}
+.pb-wip{background:var(--cheesy);border-radius:4px;transition:width 1.2s cubic-bezier(.16,1,.3,1) .1s;display:flex;align-items:center;padding-left:6px;font-weight:800;font-size:.68rem;color:#000;white-space:nowrap;overflow:hidden;}
+.pb-rest{flex:1;background:rgba(0,0,0,.08);border-radius:4px;}
+
+/* TIMELINE WRAPPER */
+.timeline-wrap{max-width:1380px;margin:0 auto;padding:0 clamp(20px,5vw,64px) 80px;}
+
+/* PHASE HEADER */
+.phase-header{display:flex;align-items:stretch;gap:0;margin:56px 0 0;border-radius:12px;overflow:hidden;position:relative;}
+.ph-color{width:18px;flex:0 0 18px;}
+.ph-body{flex:1;padding:22px 28px;background:#fff;border:2.5px solid var(--ink);border-left:none;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.ph-body h2{font-size:clamp(1.3rem,3vw,2rem);}
+.ph-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.ph-date{font-weight:800;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px;background:var(--base);}
+.ph-count{font-weight:800;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;opacity:.55;}
+
+/* TASK CARD */
+.tasks{display:flex;flex-direction:column;gap:0;margin-top:0;padding-left:40px;position:relative;}
+.tasks::before{content:"";position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--phase-c,var(--tomato)),transparent);}
+
+.task{display:grid;grid-template-columns:1fr;gap:0;position:relative;margin-top:0;}
+.task::before{content:"";position:absolute;left:-31px;top:28px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--phase-c,var(--tomato));z-index:1;transition:background .3s;}
+.task.done::before{background:var(--green-ink);border-color:var(--green-ink);}
+.task.wip::before{background:var(--cheesy);border-color:var(--cheesy);}
+
+.tcard{background:#fff;border:2px solid rgba(0,0,0,.1);border-radius:10px;padding:18px 20px;margin:8px 0;display:flex;flex-direction:column;gap:10px;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,border-color .3s;}
+.tcard:hover{transform:translateX(4px);box-shadow:4px 4px 0 var(--phase-c,var(--tomato));}
+.tcard.done{opacity:.6;background:#f8f8f8;}
+.tcard.done:hover{transform:none;box-shadow:none;}
+
+.tc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.tc-title{font-family:'Archivo';font-weight:900;font-size:clamp(1rem,2vw,1.25rem);text-transform:uppercase;line-height:1.05;flex:1;}
+.tc-prio{font-weight:800;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;white-space:nowrap;}
+.prio-hot{background:var(--tomato);color:#fff;}
+.prio-mid{background:var(--cheesy);color:#000;}
+.prio-low{background:var(--asphalt);color:#fff;}
+
+.tc-desc{font-weight:500;font-size:.88rem;opacity:.78;line-height:1.45;}
+
+.tc-deps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.tc-deps .dep-label{font-weight:800;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;}
+.dep{display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.06);border-radius:999px;padding:4px 10px;font-weight:700;font-size:.7rem;border:1.5px solid rgba(0,0,0,.1);}
+.dep::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--phase-c,var(--tomato));flex:0 0 auto;}
+
+.tc-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.tc-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.tc-link{font-weight:800;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;opacity:.55;padding:4px 10px;border-radius:999px;border:1.5px solid rgba(0,0,0,.15);transition:opacity .2s,background .2s;}
+.tc-link:hover{opacity:1;background:var(--base);}
+.tc-est{font-weight:700;font-size:.7rem;opacity:.45;white-space:nowrap;}
+
+.status-btn{font-family:'Hanken Grotesk';font-weight:800;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:7px 16px;border-radius:999px;border:2px solid var(--ink);cursor:pointer;transition:background .18s,color .18s,transform .1s;background:var(--base);}
+.status-btn:active{transform:scale(.93);}
+.status-btn[data-s="todo"]{background:var(--base);}
+.status-btn[data-s="wip"]{background:var(--cheesy);color:#000;border-color:var(--cheesy);}
+.status-btn[data-s="done"]{background:var(--green-ink);color:#fff;border-color:var(--green-ink);}
+
+/* SCROLL REVEAL */
+.r{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+.r.in{opacity:1;transform:none;}
+.r.d1{transition-delay:.06s}.r.d2{transition-delay:.12s}.r.d3{transition-delay:.18s}
+@media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none;}}
+
+/* STICKY PHASE NAV */
+.phase-nav{position:sticky;top:56px;z-index:50;background:rgba(241,242,236,.95);backdrop-filter:blur(12px);border-bottom:2px solid rgba(0,0,0,.08);padding:10px clamp(20px,5vw,64px);display:flex;gap:8px;flex-wrap:wrap;overflow-x:auto;}
+.pnav-item{font-weight:800;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px;border:2px solid transparent;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s,border-color .2s;}
+.pnav-item:hover{background:var(--black);color:#fff;}
+.pnav-item.cur{border-color:var(--black);}
+
+/* FOOTER */
+footer{background:var(--black);color:var(--base);padding:clamp(50px,8vh,90px) clamp(20px,5vw,64px) 36px;}
+footer .big{font-size:clamp(1.8rem,6vw,4.8rem);font-family:'Archivo';font-weight:900;text-transform:uppercase;line-height:.9;}
+footer .big em{color:var(--tomato);font-style:normal;}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:flex-end;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);}
+footer .meta{font-weight:600;font-size:.9rem;opacity:.8;line-height:1.8;}
+footer .logo{width:130px;}
+
+.div-band{height:5px;background:linear-gradient(90deg,var(--tomato),var(--blue),var(--cheesy),var(--veggie),var(--pink),var(--asphalt),var(--tomato),var(--blue));}
+@media(max-width:700px){.tasks{padding-left:26px;}.task::before{left:-18px;}}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<nav>
+  <a href="onepager.html" class="wm">THE PIZZARY</a>
+  <div class="links">
+    <a href="onepager.html#plan">Fahrplan</a>
+    <a href="menuekarte.html">Menükarte</a>
+    <a href="grafikarbeiten.html">Grafik</a>
+    <a href="google-marketing.html">Google</a>
+    <a href="strategie.html" class="active">Strategie</a>
+    <a href="strategie-small.html">Strategie Small</a>
+    <a href="glücksrad.html">Glücksrad</a>
+    <a href="onepager.html#go">28.08.</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="om-eyebrow">Navigation</div>
+  <a class="ol" href="onepager.html#top"><span class="idx">01</span> Start</a>
+  <a class="ol" href="onepager.html#ziele"><span class="idx">02</span> Ziele</a>
+  <a class="ol" href="onepager.html#plan"><span class="idx">03</span> Fahrplan</a>
+  <a class="ol" href="menuekarte.html"><span class="idx">04</span> Menükarte</a>
+  <a class="ol" href="grafikarbeiten.html"><span class="idx">05</span> Grafik</a>
+  <a class="ol" href="google-marketing.html"><span class="idx">06</span> Google</a>
+  <a class="ol" href="strategie.html"><span class="idx">07</span> Strategie</a>
+  <a class="ol" href="strategie-small.html"><span class="idx">08</span> Strategie Small</a>
+  <a class="ol" href="glücksrad.html"><span class="idx">09</span> Glücksrad</a>
+  <a class="ol" href="onepager.html#go"><span class="idx">10</span> 28.08.</a>
+  <div class="om-foot">
+    <span class="marker" style="color:var(--green-ink);font-size:1.3rem">Fast. Fresh. Pizza.</span>
+    <span style="font-weight:700;opacity:.6;font-size:.78rem">@thepizzary · Berlin</span>
+  </div>
+  <div class="om-band" id="omband"></div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="farbband" id="heroband"></div>
+  <div class="hero-inner">
+    <div class="eyebrow r" style="opacity:.55;font-weight:800;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px">Master-Strategie · Opening 28.08.</div>
+    <h1 class="r d1">ALLES IN<br><span class="out">RICHTIGER</span> REIHENFOLGE.</h1>
+    <div class="hero-meta r d2">
+      <span class="chip chip-r">6 Phasen</span>
+      <span class="chip chip-b">34 Aufgaben</span>
+      <p>Hier steht was wann passieren muss, was was blockiert, und was du als erstes anpacken solltest. Einfach von oben nach unten durcharbeiten.</p>
+    </div>
+  </div>
+</header>
+
+<!-- LEGEND -->
+<div class="legend-bar">
+  <div class="legend-inner">
+    <span style="font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--base);opacity:.55;margin-right:6px">Status:</span>
+    <span class="leg"><span class="dot" style="background:var(--base);border:2px solid rgba(255,255,255,.4)"></span> To Do</span>
+    <span class="leg"><span class="dot" style="background:var(--cheesy)"></span> In Progress</span>
+    <span class="leg"><span class="dot" style="background:var(--green-ink)"></span> Erledigt</span>
+    <span class="leg-div"></span>
+    <span style="font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--base);opacity:.55;margin-right:6px">Prio:</span>
+    <span class="leg"><span class="dot" style="background:var(--tomato)"></span> Must</span>
+    <span class="leg"><span class="dot" style="background:var(--cheesy)"></span> Important</span>
+    <span class="leg"><span class="dot" style="background:var(--asphalt)"></span> Nice to have</span>
+    <span class="leg-div"></span>
+    <span style="font-weight:700;font-size:.7rem;color:var(--base);opacity:.55">Tippe den Status um ihn zu ändern →</span>
+  </div>
+</div>
+
+<!-- OVERVIEW BAR -->
+<div class="prog-overview r">
+  <div class="prog-stats">
+    <div class="ps"><div class="psv" id="cnt-total">34</div><div class="psl">Aufgaben total</div></div>
+    <div class="ps"><div class="psv" id="cnt-done" style="color:var(--green-ink)">0</div><div class="psl">Erledigt</div></div>
+    <div class="ps"><div class="psv" id="cnt-wip" style="color:var(--cheesy)">0</div><div class="psl">In Progress</div></div>
+    <div class="ps"><div class="psv" id="cnt-todo">34</div><div class="psl">To Do</div></div>
+  </div>
+  <div class="prog-bar-wrap">
+    <div class="prog-bar">
+      <div class="pb-done" id="pb-done" style="width:0%">0%</div>
+      <div class="pb-wip" id="pb-wip" style="width:0%"></div>
+      <div class="pb-rest"></div>
+    </div>
+    <div style="font-size:.68rem;font-weight:700;opacity:.5;margin-top:6px">Gesamtfortschritt bis zur Eröffnung am 28.08.</div>
+  </div>
+</div>
+
+<!-- PHASE NAV -->
+<nav class="phase-nav" id="phasenav">
+  <button class="pnav-item cur" onclick="scrollToPhase('p1')">01 Sofort</button>
+  <button class="pnav-item" onclick="scrollToPhase('p2')">02 Fundament</button>
+  <button class="pnav-item" onclick="scrollToPhase('p3')">03 Assets</button>
+  <button class="pnav-item" onclick="scrollToPhase('p4')">04 Launch-Prep</button>
+  <button class="pnav-item" onclick="scrollToPhase('p5')">05 Pre-Opening</button>
+  <button class="pnav-item" onclick="scrollToPhase('p6')">06 Opening & danach</button>
+</nav>
+
+<div class="timeline-wrap">
+
+<!-- ═══════════════════════════════════ PHASE 1 ═══════════════════════════════════ -->
+<div class="phase-header r" id="p1" style="--phase-c:var(--p1)">
+  <div class="ph-color" style="background:var(--p1)"></div>
+  <div class="ph-body">
+    <div>
+      <div style="font-weight:800;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:4px">Phase 01 · Jetzt sofort starten</div>
+      <h2>FUNDAMENT<br>LEGEN</h2>
+    </div>
+    <div class="ph-meta">
+      <span class="ph-date" style="background:var(--p1);color:#fff">Jetzt · Juni–Juli</span>
+      <span class="ph-count">5 Aufgaben · Diese blockieren alles andere</span>
+    </div>
+  </div>
+</div>
+<div class="tasks r" style="--phase-c:var(--p1)">
+
+  <div class="task" id="t1">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Datum, Adresse & Uhrzeit final bestätigen</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">28.08. ist gesetzt. Aber: genaue Adresse und Öffnungszeit der Eröffnung müssen überall eingetragen werden — in alle Grafiken, Website, Google Business, Flyer. Ohne das kann nichts produziert werden.</p>
+      <div class="tc-deps"><span class="dep-label">Abhängigkeit:</span><span class="dep">Blockiert alle Grafik-Deliverables</span><span class="dep">Blockiert Google Business</span><span class="dep">Blockiert Flyer-Druck</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="onepager.html#go">→ Opening Plan</a><span class="tc-est">⏱ 30 Min</span></div>
+        <button class="status-btn" data-s="todo" data-id="t1">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t2">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Google Business Profil aufsetzen & vervollständigen</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Name, Adresse, Öffnungszeiten, Kategorien, Beschreibung, Telefon, Website. Solange das Profil leer ist, existiert The Pizzary für Google nicht. Reviews können erst gesammelt werden wenn das Profil live ist.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Adresse final (T1)</span></div>
+      <div class="tc-deps" style="margin-top:4px"><span class="dep-label">Blockiert:</span><span class="dep">Alle Review-Maßnahmen</span><span class="dep">Google Ads</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="google-marketing.html#profile">→ Google Marketing</a><span class="tc-est">⏱ 1–2 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t2">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t3">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Menü-System entscheiden: Struktur & Kategorien</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Welche Kategorien gibt es? Wie ist die Karte aufgebaut? Diese Entscheidung muss zuerst fallen — bevor Menükarte, Fotos, Grafiken oder Bildschirm-Menus gemacht werden können.</p>
+      <div class="tc-deps"><span class="dep-label">Blockiert:</span><span class="dep">Menükarte Print</span><span class="dep">Bildschirm-Menu</span><span class="dep">Produktfotos</span><span class="dep">Instagram Menu Highlight</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="menuekarte.html#system">→ Menükarte</a><span class="tc-est">⏱ 1–3 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t3">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t4">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Anzahl iiyama Bildschirme bestätigen</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Wie viele Menuboards werden im Store benötigt? Anzahl und Positionierung bestimmen das Layout-Konzept für alle digitalen Menus. Bestellen braucht Vorlaufzeit.</p>
+      <div class="tc-deps"><span class="dep-label">Blockiert:</span><span class="dep">Bildschirm-Menu Layout</span><span class="dep">Hardware-Bestellung</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="menuekarte.html#system">→ Menükarte</a><span class="tc-est">⏱ 15 Min</span></div>
+        <button class="status-btn" data-s="todo" data-id="t4">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t5">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Creator-Liste aufbauen & First Taste Club einladen</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Wer kommt zum Pre-Opening am 27.08.? Liste von 15–30 lokalen Creators, Foodbloggern und Pressevertretern zusammenstellen und personalisiert einladen. Vorlaufzeit: mind. 3 Wochen.</p>
+      <div class="tc-deps"><span class="dep-label">Blockiert:</span><span class="dep">Ticket-Design (T10)</span><span class="dep">Goodie Bags (T24)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="onepager.html#kanaele">→ Kanäle</a><span class="tc-est">⏱ 3–5 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t5">To Do</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tasks p1 -->
+
+<!-- ═══════════════════════════════════ PHASE 2 ═══════════════════════════════════ -->
+<div class="phase-header r" id="p2" style="--phase-c:var(--p2)">
+  <div class="ph-color" style="background:var(--p2)"></div>
+  <div class="ph-body">
+    <div>
+      <div style="font-weight:800;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:4px">Phase 02 · Sobald Phase 1 steht</div>
+      <h2>CONTENT &amp;<br>GRAFIK-BASIS</h2>
+    </div>
+    <div class="ph-meta">
+      <span class="ph-date" style="background:var(--p2);color:#fff">Juli · KW 28–30</span>
+      <span class="ph-count">8 Aufgaben · Produzieren & Briefen</span>
+    </div>
+  </div>
+</div>
+<div class="tasks r" style="--phase-c:var(--p2)">
+
+  <div class="task" id="t6">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Pizza-Foto Stil-Briefing & Master-Shot produzieren</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Das eine Master-Foto, auf dem alles aufbaut. Licht, Winkel, Untergrund, Stimmung beschreiben. Shooting beauftragen oder selbst durchführen. Danach: alle weiteren Bilder aus dieser Ästhetik.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Menü-System (T3)</span></div>
+      <div class="tc-deps" style="margin-top:4px"><span class="dep-label">Blockiert:</span><span class="dep">AI-Zutaten generieren (T7)</span><span class="dep">Werbeposter (T11)</span><span class="dep">Wolt-Banner (T18)</span><span class="dep">GMB Fotos</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="menuekarte.html#fotos">→ Menükarte Fotos</a><span class="tc-est">⏱ 2–4 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t6">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t7">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Alle Zutaten & Saucen per AI generieren</div>
+        <span class="tc-prio prio-mid">Important</span>
+      </div>
+      <p class="tc-desc">Im Stil des Master-Fotos: Tomatensugo, Mozzarella, Basilikum, alle Toppings als konsistentes Bild-Set. Wird für Menükarte, Website und Social Media verwendet.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Master-Foto fertig (T6)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="menuekarte.html#fotos">→ Fotos</a><span class="tc-est">⏱ 2–3 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t7">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t8">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Menü-System erstellen & Karte texten</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Auf Basis der Struktur-Entscheidung: alle Gerichte, Preise, Beschreibungen ausarbeiten. Das ist der Inhalt für alle weiteren Karten-Formate.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Menü-Entscheidung (T3)</span><span class="dep">Getränke-Auswahl</span></div>
+      <div class="tc-deps" style="margin-top:4px"><span class="dep-label">Blockiert:</span><span class="dep">Menükarte Print (T12)</span><span class="dep">Bildschirm-Menu (T13)</span><span class="dep">Tresenkarte (T14)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="menuekarte.html">→ Menükarte</a><span class="tc-est">⏱ 3–6 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t8">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t9">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Glücksrad-Website live schalten & QR generieren</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Website hosten (Netlify/Vercel), Domain setzen (z.B. dreh.thepizzary.de), QR-Code generieren. Lead-Formular an Mailtool anbinden. QR kommt auf alle Flyer und Aufsteller.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Adresse (T1)</span></div>
+      <div class="tc-deps" style="margin-top:4px"><span class="dep-label">Blockiert:</span><span class="dep">Flyer QR-Druck (T16)</span><span class="dep">Review-Aufsteller (T21)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="glücksrad.html">→ Glücksrad</a><span class="tc-est">⏱ 1–2 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t9">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t10">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">First Taste Club Ticket designen & versenden</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Digitales + printbares Ticket für das Pre-Opening am 27.08. Muss mindestens 3 Wochen vorher raus. Edel, screenshot-würdig, sammelbar — das Ticket selbst ist schon Content.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Creator-Liste (T5)</span><span class="dep">Adresse (T1)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="grafikarbeiten.html">→ Grafik</a><span class="tc-est">⏱ 2–4 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t10">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t11">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Press Kit erstellen & versenden</div>
+        <span class="tc-prio prio-mid">Important</span>
+      </div>
+      <p class="tc-desc">PDF + Drive-Ordner: Kurzprofil, Eckdaten, Logos, Food-Fotos, Gründer-Statement. An lokale Medien, Foodblogger und Influencer senden. Redaktionsvorlauf mind. 3–4 Wochen.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Master-Foto (T6)</span><span class="dep">Adresse (T1)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="onepager.html#kanaele">→ Kanäle</a><span class="tc-est">⏱ 3–5 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t11">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t35">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Instagram Templates designen</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Post-Vorlagen 1:1, Stories 9:16 und Reels-Cover in Markenfarben. Einmal gebaut — für alle organischen Posts bis zur Eröffnung und danach verwendet. Konsistenz ist der Schlüssel.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Master-Foto (T6)</span></div>
+      <div class="tc-deps" style="margin-top:4px"><span class="dep-label">Blockiert:</span><span class="dep">Organic Content-Skits (T19)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="grafikarbeiten.html#digital">→ Grafik Digital</a><span class="tc-est">⏱ 3–5 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t35">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t36">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Wolt / Lieferando Hero Banner</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Das erste was Kunden auf der Bestell-Plattform sehen. Wolt: 1920×1080, Lieferando: 1024×200. Starkes Food-Foto, klarer Claim. Hochladen braucht oft 1–2 Wochen Freigabe-Vorlauf.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Master-Foto (T6)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="grafikarbeiten.html#digital">→ Grafik</a><span class="tc-est">⏱ 2 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t36">To Do</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════ PHASE 3 ═══════════════════════════════════ -->
+<div class="phase-header r" id="p3" style="--phase-c:var(--p3);color:var(--black)">
+  <div class="ph-color" style="background:var(--p3)"></div>
+  <div class="ph-body">
+    <div>
+      <div style="font-weight:800;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:4px">Phase 03 · Parallel zu Phase 2</div>
+      <h2>PRINT &amp;<br>STORE ASSETS</h2>
+    </div>
+    <div class="ph-meta">
+      <span class="ph-date" style="background:var(--p3);color:#000">Juli · KW 30–32</span>
+      <span class="ph-count">8 Aufgaben · Drucken braucht Vorlaufzeit!</span>
+    </div>
+  </div>
+</div>
+<div class="tasks r" style="--phase-c:var(--p3)">
+
+  <div class="task" id="t12">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Flyer designen & in den Druck geben</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">A5 oder DIN-lang, doppelseitig. QR zum Glücksrad auf jeder Seite. Druckerei braucht 5–10 Werktage. Spätester Druckauftrag: 1. August für Druck bis 8. August.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Glücksrad QR live (T9)</span><span class="dep">Adresse (T1)</span></div>
+      <div class="tc-deps" style="margin-top:4px"><span class="dep-label">Blockiert:</span><span class="dep">Flyering starten (T22)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="grafikarbeiten.html#print">→ Grafik Print</a><span class="tc-est">⏱ 2–3 Std Design + Druck-Vorlauf</span></div>
+        <button class="status-btn" data-s="todo" data-id="t12">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t13">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Fensterbeklebung designen & anbringen lassen</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Logo, Claim, Öffnungszeiten und Opening-Ankündigung fürs Schaufenster. Beklebungsfolie braucht Produktion + Freitage-Termin. Spätestens 1 Woche vor Opening angebracht.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Adresse & Maße vom Store</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="grafikarbeiten.html#print">→ Grafik</a><span class="tc-est">⏱ Prod. 5–7 WT</span></div>
+        <button class="status-btn" data-s="todo" data-id="t13">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t14">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Menükarte Print + Tresenkarte produzieren</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Gedruckte Karte für Tisch und die kompakte Tresenkarte. Laminiert oder Heft-Bindung. Beide aus einer Design-Quelle: einmal gesetzt, zwei Formate gedruckt.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Menü-System fertig (T8)</span><span class="dep">Zutaten-Fotos (T7)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="menuekarte.html">→ Menükarte</a><span class="tc-est">⏱ 4–6 Std + Druck</span></div>
+        <button class="status-btn" data-s="todo" data-id="t14">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t15">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Werbeposter & Kundenstopper Poster</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">A1-Poster für Aktionen + Kundenstopper für draussen. Der Kundenstopper ist der erste Eindruck von der Straße aus. Hook in 2 Sekunden. Beide bis zum Opening gedruckt und montiert.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Master-Foto (T6)</span><span class="dep">Adresse (T1)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="grafikarbeiten.html">→ Grafik</a><span class="tc-est">⏱ 2–4 Std + Druck</span></div>
+        <button class="status-btn" data-s="todo" data-id="t15">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t16">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Bildschirm-Menu für iiyama einrichten</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Layout für alle bestätigten Bildschirme. Digital-Board über dem Tresen: Menü klar lesbar, Marken-Ästhetik, animierbar. Wird auf den Screens abgespielt.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">iiyama Anzahl (T4)</span><span class="dep">Menü-System (T8)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="menuekarte.html#touchpoints">→ Touchpoints</a><span class="tc-est">⏱ 3–5 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t16">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t17">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Tischaufsteller & Google-Review-QR designen & drucken</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">A5-Aufsteller mit QR zum Google-Review-Formular. Auf jedem Tisch + Theke. Schöner QR (nicht Standard-Pixel), Markenfarben, klarer Call-to-Action.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Google Business live (T2)</span></div>
+      <div class="tc-deps" style="margin-top:4px"><span class="dep-label">Blockiert:</span><span class="dep">Review-Kampagne starten (T27)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="google-marketing.html#reviews">→ Google</a><span class="tc-est">⏱ 1–2 Std + Druck</span></div>
+        <button class="status-btn" data-s="todo" data-id="t17">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t18">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Sticker, Loyalty Card & Packaging beauftragen</div>
+        <span class="tc-prio prio-mid">Important</span>
+      </div>
+      <p class="tc-desc">Aufkleber für Boxen/Tüten, Stempelkarte (10× kaufen = 1× gratis), Packaging-Design. Alles mit Marken-Logo. Jede Verpackung die durch die Stadt läuft ist Werbung.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Marken-Assets vorhanden</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="grafikarbeiten.html#pos">→ Store & POS</a><span class="tc-est">⏱ 2–3 Std + Druck-Vorlauf</span></div>
+        <button class="status-btn" data-s="todo" data-id="t18">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t19">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Goodie Bags & Free Merch produzieren</div>
+        <span class="tc-prio prio-mid">Important</span>
+      </div>
+      <p class="tc-desc">Caps, Totes oder andere Merch-Items mit Logo. Für Creator-Goodie-Bags + als Glücksrad-Gewinn. Produktion braucht oft 2–3 Wochen Vorlauf bei individuellen Druckartikeln.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Creator-Anzahl bekannt (T5)</span></div>
+      <div class="tc-deps" style="margin-top:4px"><span class="dep-label">Blockiert:</span><span class="dep">Goodie Bags packen (T28)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="grafikarbeiten.html">→ Grafik</a><span class="tc-est">⏱ Prod. 2–3 Wochen</span></div>
+        <button class="status-btn" data-s="todo" data-id="t19">To Do</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════ PHASE 4 ═══════════════════════════════════ -->
+<div class="phase-header r" id="p4" style="--phase-c:var(--p4)">
+  <div class="ph-color" style="background:var(--p4)"></div>
+  <div class="ph-body">
+    <div>
+      <div style="font-weight:800;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:4px">Phase 04 · 2 Wochen vor Opening</div>
+      <h2>LAUNCH-<br>VORBEREITUNG</h2>
+    </div>
+    <div class="ph-meta">
+      <span class="ph-date" style="background:var(--p4);color:#fff">4. – 14. August</span>
+      <span class="ph-count">7 Aufgaben · Ads, Organic, Flyering</span>
+    </div>
+  </div>
+</div>
+<div class="tasks r" style="--phase-c:var(--p4)">
+
+  <div class="task" id="t20">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Paid Ads aufsetzen: 2 Assets, Tracking live</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Asset 1: Event-Fokus „Große Eröffnung 28.08." — Asset 2: Free-Meals-Fokus „Erste 100 essen gratis". UTM-Tracking-Links auf Glücksrad-Website. Budget: 400 €, 28 €/Tag, Berlin 3–5 km Radius.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Grafik-Assets (T6, T15)</span><span class="dep">Glücksrad live (T9)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="onepager.html#kanaele">→ Kanäle</a><span class="tc-est">⏱ 2–3 Std Setup</span></div>
+        <button class="status-btn" data-s="todo" data-id="t20">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t21">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Organic Content: Hero-Skit „Michelle wartet" drehen</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Michelle im Schlafanzug vor dem Store. Nader kommt vorbei. Schulter-Zucken. Sound-Trend. Dieser Skit startet die Teaser-Welle. Ab sofort: 3× pro Woche posten bis 28.08.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Instagram Templates (T35)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="onepager.html#kanaele">→ Organic</a><span class="tc-est">⏱ 1–2 Std Dreh</span></div>
+        <button class="status-btn" data-s="todo" data-id="t21">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t22">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Flyering: T–4 Tage vor Opening</div>
+        <span class="tc-prio prio-mid">Important</span>
+      </div>
+      <p class="tc-desc">Dichteste Welle am 14.–15.08. Hotspots: Umkreis, Unis, Büros, Fitnessstudios, ÖPNV. Jeder Flyer hat den QR zum Glücksrad — damit wird aus einem Flyer ein Lead.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Flyer gedruckt (T12)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><span class="tc-est">⏱ 2–3 Std Verteilen</span></div>
+        <button class="status-btn" data-s="todo" data-id="t22">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t23">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Team-Briefing: Review-Skript & Opening-Ablauf</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Alle lernen: Satz für Review-Anfrage, Ablauf am Eröffnungstag, Umgang mit dem Glücksrad, was bei der Einlösung zu tun ist. Einmal gebrieft = reibungsloser Opening-Tag.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Review-QR fertig (T17)</span><span class="dep">Glücksrad live (T9)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="google-marketing.html#reviews">→ Google Review Skript</a><span class="tc-est">⏱ 1–2 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t23">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t24">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Entertainment für Pre- & Main-Opening buchen</div>
+        <span class="tc-prio prio-mid">Important</span>
+      </div>
+      <p class="tc-desc">DJ, Playlist, Live-Element oder Spoken-Word an der Pizza-Station. Für beide Events: Pre-Opening 27.08. und Main-Opening 28.08. Buchung mind. 3 Wochen vorher.</p>
+      <div class="tc-bottom">
+        <div class="tc-meta"><span class="tc-est">⏱ Buchung</span></div>
+        <button class="status-btn" data-s="todo" data-id="t24">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t25">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Glücksrad physisch bauen (große Pizza-Scheibe)</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Die große physische Drehscheibe als Eyecatcher im/vor dem Store. Zusammen mit der digitalen Website bildet sie die Guerilla-Marketing-Maschine. Produktion planen.</p>
+      <div class="tc-bottom">
+        <div class="tc-meta"><span class="tc-est">⏱ Produktion 1–2 Wochen</span></div>
+        <button class="status-btn" data-s="todo" data-id="t25">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t26">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Eröffnungsvideo-Crew einplanen</div>
+        <span class="tc-prio prio-mid">Important</span>
+      </div>
+      <p class="tc-desc">Wer filmt am 28.08.? Schlange, Glücksrad, erste Bisse, Konfetti, Crew-Jubel. Das 30–60s Hero-Video ist das Haupt-Asset für alle „verpasst?"-Ads danach. Crew früh sichern.</p>
+      <div class="tc-bottom">
+        <div class="tc-meta"><span class="tc-est">⏱ Koordination</span></div>
+        <button class="status-btn" data-s="todo" data-id="t26">To Do</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════ PHASE 5 ═══════════════════════════════════ -->
+<div class="phase-header r" id="p5" style="--phase-c:var(--p5)">
+  <div class="ph-color" style="background:var(--p5)"></div>
+  <div class="ph-body">
+    <div>
+      <div style="font-weight:800;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:4px">Phase 05 · Die Woche davor</div>
+      <h2>PRE-OPENING<br>& ENDSPURT</h2>
+    </div>
+    <div class="ph-meta">
+      <span class="ph-date" style="background:var(--p5);color:#000">24. – 27. August (26: F&amp;F · 27: Creator)</span>
+      <span class="ph-count">4 Aufgaben · Finales Setup & First Taste Club</span>
+    </div>
+  </div>
+</div>
+<div class="tasks r" style="--phase-c:var(--p5)">
+
+  <div class="task" id="t27">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Deko aufbauen: Ballons, Poster, Foto-Ecke</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Ballons in Tomatenrot + Cheesy, Werbeposter hängen, Kundenstopper aufstellen, Foto-Ecke mit Logo-Backdrop einrichten. Wird am Tag vor dem Pre-Opening aufgebaut.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Poster gedruckt (T15)</span><span class="dep">Kundenstopper (T15)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><span class="tc-est">⏱ 2–3 Std Aufbau</span></div>
+        <button class="status-btn" data-s="todo" data-id="t27">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t28">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Goodie Bags für Creator packen</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Alle Goodie-Items (Merch, Voucher, Signature-Item, Ticket) zusammenstellen und in die Goodie-Bags packen. Fertig vor dem Pre-Opening am 27.08.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Merch produziert (T19)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><span class="tc-est">⏱ 1–2 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t28">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t29">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">First Taste Club · Pre-Opening 27.08.</div>
+        <span class="tc-prio prio-hot">Opening Must</span>
+      </div>
+      <p class="tc-desc">Creator-Event: Goodie Bags, Entertainment, volles Menü. Bitte an alle Creators: 1 Reel bis zum 28.08. live. Presse hat separaten Slot. Ziel: 20–30 Reels stehen pünktlich zur Eröffnung.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Tickets versandt (T10)</span><span class="dep">Goodie Bags (T28)</span><span class="dep">Entertainment (T24)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><span class="tc-est">📅 27.08.</span></div>
+        <button class="status-btn" data-s="todo" data-id="t29">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t30">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Final-Check: alles im Store ready?</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Checkliste durchgehen: Glücksrad steht, QR-Aufsteller an allen Tischen, Karten gedruckt, Bildschirme laufen, Team gebrieft, Merch bereit, Google Business live mit Fotos. Kein Detail offen lassen.</p>
+      <div class="tc-bottom">
+        <div class="tc-meta"><span class="tc-est">📅 27.08. Abend</span></div>
+        <button class="status-btn" data-s="todo" data-id="t30">To Do</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════ PHASE 6 ═══════════════════════════════════ -->
+<div class="phase-header r" id="p6" style="--phase-c:var(--p6)">
+  <div class="ph-color" style="background:var(--p6)"></div>
+  <div class="ph-body">
+    <div>
+      <div style="font-weight:800;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:4px">Phase 06 · Opening & Danach</div>
+      <h2>GO LIVE &amp;<br>NACHGLÜHEN</h2>
+    </div>
+    <div class="ph-meta">
+      <span class="ph-date" style="background:var(--p6);color:#fff">28.08. +</span>
+      <span class="ph-count">5 Aufgaben · Alles einsammeln was wir gesät haben</span>
+    </div>
+  </div>
+</div>
+<div class="tasks r" style="--phase-c:var(--p6)">
+
+  <div class="task" id="t31">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Große Eröffnung 28.08. · Live!</div>
+        <span class="tc-prio prio-hot" style="background:var(--green-ink)">28.08.</span>
+      </div>
+      <p class="tc-desc">Erste 100 Gäste essen gratis. Glücksrad läuft. Entertainment an. Team briefed. Review-Skript aktiv. Video-Crew filmt alles. Die ganze Vorbereitung zahlt sich jetzt aus.</p>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="onepager.html#go">→ Opening Plan</a><span class="tc-est">📅 FR 28.08.</span></div>
+        <button class="status-btn" data-s="todo" data-id="t31">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t32">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Review-Push: 100 in 14 Tagen</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">Vom ersten Tag an: Team fragt aktiv, Glücksrad-Anreiz, Creator-Reviews vom Pre-Opening. Instagram Story Review-QR in Woche 1. Auf jede Bewertung innerhalb 24h antworten.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Google Business live (T2)</span><span class="dep">QR-Aufsteller (T17)</span><span class="dep">Team-Briefing (T23)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="google-marketing.html">→ Google Marketing</a><span class="tc-est">⏱ Ongoing</span></div>
+        <button class="status-btn" data-s="todo" data-id="t32">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t33">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Eröffnungs-Video schneiden & als Hero-Reel posten</div>
+        <span class="tc-prio prio-hot">Must</span>
+      </div>
+      <p class="tc-desc">30–60s Best-of vom Opening: Schlange, Glücksrad-Dreher, erste Biss-Reaktionen, Konfetti, Team. Als Pin-Post auf Instagram. Wird gleichzeitig das Haupt-Asset für die „verpasst?"-Ads.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Video-Material vom 28.08.</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><span class="tc-est">⏱ 2–4 Std Schnitt</span></div>
+        <button class="status-btn" data-s="todo" data-id="t33">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t34">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Ads-Shift: „Du hast es verpasst?" Kampagne</div>
+        <span class="tc-prio prio-mid">Important</span>
+      </div>
+      <p class="tc-desc">Ab Tag 2: Ads-Budget auf das stärkere Asset verschieben, Hook wechseln zu „Du hast es verpasst? Wir sind jetzt offen." Ziel: Laufkundschaft und Neugierige in den ersten 2 Wochen.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Eröffnungs-Video (T33)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="onepager.html#kanaele">→ Paid Ads</a><span class="tc-est">⏱ 30 Min Anpassung</span></div>
+        <button class="status-btn" data-s="todo" data-id="t34">To Do</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="task" id="t37">
+    <div class="tcard">
+      <div class="tc-top">
+        <div class="tc-title">Ersten Newsletter an alle Glücksrad-Leads schicken</div>
+        <span class="tc-prio prio-mid">Important</span>
+      </div>
+      <p class="tc-desc">Alle Leads aus dem Glücksrad-Formular bekommen innerhalb von 7 Tagen nach Opening eine erste Mail: „Danke, ihr wart dabei" + nächstes Angebot + nochmal die Review-Bitte.</p>
+      <div class="tc-deps"><span class="dep-label">Braucht zuerst:</span><span class="dep">Leads aus Glücksrad (T9)</span></div>
+      <div class="tc-bottom">
+        <div class="tc-meta"><a class="tc-link" href="grafikarbeiten.html#digital">→ Newsletter Header</a><span class="tc-est">⏱ 1–2 Std</span></div>
+        <button class="status-btn" data-s="todo" data-id="t37">To Do</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tasks p6 -->
+</div><!-- /timeline-wrap -->
+
+<div class="div-band"></div>
+<footer>
+  <div class="wide" style="max-width:1380px;margin:0 auto">
+    <div class="eyebrow r" style="opacity:.5;font-weight:800;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px">Strategie · The Pizzary Berlin</div>
+    <div class="big r d1">EINE AUFGABE<br>NACH DER <em>ANDEREN.</em></div>
+    <div class="row r d2">
+      <div class="meta">
+        <span class="marker" style="color:var(--green-ink)">Fast. Fresh. Pizza.</span><br>
+        📍 [Adresse] · Berlin · 28.08.<br>
+        📲 @thepizzary
+      </div>
+      <img class="logo" src="assets/logo-white.png" alt="THE PIZZARY" onerror="this.style.display='none'"/>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* farbband */
+(function(){
+  const order=['--cheesy','--veggie','--blue','--tomato','--pink','--asphalt','--cheesy','--blue'];
+  const cs=getComputedStyle(document.documentElement);
+  ['heroband','omband'].forEach(id=>{
+    const m=document.getElementById(id);if(!m)return;
+    order.forEach((c,i)=>{
+      const s=document.createElement('span');s.style.background=cs.getPropertyValue(c).trim();
+      if(id==='heroband'){s.style.animationDelay=(0.15+i*0.07)+'s';}else{s.style.transform='scaleY(1)';}
+      m.appendChild(s);
+    });
+  });
+})();
+
+/* burger */
+(function(){
+  const b=document.getElementById('burger'),ov=document.getElementById('overlay');if(!b)return;
+  const toggle=o=>{const open=o??!document.body.classList.contains('menu-open');document.body.classList.toggle('menu-open',open);b.setAttribute('aria-expanded',open);ov.setAttribute('aria-hidden',!open);};
+  b.addEventListener('click',()=>toggle());
+  ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggle(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false);});
+})();
+
+/* status + counter */
+const TOTAL=34;
+function updateCounts(){
+  let done=0,wip=0;
+  document.querySelectorAll('.status-btn').forEach(b=>{if(b.dataset.s==='done')done++;else if(b.dataset.s==='wip')wip++;});
+  const todo=TOTAL-done-wip;
+  document.getElementById('cnt-done').textContent=done;
+  document.getElementById('cnt-wip').textContent=wip;
+  document.getElementById('cnt-todo').textContent=todo;
+  const dp=Math.round(done/TOTAL*100),wp=Math.round(wip/TOTAL*100);
+  const pbDone=document.getElementById('pb-done'),pbWip=document.getElementById('pb-wip');
+  pbDone.style.width=dp+'%';pbDone.textContent=dp>6?dp+'%':'';
+  pbWip.style.width=wp+'%';
+}
+const cycle=['todo','wip','done'];const lbl={todo:'To Do',wip:'In Progress ⚡',done:'Erledigt ✓'};
+document.querySelectorAll('.status-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const nx=cycle[(cycle.indexOf(btn.dataset.s)+1)%cycle.length];
+    btn.dataset.s=nx;btn.textContent=lbl[nx];
+    const card=btn.closest('.task');
+    if(card){card.classList.toggle('done',nx==='done');card.classList.toggle('wip',nx==='wip');}
+    updateCounts();
+    // save to localStorage
+    try{localStorage.setItem('pz_task_'+btn.dataset.id,nx);}catch(_){}
+  });
+  // restore
+  try{const saved=localStorage.getItem('pz_task_'+btn.dataset.id);if(saved){btn.dataset.s=saved;btn.textContent=lbl[saved];const card=btn.closest('.task');if(card){card.classList.toggle('done',saved==='done');card.classList.toggle('wip',saved==='wip');}}}catch(_){}
+});
+updateCounts();
+
+/* phase nav scroll */
+function scrollToPhase(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+
+/* reveal */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -4% 0px'});
+document.querySelectorAll('.r').forEach(el=>io.observe(el));
+
+/* progress + phase nav active */
+const phases=['p1','p2','p3','p4','p5','p6'];
+const pnavItems=document.querySelectorAll('.pnav-item');
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  let cur=0;
+  phases.forEach((id,i)=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=120)cur=i;});
+  pnavItems.forEach((b,i)=>b.classList.toggle('cur',i===cur));
+},{passive:true});
+</script>
+</body>
+</html>

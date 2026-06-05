@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>THE PIZZARY — Menükarte · Themen-Briefing</title>
+<meta name="description" content="Menükarte für THE PIZZARY: alle Themen, die wir besprechen müssen. Menü-System, Produktfotos, Touchpoints." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --base:#F1F2EC;--cheesy:#E8EC8B;--veggie:#9FC8A0;--blue:#5B6FD6;--tomato:#C9202A;
+  --black:#0A0A0A;--pink:#D87ACF;--asphalt:#A99FC2;--green-ink:#2EA24B;--ink:#0A0A0A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--base);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5;}
+h1,h2,h3,.display{font-family:'Archivo',sans-serif;font-weight:900;letter-spacing:-.02em;line-height:.92;text-transform:uppercase;}
+.marker{font-family:'Permanent Marker',cursive;font-weight:400;text-transform:none;letter-spacing:0;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);mix-blend-mode:difference;color:#fff;pointer-events:none;}
+nav .wm{font-family:'Archivo';font-weight:900;font-size:1.1rem;letter-spacing:.02em;pointer-events:auto;}
+nav .links{display:flex;gap:clamp(14px,2.5vw,34px);font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;align-items:center;}
+nav .links a{opacity:.7;transition:opacity .25s;}
+nav .links a:hover,nav .links a.active{opacity:1;}
+.burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:36px;height:30px;background:none;border:none;cursor:pointer;pointer-events:auto;padding:0;}
+.burger span{display:block;height:3px;width:100%;background:#fff;border-radius:3px;transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .2s;}
+body.menu-open .burger span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+body.menu-open .burger span:nth-child(2){opacity:0;}
+body.menu-open .burger span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:860px){nav .links{display:none;}.burger{display:flex;}}
+
+.overlay{position:fixed;inset:0;z-index:99;background:var(--black);color:var(--base);display:flex;flex-direction:column;justify-content:center;padding:90px clamp(24px,8vw,110px) 0;transform:translateY(-101%);transition:transform .6s cubic-bezier(.76,0,.24,1);overflow:hidden;}
+body.menu-open{overflow:hidden;}
+body.menu-open .overlay{transform:none;}
+.overlay .om-eyebrow{font-weight:800;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5;margin-bottom:24px;}
+.overlay a.ol{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(2rem,8vw,4.4rem);line-height:1.04;color:var(--base);display:flex;align-items:baseline;gap:18px;padding:5px 0;opacity:0;transform:translateY(34px);transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1),color .2s;}
+.overlay a.ol .idx{font-family:'Hanken Grotesk';font-weight:700;font-size:.9rem;opacity:.4;letter-spacing:.05em;}
+body.menu-open .overlay a.ol{opacity:1;transform:none;}
+body.menu-open .overlay a.ol:nth-child(2){transition-delay:.18s}
+body.menu-open .overlay a.ol:nth-child(3){transition-delay:.24s}
+body.menu-open .overlay a.ol:nth-child(4){transition-delay:.3s}
+body.menu-open .overlay a.ol:nth-child(5){transition-delay:.36s}
+body.menu-open .overlay a.ol:nth-child(6){transition-delay:.42s}
+body.menu-open .overlay a.ol:nth-child(7){transition-delay:.48s}
+body.menu-open .overlay a.ol:nth-child(8){transition-delay:.54s}
+.overlay a.ol:hover{color:var(--tomato);}
+.overlay a.ol:hover .idx{color:var(--cheesy);opacity:1;}
+.overlay .om-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:28px 0;flex-wrap:wrap;gap:14px;}
+.overlay .om-foot .marker{color:var(--green-ink);font-size:1.4rem;}
+.overlay .om-band{position:absolute;bottom:0;left:0;right:0;height:14px;display:grid;grid-template-columns:repeat(8,1fr);}
+.progress{position:fixed;top:0;left:0;height:4px;background:var(--tomato);width:0;z-index:101;}
+
+/* LAYOUT */
+section{padding:clamp(60px,9vh,120px) clamp(20px,5vw,64px);position:relative;}
+.wide{max-width:1320px;margin:0 auto;}
+.eyebrow{font-weight:800;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-bottom:18px;}
+.lead{font-size:clamp(1.05rem,2vw,1.4rem);font-weight:500;max-width:62ch;}
+.r{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+.r.in{opacity:1;transform:none;}
+.r.d1{transition-delay:.08s}.r.d2{transition-delay:.16s}.r.d3{transition-delay:.24s}.r.d4{transition-delay:.32s}.r.d5{transition-delay:.4s}
+@media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none;}}
+
+/* HERO */
+.hero{min-height:88svh;display:flex;flex-direction:column;justify-content:center;padding-top:120px;padding-bottom:clamp(70px,12vh,120px);position:relative;overflow:hidden;}
+.farbband{position:absolute;bottom:0;left:0;right:0;height:clamp(70px,12vh,130px);z-index:0;display:grid;grid-template-columns:repeat(8,1fr);}
+.farbband span{transform:scaleY(0);transform-origin:bottom;animation:tile .8s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes tile{to{transform:scaleY(1);}}
+.hero-inner{position:relative;z-index:2;}
+.hero h1{font-size:clamp(3rem,13vw,10rem);color:var(--ink);}
+.hero h1 .out{-webkit-text-stroke:2.5px var(--ink);color:transparent;}
+.hero .tag{display:inline-block;margin-top:26px;background:var(--black);color:#fff;font-family:'Archivo';font-weight:900;font-size:clamp(.85rem,2vw,1.15rem);padding:8px 18px;text-transform:uppercase;transform:rotate(-1.5deg);}
+.hero .lead{margin-top:24px;}
+
+/* SECTION HEAD */
+.shead{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:40px;}
+.shead h2{font-size:clamp(2rem,6vw,4rem);}
+.snum{font-family:'Archivo';font-weight:900;font-size:clamp(2.4rem,7vw,5rem);color:var(--tomato);line-height:.8;}
+.shead .marker{color:var(--green-ink);font-size:clamp(1.2rem,3vw,1.9rem);}
+
+/* DECISION CARDS */
+.decks{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.deck{background:#fff;border:2.5px solid var(--ink);border-radius:8px;padding:26px 24px;display:flex;flex-direction:column;gap:16px;min-height:230px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s;}
+.deck:hover{transform:translateY(-6px);box-shadow:8px 10px 0 var(--ink);}
+.deck .q{font-family:'Archivo';font-weight:800;font-size:clamp(1.15rem,2vw,1.5rem);text-transform:none;line-height:1.1;letter-spacing:-.01em;}
+.deck p{font-weight:500;font-size:.92rem;opacity:.78;flex:1;}
+.status{align-self:flex-start;font-weight:800;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:999px;border:2.5px solid var(--ink);cursor:pointer;user-select:none;transition:background .2s,color .2s,transform .1s;background:var(--base);}
+.status:active{transform:scale(.95);}
+.status[data-s="offen"]{background:var(--cheesy);}
+.status[data-s="ja"]{background:var(--green-ink);color:#fff;border-color:var(--green-ink);}
+.status[data-s="nein"]{background:var(--tomato);color:#fff;border-color:var(--tomato);}
+.hint{font-size:.7rem;font-weight:700;opacity:.45;letter-spacing:.04em;}
+
+/* FOTO row */
+.foto{background:var(--black);color:var(--base);}
+.foto .lead{color:var(--base);opacity:.85;}
+.fcards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;}
+.fcard{border-radius:8px;padding:26px 24px;min-height:240px;display:flex;flex-direction:column;justify-content:space-between;color:var(--ink);}
+.fcard .emoji{font-size:2rem;}
+.fcard h3{font-size:clamp(1.3rem,2.2vw,1.7rem);margin:12px 0 8px;text-transform:none;letter-spacing:-.01em;}
+.fcard p{font-weight:500;font-size:.92rem;}
+.fcard.c1{background:var(--cheesy);}
+.fcard.c2{background:var(--pink);color:#fff;}
+.fcard.c3{background:var(--veggie);}
+.tagline{margin-top:14px;font-weight:800;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;opacity:.65;}
+
+/* TOUCHPOINTS */
+.touch{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:42px;}
+.tp{border-radius:8px;padding:24px 22px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.16,1,.3,1);}
+.tp:hover{transform:translateY(-6px) rotate(-1deg);}
+.tp .n{font-family:'Archivo';font-weight:900;font-size:1rem;opacity:.5;}
+.tp h3{font-size:clamp(1.15rem,1.8vw,1.45rem);text-transform:uppercase;line-height:1;}
+.tp p{font-weight:600;font-size:.8rem;opacity:.8;margin-top:6px;}
+.tp.veggie{background:var(--veggie);}.tp.cheesy{background:var(--cheesy);}
+.tp.blue{background:var(--blue);color:#fff;}.tp.pink{background:var(--pink);color:#fff;}
+.tp.asphalt{background:var(--asphalt);color:#fff;}.tp.tomato{background:var(--tomato);color:#fff;}
+.tp.black{background:var(--black);color:var(--base);}.tp.base{background:#fff;border:2.5px solid var(--ink);}
+
+/* NEXT */
+.next{background:var(--blue);color:#fff;}
+.next h2{font-size:clamp(2rem,6vw,4.2rem);}
+.next .lead{color:#fff;margin-top:20px;}
+.next .btn{display:inline-flex;align-items:center;gap:12px;background:var(--black);color:#fff;font-weight:800;padding:16px 28px;border-radius:999px;font-size:.95rem;margin-top:28px;transition:transform .25s,background .25s,color .25s;}
+.next .btn:hover{transform:translateX(6px);background:#fff;color:var(--black);}
+
+/* FOOTER */
+footer{background:var(--black);color:var(--base);padding:clamp(56px,8vh,100px) clamp(20px,5vw,64px) 36px;}
+footer .big{font-size:clamp(2.2rem,8vw,6rem);font-family:'Archivo';font-weight:900;text-transform:uppercase;line-height:.9;}
+footer .big em{font-style:normal;color:var(--tomato);}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:flex-end;margin-top:36px;padding-top:26px;border-top:1px solid rgba(255,255,255,.2);}
+footer .meta{font-weight:600;font-size:.92rem;opacity:.8;line-height:1.8;}
+footer .logo{width:150px;}
+footer .marker{color:var(--green-ink);font-size:1.5rem;}
+
+@media(max-width:880px){
+  .decks,.fcards{grid-template-columns:1fr;}
+  .touch{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:520px){.touch{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+<nav>
+  <a href="onepager.html" class="wm">THE PIZZARY</a>
+  <div class="links">
+    <a href="onepager.html#ziele">Ziele</a>
+    <a href="onepager.html#plan">Fahrplan</a>
+    <a href="onepager.html#kanaele">Kanäle</a>
+    <a href="menuekarte.html" class="active">Menükarte</a>
+    <a href="grafikarbeiten.html">Grafik</a>
+    <a href="google-marketing.html">Google</a>
+    <a href="strategie.html">Strategie</a>
+    <a href="strategie-small.html">Strategie Small</a>
+    <a href="glücksrad.html">Glücksrad</a>
+    <a href="onepager.html#go" class="cta">28.08.</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="om-eyebrow">Navigation</div>
+  <a class="ol" href="onepager.html#top"><span class="idx">01</span> Start</a>
+  <a class="ol" href="onepager.html#ziele"><span class="idx">02</span> Ziele</a>
+  <a class="ol" href="onepager.html#plan"><span class="idx">03</span> Fahrplan</a>
+  <a class="ol" href="onepager.html#kanaele"><span class="idx">04</span> Kanäle</a>
+  <a class="ol" href="menuekarte.html"><span class="idx">05</span> Menükarte</a>
+  <a class="ol" href="grafikarbeiten.html"><span class="idx">06</span> Grafik</a>
+  <a class="ol" href="google-marketing.html"><span class="idx">07</span> Google</a>
+  <a class="ol" href="glücksrad.html"><span class="idx">09</span> Glücksrad</a>
+  <a class="ol" href="onepager.html#go"><span class="idx">10</span> 28.08.</a>
+  <div class="om-foot">
+    <span class="marker">Fast. Fresh. Pizza.</span>
+    <span style="font-weight:700;opacity:.6;font-size:.8rem">@thepizzary · Berlin</span>
+  </div>
+  <div class="om-band" id="omband" aria-hidden="true"></div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="farbband" id="heroband" aria-hidden="true"></div>
+  <div class="hero-inner wide">
+    <div class="eyebrow r">Themen-Briefing · zu besprechen</div>
+    <h1 class="r d1">MENÜ<span class="out">KARTE</span></h1>
+    <span class="tag r d2">Diese Themen müssen wir klären</span>
+    <p class="lead r d3">Bevor die Karte steht, ein paar Entscheidungen. Tipp auf den Status, um direkt festzuhalten, was geklärt ist. Drei Blöcke: Menü-System, Produktfotos und alle Touchpoints, auf denen die Karte erscheint.</p>
+  </div>
+</header>
+
+<!-- 1 · MENÜ-SYSTEM -->
+<section id="system">
+  <div class="wide">
+    <div class="shead r">
+      <div><span class="snum">01</span><h2 style="margin-top:8px">DAS MENÜ-SYSTEM</h2></div>
+      <span class="marker r d1">Wie soll die Karte funktionieren?</span>
+    </div>
+    <div class="decks">
+      <div class="deck r d1">
+        <div class="q">Wie ist das Menü-System aufgebaut?</div>
+        <p>Struktur, Kategorien, Logik. Wie findet der Gast vom ersten Blick zur Bestellung? Pizza, Sides, Drinks, Deals.</p>
+        <div class="status" data-s="offen">Status: Offen</div>
+        <span class="hint">Tippen zum Ändern →</span>
+      </div>
+      <div class="deck r d2">
+        <div class="q">Brauchst du noch ein Menü-System?</div>
+        <p>Gibt es schon eine Struktur, oder bauen wir sie von Grund auf? Das entscheidet den Umfang.</p>
+        <div class="status" data-s="offen">Status: Offen</div>
+        <span class="hint">Tippen zum Ändern →</span>
+      </div>
+      <div class="deck r d3">
+        <div class="q">Soll ich das erstellen?</div>
+        <p>Wenn ja, baue ich dir ein durchdachtes Menü-System inkl. Aufbau, Reihenfolge und Preis-Logik.</p>
+        <div class="status" data-s="offen">Status: Offen</div>
+        <span class="hint">Tippen zum Ändern →</span>
+      </div>
+      <div class="deck r d4" style="grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;gap:20px 40px;background:var(--black);color:var(--base);border-color:var(--black);">
+        <div style="flex:1;min-width:220px;">
+          <div class="q" style="color:var(--cheesy);font-size:clamp(1.2rem,2.8vw,1.9rem)">Wie viele Menuboards brauchst du?</div>
+          <p style="color:#fff;opacity:.8;margin-top:10px;">Bildschirme von <strong style="color:var(--cheesy)">iiyama</strong> — wie viele Displays brauchst du im Store für das digitale Menü? Über dem Tresen, Eingang, seitlich? Anzahl &amp; Positionierung bestimmen das Layout-Konzept.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="iiyama-btn" data-n="1" style="font-family:'Archivo';font-weight:900;font-size:1.4rem;width:56px;height:56px;border-radius:10px;border:2.5px solid var(--cheesy);background:transparent;color:var(--cheesy);cursor:pointer;transition:background .2s,color .2s;">1</button>
+            <button class="iiyama-btn" data-n="2" style="font-family:'Archivo';font-weight:900;font-size:1.4rem;width:56px;height:56px;border-radius:10px;border:2.5px solid var(--cheesy);background:transparent;color:var(--cheesy);cursor:pointer;transition:background .2s,color .2s;">2</button>
+            <button class="iiyama-btn" data-n="3" style="font-family:'Archivo';font-weight:900;font-size:1.4rem;width:56px;height:56px;border-radius:10px;border:2.5px solid var(--cheesy);background:transparent;color:var(--cheesy);cursor:pointer;transition:background .2s,color .2s;">3</button>
+            <button class="iiyama-btn" data-n="4" style="font-family:'Archivo';font-weight:900;font-size:1.4rem;width:56px;height:56px;border-radius:10px;border:2.5px solid var(--cheesy);background:transparent;color:var(--cheesy);cursor:pointer;transition:background .2s,color .2s;">4</button>
+            <button class="iiyama-btn" data-n="5+" style="font-family:'Archivo';font-weight:900;font-size:1.1rem;padding:0 14px;height:56px;border-radius:10px;border:2.5px solid var(--cheesy);background:transparent;color:var(--cheesy);cursor:pointer;transition:background .2s,color .2s;">5+</button>
+          </div>
+          <span class="iiyama-label" style="font-weight:800;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cheesy);opacity:.6;">Anzahl wählen →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · FOTOSHOOTING -->
+<section class="foto" id="fotos">
+  <div class="wide">
+    <div class="shead r">
+      <div><span class="snum" style="color:var(--cheesy)">02</span><h2 style="margin-top:8px;color:var(--base)">FOTO-SHOOTING<br>& PRODUKTFOTOS</h2></div>
+      <span class="marker r d1" style="color:var(--cheesy)">Wie sieht die Pizza aus?</span>
+    </div>
+    <p class="lead r d1">Gutes Essen verkauft sich über gutes Foto. Wir brauchen ein Master-Bild und daraus ein System für alle Touchpoints.</p>
+    <div class="fcards">
+      <div class="fcard c1 r d1">
+        <div class="emoji">📸</div>
+        <div><h3>Master-Pizza-Foto</h3><p>Ein Foto in Top-Qualität als Referenz. Du beschreibst den Stil (Licht, Untergrund, Winkel, Stimmung), danach ziehen wir alles daraus.</p></div>
+        <div class="tagline">Braucht: Stil-Briefing</div>
+      </div>
+      <div class="fcard c2 r d2">
+        <div class="emoji">🍅</div>
+        <div><h3>Zutaten & Saucen in AI</h3><p>Alle Zutaten und Saucen sauber per AI generieren, im gleichen Look wie das Master-Foto. Konsistent über die ganze Karte.</p></div>
+        <div class="tagline">Output: Bild-Set</div>
+      </div>
+      <div class="fcard c3 r d3">
+        <div class="emoji">🥤</div>
+        <div><h3>Getränke?</h3><p>Welche Drinks kommen auf die Karte und sollen sie auch visualisiert werden? Offene Frage für die Auswahl.</p></div>
+        <div class="tagline">Offen · zu klären</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · TOUCHPOINTS -->
+<section id="touchpoints">
+  <div class="wide">
+    <div class="shead r">
+      <div><span class="snum">03</span><h2 style="margin-top:8px">WO DIE KARTE<br>ERSCHEINT</h2></div>
+      <span class="marker r d1">Ein Look, sieben Formate.</span>
+    </div>
+    <p class="lead r d1">Jeder Touchpoint braucht das gleiche Design in seinem Format. Hier alle, die wir produzieren.</p>
+    <div class="touch">
+      <div class="tp cheesy r d1"><div class="n">01</div><div><h3>Print Menu</h3><p>Klassische Karte zum Mitnehmen / am Tisch.</p></div></div>
+      <div class="tp veggie r d1"><div class="n">02</div><div><h3>Tresenkarte</h3><p>Kompakt für die Theke beim Bestellen.</p></div></div>
+      <div class="tp blue r d2"><div class="n">03</div><div><h3>Bildschirm-Menu</h3><p>Digital Boards über dem Tresen.</p></div></div>
+      <div class="tp pink r d2"><div class="n">04</div><div><h3>Website-Menu</h3><p>Online-Karte, responsive & aktuell.</p></div></div>
+      <div class="tp asphalt r d3"><div class="n">05</div><div><h3>Instagram Highlight</h3><p>Menu als Story-Highlight im Feed.</p></div></div>
+      <div class="tp tomato r d3"><div class="n">06</div><div><h3>Kundenstopper</h3><p>Aufsteller vor der Tür, Blickfang.</p></div></div>
+      <div class="tp black r d4"><div class="n">07</div><div><h3>Promo-Aussteller</h3><p>Werbe-Poster & Aktions-Displays.</p></div></div>
+      <div class="tp base r d4"><div class="n">+</div><div><h3>Ein System</h3><p>Alle Formate aus einer Design-Quelle.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section class="next" id="next">
+  <div class="wide">
+    <div class="eyebrow r" style="color:#fff;opacity:.7">Nächster Schritt</div>
+    <h2 class="r d1">SAG MIR, WO<br>WIR STARTEN.</h2>
+    <p class="lead r d2">Klär die drei Status oben, gib mir das Stil-Briefing fürs Pizza-Foto, dann lege ich los: erst Menü-System, dann Master-Foto + AI-Zutaten, dann alle Touchpoints im einheitlichen Look.</p>
+    <a class="btn r d3" href="onepager.html">Zurück zum Opening-Plan <span>→</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="go">
+  <div class="wide">
+    <div class="eyebrow r" style="opacity:.6">Menükarte · The Pizzary</div>
+    <div class="big r d1">EINE KARTE,<br><em>EIN LOOK.</em></div>
+    <div class="row r d2">
+      <div class="meta">
+        <span class="marker">Fast. Fresh. Pizza.</span><br>
+        📍 [Adresse einsetzen] · Berlin<br>
+        📲 @thepizzary
+      </div>
+      <img class="logo" src="assets/logo-white.png" alt="THE PIZZARY" onerror="this.style.display='none'"/>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* farbbands */
+(function(){
+  const order=['--cheesy','--veggie','--blue','--tomato','--pink','--asphalt','--cheesy','--blue'];
+  const cs=getComputedStyle(document.documentElement);
+  ['heroband','omband'].forEach(id=>{
+    const m=document.getElementById(id);if(!m)return;
+    order.forEach((c,i)=>{
+      const s=document.createElement('span');
+      s.style.background=cs.getPropertyValue(c).trim();
+      if(id==='heroband'){s.style.animationDelay=(0.15+i*0.07)+'s';}
+      else{s.style.transform='none';}
+      m.appendChild(s);
+    });
+  });
+})();
+
+/* burger */
+(function(){
+  const b=document.getElementById('burger');const ov=document.getElementById('overlay');if(!b)return;
+  const toggle=open=>{const o=open??!document.body.classList.contains('menu-open');document.body.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o);ov.setAttribute('aria-hidden',!o);};
+  b.addEventListener('click',()=>toggle());
+  ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggle(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false);});
+})();
+
+/* decision status cycle */
+(function(){
+  const cycle=['offen','ja','nein'];const label={offen:'Status: Offen',ja:'Status: Ja ✓',nein:'Status: Nein'};
+  document.querySelectorAll('.status').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const cur=el.dataset.s;const nx=cycle[(cycle.indexOf(cur)+1)%cycle.length];
+      el.dataset.s=nx;el.textContent=label[nx];
+    });
+  });
+})();
+
+/* iiyama screen selector */
+(function(){
+  const btns=document.querySelectorAll('.iiyama-btn');
+  const lbl=document.querySelector('.iiyama-label');
+  const cs=getComputedStyle(document.documentElement);
+  const cheesy=cs.getPropertyValue('--cheesy').trim();
+  btns.forEach(b=>{
+    b.addEventListener('click',()=>{
+      btns.forEach(x=>{x.style.background='transparent';x.style.color=cheesy;});
+      b.style.background=cheesy;b.style.color='#0A0A0A';
+      lbl.textContent=b.dataset.n+' Bildschirm'+(b.dataset.n==='1'?'':'e')+' · iiyama ✓';
+      lbl.style.opacity='1';
+    });
+  });
+})();
+
+/* reveal */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.r').forEach(el=>io.observe(el));
+
+/* progress + active nav */
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+</script>
+</body>
+</html>

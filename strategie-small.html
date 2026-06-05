@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>THE PIZZARY — Strategie Small</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --base:#F1F2EC;--cheesy:#E8EC8B;--veggie:#9FC8A0;--blue:#5B6FD6;
+  --tomato:#C9202A;--black:#0A0A0A;--pink:#D87ACF;--asphalt:#A99FC2;
+  --green-ink:#2EA24B;--ink:#0A0A0A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--base);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+h1,h2,h3{font-family:'Archivo',sans-serif;font-weight:900;letter-spacing:-.02em;text-transform:uppercase;line-height:.92;}
+.marker{font-family:'Permanent Marker',cursive;font-weight:400;text-transform:none;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,64px);mix-blend-mode:difference;color:#fff;pointer-events:none;}
+nav .wm{font-family:'Archivo';font-weight:900;font-size:1.05rem;pointer-events:auto;}
+nav .links{display:flex;gap:clamp(8px,1.4vw,22px);font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;pointer-events:auto;align-items:center;}
+nav .links a{opacity:.65;transition:opacity .2s;white-space:nowrap;}
+nav .links a:hover,nav .links a.active{opacity:1;}
+.burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:34px;height:28px;background:none;border:none;cursor:pointer;pointer-events:auto;}
+.burger span{display:block;height:3px;width:100%;background:#fff;border-radius:3px;transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .2s;}
+body.mo .burger span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+body.mo .burger span:nth-child(2){opacity:0;}
+body.mo .burger span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:1100px){nav .links{display:none;}.burger{display:flex;}}
+.ov{position:fixed;inset:0;z-index:99;background:var(--black);color:var(--base);display:flex;flex-direction:column;justify-content:center;padding:90px clamp(24px,8vw,100px) 0;transform:translateY(-101%);transition:transform .6s cubic-bezier(.76,0,.24,1);overflow:hidden;}
+body.mo{overflow:hidden;}
+body.mo .ov{transform:none;}
+.ov .oe{font-weight:800;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.45;margin-bottom:22px;}
+.ov a.ol{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,6vw,3.6rem);line-height:1.06;color:var(--base);display:flex;align-items:baseline;gap:16px;padding:3px 0;opacity:0;transform:translateY(28px);transition:opacity .45s,transform .45s cubic-bezier(.16,1,.3,1),color .2s;}
+.ov a.ol span{font-family:'Hanken Grotesk';font-weight:700;font-size:.8rem;opacity:.4;}
+body.mo .ov a.ol{opacity:1;transform:none;}
+body.mo .ov a.ol:nth-child(2){transition-delay:.11s}body.mo .ov a.ol:nth-child(3){transition-delay:.16s}
+body.mo .ov a.ol:nth-child(4){transition-delay:.21s}body.mo .ov a.ol:nth-child(5){transition-delay:.26s}
+body.mo .ov a.ol:nth-child(6){transition-delay:.31s}body.mo .ov a.ol:nth-child(7){transition-delay:.36s}
+body.mo .ov a.ol:nth-child(8){transition-delay:.41s}body.mo .ov a.ol:nth-child(9){transition-delay:.46s}
+body.mo .ov a.ol:nth-child(10){transition-delay:.51s}
+.ov a.ol:hover{color:var(--tomato);}
+.ov .of{margin-top:auto;padding:20px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.ov .ob{position:absolute;bottom:0;left:0;right:0;height:12px;display:grid;grid-template-columns:repeat(8,1fr);}
+.prog{position:fixed;top:0;left:0;height:3px;background:var(--tomato);width:0;z-index:101;}
+
+/* HERO */
+.hero{min-height:80svh;display:flex;flex-direction:column;justify-content:center;padding:clamp(100px,14vh,140px) clamp(20px,5vw,64px) clamp(60px,10vh,90px);position:relative;overflow:hidden;background:var(--black);color:var(--base);}
+.hband{position:absolute;bottom:0;left:0;right:0;height:10px;display:grid;grid-template-columns:repeat(6,1fr);}
+.hband span{background:var(--c);}
+.hero h1{font-size:clamp(3rem,13vw,10rem);}
+.hero h1 .r{color:var(--tomato);}
+.hero h1 .o{-webkit-text-stroke:2px var(--base);color:transparent;}
+.htag{display:inline-flex;gap:10px;flex-wrap:wrap;margin-top:22px;}
+.htag span{font-family:'Archivo';font-weight:900;font-size:.82rem;text-transform:uppercase;padding:7px 16px;border-radius:999px;}
+.htag .tc{background:var(--tomato);color:#fff;}
+.htag .bc{background:rgba(255,255,255,.1);color:var(--base);}
+.hero p{font-size:clamp(1rem,2vw,1.2rem);font-weight:500;max-width:44ch;margin-top:18px;opacity:.75;}
+.eyebrow{font-weight:800;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5;margin-bottom:14px;}
+
+/* PROGRESS BAR */
+.pbar-wrap{background:#fff;border-bottom:2px solid rgba(0,0,0,.08);padding:14px clamp(20px,5vw,64px);}
+.pbar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.pbar-label{font-weight:800;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;}
+.pbar{flex:1;min-width:120px;height:28px;background:rgba(0,0,0,.07);border-radius:6px;overflow:hidden;display:flex;gap:2px;padding:3px;}
+.pb-d{background:var(--green-ink);border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;padding-left:8px;font-weight:800;font-size:.65rem;color:#fff;white-space:nowrap;overflow:hidden;}
+.pb-w{background:var(--cheesy);border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1) .1s;display:flex;align-items:center;padding-left:6px;font-weight:800;font-size:.65rem;color:#000;overflow:hidden;}
+.pb-r{flex:1;background:transparent;}
+.pbar-counts{display:flex;gap:14px;flex-wrap:wrap;}
+.pc{font-weight:700;font-size:.72rem;white-space:nowrap;}
+.pc b{font-weight:900;}
+
+/* MAIN CONTENT */
+.wrap{max-width:860px;margin:0 auto;padding:0 clamp(20px,5vw,64px) 80px;}
+
+/* PHASE */
+.phase{margin-top:56px;}
+.ph{display:flex;align-items:center;gap:0;margin-bottom:24px;}
+.ph-bar{width:5px;height:56px;border-radius:3px;flex:0 0 5px;}
+.ph-text{padding:10px 20px;}
+.ph-text .phl{font-weight:800;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:2px;}
+.ph-text h2{font-size:clamp(1.4rem,4vw,2.2rem);}
+.ph-text .phd{font-weight:700;font-size:.76rem;margin-top:4px;opacity:.6;}
+.marker-note{display:block;font-size:clamp(1rem,2.5vw,1.3rem);margin-top:4px;}
+
+/* TASK ROW */
+.tasks{display:flex;flex-direction:column;gap:10px;padding-left:25px;border-left:2px solid rgba(0,0,0,.08);position:relative;}
+
+.t{background:#fff;border-radius:10px;padding:18px 20px;display:flex;gap:16px;align-items:flex-start;position:relative;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;}
+.t:hover{transform:translateX(5px);}
+.t.done{opacity:.45;}
+.t.done:hover{transform:none;}
+.t .dot{width:12px;height:12px;border-radius:50%;flex:0 0 12px;margin-top:5px;border:2.5px solid var(--pc,var(--ink));background:#fff;transition:background .2s;}
+.t.wip .dot{background:var(--cheesy);border-color:var(--cheesy);}
+.t.done .dot{background:var(--green-ink);border-color:var(--green-ink);}
+.t .body{flex:1;min-width:0;}
+.t .top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.t .title{font-family:'Archivo';font-weight:900;font-size:clamp(.95rem,2vw,1.15rem);text-transform:uppercase;line-height:1.05;flex:1;}
+.t .prio{font-weight:800;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;white-space:nowrap;flex:0 0 auto;}
+.p-hot{background:var(--tomato);color:#fff;}
+.p-mid{background:var(--cheesy);color:#000;}
+.t .desc{font-weight:500;font-size:.88rem;opacity:.72;line-height:1.45;margin-top:6px;}
+.t .dep{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.t .dep .dl{font-weight:800;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;opacity:.5;}
+.t .dep .dc{font-weight:700;font-size:.68rem;padding:3px 9px;border-radius:999px;background:rgba(0,0,0,.06);border:1.5px solid rgba(0,0,0,.1);}
+.t .bot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.t .est{font-weight:700;font-size:.68rem;opacity:.45;}
+.sbtn{font-family:'Hanken Grotesk';font-weight:800;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px;border:2px solid var(--ink);cursor:pointer;transition:background .15s,color .15s,transform .1s;background:var(--base);}
+.sbtn:active{transform:scale(.93);}
+.sbtn[data-s="todo"]{background:var(--base);}
+.sbtn[data-s="wip"]{background:var(--cheesy);color:#000;border-color:var(--cheesy);}
+.sbtn[data-s="done"]{background:var(--green-ink);color:#fff;border-color:var(--green-ink);}
+
+/* DIVIDER */
+.div{height:4px;background:linear-gradient(90deg,var(--tomato),var(--blue),var(--cheesy),var(--veggie),var(--pink),var(--asphalt),var(--tomato),var(--blue));margin-top:56px;}
+
+/* FOOTER */
+footer{background:var(--black);color:var(--base);padding:clamp(46px,7vh,80px) clamp(20px,5vw,64px) 32px;}
+footer h2{font-size:clamp(1.8rem,6vw,4.5rem);}
+footer h2 em{color:var(--tomato);font-style:normal;}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:flex-end;margin-top:30px;padding-top:22px;border-top:1px solid rgba(255,255,255,.18);}
+footer .meta{font-weight:600;font-size:.9rem;opacity:.75;line-height:1.8;}
+footer img{width:120px;}
+
+/* SCROLL REVEAL */
+.r{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);}
+.r.in{opacity:1;transform:none;}
+.r.d1{transition-delay:.06s}.r.d2{transition-delay:.12s}.r.d3{transition-delay:.18s}.r.d4{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none;}}
+@media(max-width:600px){.t{flex-direction:column;gap:8px;}.t .dot{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+
+<nav>
+  <a href="onepager.html" class="wm">THE PIZZARY</a>
+  <div class="links">
+    <a href="onepager.html#plan">Fahrplan</a>
+    <a href="menuekarte.html">Menükarte</a>
+    <a href="grafikarbeiten.html">Grafik</a>
+    <a href="google-marketing.html">Google</a>
+    <a href="strategie.html">Strategie</a>
+    <a href="strategie-small.html" class="active">Strategie Small</a>
+    <a href="glücksrad.html">Glücksrad</a>
+    <a href="onepager.html#go">28.08.</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="ov" id="ov">
+  <div class="oe">Navigation</div>
+  <a class="ol" href="onepager.html#top"><span>01</span> Start</a>
+  <a class="ol" href="onepager.html#plan"><span>02</span> Fahrplan</a>
+  <a class="ol" href="menuekarte.html"><span>03</span> Menükarte</a>
+  <a class="ol" href="grafikarbeiten.html"><span>04</span> Grafik</a>
+  <a class="ol" href="google-marketing.html"><span>05</span> Google</a>
+  <a class="ol" href="strategie.html"><span>06</span> Strategie</a>
+  <a class="ol" href="strategie-small.html"><span>07</span> Strategie Small</a>
+  <a class="ol" href="glücksrad.html"><span>08</span> Glücksrad</a>
+  <a class="ol" href="onepager.html#go"><span>09</span> 28.08.</a>
+  <div class="of">
+    <span class="marker" style="color:var(--green-ink);font-size:1.3rem">Fast. Fresh. Pizza.</span>
+    <span style="font-weight:700;opacity:.55;font-size:.76rem">@thepizzary · Berlin</span>
+  </div>
+  <div class="ob" id="ob"></div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hband" id="hb">
+    <span style="--c:var(--tomato)"></span>
+    <span style="--c:var(--cheesy)"></span>
+    <span style="--c:var(--veggie)"></span>
+    <span style="--c:var(--blue)"></span>
+    <span style="--c:var(--pink)"></span>
+    <span style="--c:var(--asphalt)"></span>
+  </div>
+  <div style="max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:2">
+    <p class="eyebrow r" style="color:var(--base)">Strategie Small · Die wichtigsten Punkte</p>
+    <h1 class="r d1">DAS <span class="r">WESENTLICHE.</span></h1>
+    <div class="htag r d2">
+      <span class="tc">6 Phasen</span>
+      <span class="bc">15 Must-Dos</span>
+      <span class="bc">28.08. Berlin</span>
+    </div>
+    <p class="r d3">Nur die Aufgaben, die wirklich entscheiden ob das Opening ein Erfolg wird. Keine Nice-to-haves. Einfach von oben nach unten abhaken.</p>
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="pbar-wrap">
+  <div class="pbar-inner">
+    <span class="pbar-label">Fortschritt</span>
+    <div class="pbar"><div class="pb-d" id="pbd"></div><div class="pb-w" id="pbw"></div><div class="pb-r"></div></div>
+    <div class="pbar-counts">
+      <span class="pc"><b id="cnt-d">0</b> Erledigt</span>
+      <span class="pc"><b id="cnt-w">0</b> In Progress</span>
+      <span class="pc"><b id="cnt-t">15</b> To Do</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ── PHASE 1 ── -->
+<div class="phase r" id="p1">
+  <div class="ph">
+    <div class="ph-bar" style="background:var(--tomato)"></div>
+    <div class="ph-text">
+      <div class="phl">Phase 01</div>
+      <h2>JETZT SOFORT</h2>
+      <div class="phd">Jetzt · Diese 3 Punkte blockieren alles andere</div>
+      <span class="marker marker-note" style="color:var(--green-ink)">Starte hier. Nichts anderes zuerst.</span>
+    </div>
+  </div>
+  <div class="tasks" style="--pc:var(--tomato)">
+
+    <div class="t r d1" id="t1">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Adresse & Datum bestätigen</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">28.08., genaue Adresse und Uhrzeit in alle Materialien eintragen. Ohne das kann nichts produziert werden.</p>
+        <div class="dep"><span class="dl">Blockiert:</span><span class="dc">Alle Grafiken</span><span class="dc">Flyer</span><span class="dc">Google Business</span></div>
+        <div class="bot"><span class="est">⏱ 30 Min</span><button class="sbtn" data-s="todo" data-id="s1">To Do</button></div>
+      </div>
+    </div>
+
+    <div class="t r d2" id="t2">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Google Business Profil live schalten</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Profil vollständig ausfüllen: Name, Adresse, Öffnungszeiten, Fotos, Beschreibung. Ohne das: keine Reviews sammelbar.</p>
+        <div class="dep"><span class="dl">Blockiert:</span><span class="dc">Alle Review-Maßnahmen</span></div>
+        <div class="bot"><span class="est">⏱ 1–2 Std</span><button class="sbtn" data-s="todo" data-id="s2">To Do</button></div>
+      </div>
+    </div>
+
+    <div class="t r d3" id="t3">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Creator-Liste + First Taste Club Einladungen raus</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">15–30 lokale Creators & Foodblogger. Mind. 3 Wochen Vorlauf. Wer nicht eingeladen ist, dreht am 27.08. keinen Reel für dich.</p>
+        <div class="dep"><span class="dl">Blockiert:</span><span class="dc">Goodie Bags</span><span class="dc">Ticket-Design</span></div>
+        <div class="bot"><span class="est">⏱ 3–5 Std</span><button class="sbtn" data-s="todo" data-id="s3">To Do</button></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── PHASE 2 ── -->
+<div class="phase r" id="p2">
+  <div class="ph">
+    <div class="ph-bar" style="background:var(--blue)"></div>
+    <div class="ph-text">
+      <div class="phl">Phase 02</div>
+      <h2>BILDER & BASIS</h2>
+      <div class="phd">Juli · Sobald Phase 1 erledigt</div>
+      <span class="marker marker-note" style="color:var(--green-ink)">Ohne Foto geht nichts weiter.</span>
+    </div>
+  </div>
+  <div class="tasks" style="--pc:var(--blue)">
+
+    <div class="t r d1">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Master-Pizza-Foto produzieren</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Ein Foto, das alles trägt. Stil briefen, Shooting, fertig. Alles andere — Poster, Wolt-Banner, Instagram — kommt daraus.</p>
+        <div class="dep"><span class="dl">Blockiert:</span><span class="dc">Alle Grafik-Deliverables</span><span class="dc">Wolt Banner</span><span class="dc">Instagram</span></div>
+        <div class="bot"><span class="est">⏱ 2–4 Std</span><button class="sbtn" data-s="todo" data-id="s4">To Do</button></div>
+      </div>
+    </div>
+
+    <div class="t r d2">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Menü-System entscheiden & texten</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Kategorien, Gerichte, Preise, Getränke. Einmal erledigt — Basis für Print, Bildschirm-Menu, Website, Instagram Highlight.</p>
+        <div class="dep"><span class="dl">Blockiert:</span><span class="dc">Menükarte Print</span><span class="dc">Bildschirm-Menu</span></div>
+        <div class="bot"><span class="est">⏱ 3–6 Std</span><button class="sbtn" data-s="todo" data-id="s5">To Do</button></div>
+      </div>
+    </div>
+
+    <div class="t r d3">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Glücksrad-Website live + QR generieren</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Hosten, Domain setzen, Lead-Formular anbinden. Der QR kommt auf alle Flyer. Jeder Flyer wird zum Lead-Capture.</p>
+        <div class="dep"><span class="dl">Blockiert:</span><span class="dc">Flyer Druck</span><span class="dc">Review-Aufsteller</span></div>
+        <div class="bot"><span class="est">⏱ 1–2 Std</span><button class="sbtn" data-s="todo" data-id="s6">To Do</button></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── PHASE 3 ── -->
+<div class="phase r" id="p3">
+  <div class="ph">
+    <div class="ph-bar" style="background:var(--cheesy)"></div>
+    <div class="ph-text">
+      <div class="phl">Phase 03</div>
+      <h2>DRUCK & PRINT</h2>
+      <div class="phd">Bis spätestens 1. August · Druckereien brauchen Zeit</div>
+      <span class="marker marker-note" style="color:var(--green-ink)">Zu spät bestellt = nicht rechtzeitig da.</span>
+    </div>
+  </div>
+  <div class="tasks" style="--pc:var(--cheesy)">
+
+    <div class="t r d1">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Flyer + Kundenstopper + Werbeposter</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Alle drei in Druck geben. Flyer mit QR zum Glücksrad. Kundenstopper ist der erste Blick von der Straße. Druckvorlauf: 5–10 Werktage.</p>
+        <div class="bot"><span class="est">⏱ Druck-Vorlauf einplanen</span><button class="sbtn" data-s="todo" data-id="s7">To Do</button></div>
+      </div>
+    </div>
+
+    <div class="t r d2">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Fensterbeklebung beauftragen</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Store-Fenster als Werbefläche: Logo, Claim, Opening-Ankündigung. Produktion + Freitage braucht 1–2 Wochen Vorlauf.</p>
+        <div class="bot"><span class="est">⏱ Prod. 7–10 Werktage</span><button class="sbtn" data-s="todo" data-id="s8">To Do</button></div>
+      </div>
+    </div>
+
+    <div class="t r d3">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Tischaufsteller mit Google-Review-QR</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">A5 auf jedem Tisch + Theke. Direkt-Link zum Review-Formular. Das ist der stille Review-Sammler der am Opening-Tag sofort arbeitet.</p>
+        <div class="bot"><span class="est">⏱ 1 Std + Druck</span><button class="sbtn" data-s="todo" data-id="s9">To Do</button></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── PHASE 4 ── -->
+<div class="phase r" id="p4">
+  <div class="ph">
+    <div class="ph-bar" style="background:var(--pink)"></div>
+    <div class="ph-text">
+      <div class="phl">Phase 04</div>
+      <h2>2 WOCHEN VOR DEM OPENING</h2>
+      <div class="phd">4. – 14. August</div>
+      <span class="marker marker-note" style="color:var(--green-ink)">Jetzt wird getrommelt.</span>
+    </div>
+  </div>
+  <div class="tasks" style="--pc:var(--pink)">
+
+    <div class="t r d1">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Paid Ads live schalten (400 €)</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Asset 1: Event. Asset 2: Gratis-Food. Berlin, 3 km Radius, 28 €/Tag. UTM-Links tracken welches Asset Leads bringt. Woche 1 testen, dann Budget shiften.</p>
+        <div class="bot"><span class="est">⏱ 2–3 Std Setup</span><button class="sbtn" data-s="todo" data-id="s10">To Do</button></div>
+      </div>
+    </div>
+
+    <div class="t r d2">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Organic Content: 3× pro Woche posten</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Hero-Skit „Michelle wartet im Schlafanzug", Behind the Dough, Crew-Vorstellung, Glücksrad-Teaser. Ab sofort bis zum 28.08.</p>
+        <div class="bot"><span class="est">⏱ Laufend</span><button class="sbtn" data-s="todo" data-id="s11">To Do</button></div>
+      </div>
+    </div>
+
+    <div class="t r d3">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Team-Briefing: Review-Skript + Opening-Ablauf</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Alle kennen den einen Satz für Reviews, den Glücksrad-Ablauf und was am 28.08. zu tun ist. Einmal gebrieft — läuft am Tag von allein.</p>
+        <div class="bot"><span class="est">⏱ 1–2 Std</span><button class="sbtn" data-s="todo" data-id="s12">To Do</button></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── PHASE 5 ── -->
+<div class="phase r" id="p5">
+  <div class="ph">
+    <div class="ph-bar" style="background:var(--veggie)"></div>
+    <div class="ph-text">
+      <div class="phl">Phase 05</div>
+      <h2>DIE WOCHE DAVOR</h2>
+      <div class="phd">24. – 27. Aug (26: F&amp;F · 27: Creator)</div>
+      <span class="marker marker-note" style="color:var(--green-ink)">Letzte Vorbereitung. Kein Stress mehr.</span>
+    </div>
+  </div>
+  <div class="tasks" style="--pc:var(--veggie)">
+
+    <div class="t r d1">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">Deko aufbauen + Final-Check</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Ballons, Poster, Kundenstopper, Glücksrad, QR-Aufsteller — alles steht. Team final gebrieft. Kein offener Punkt mehr.</p>
+        <div class="bot"><span class="est">⏱ 27.08. Aufbau</span><button class="sbtn" data-s="todo" data-id="s13">To Do</button></div>
+      </div>
+    </div>
+
+    <div class="t r d2">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">First Taste Club · Pre-Opening 27.08.</div><span class="prio p-hot">Opening</span></div>
+        <p class="desc">Creator-Event mit Goodie Bags, Entertainment, vollem Menü. Bitte: 1 Reel bis zum 28.08. live. Ziel: 20+ Reels zur Eröffnung bereit.</p>
+        <div class="bot"><span class="est">📅 27.08.</span><button class="sbtn" data-s="todo" data-id="s14">To Do</button></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── PHASE 6 ── -->
+<div class="phase r" id="p6">
+  <div class="ph">
+    <div class="ph-bar" style="background:var(--asphalt)"></div>
+    <div class="ph-text">
+      <div class="phl">Phase 06</div>
+      <h2>28.08. + DANACH</h2>
+      <div class="phd">Opening-Tag und die ersten 2 Wochen</div>
+      <span class="marker marker-note" style="color:var(--green-ink)">Alles einsammeln was wir gesät haben.</span>
+    </div>
+  </div>
+  <div class="tasks" style="--pc:var(--asphalt)">
+
+    <div class="t r d1">
+      <div class="dot"></div>
+      <div class="body">
+        <div class="top"><div class="title">100 Google Reviews in 14 Tagen</div><span class="prio p-hot">Must</span></div>
+        <p class="desc">Team fragt aktiv. Glücksrad-Anreiz. Creator-Reviews. Instagram Story QR. Auf jede Review innerhalb 24h antworten. 4.8 Sterne ist das Ziel.</p>
+        <div class="bot"><span class="est">⏱ Ongoing</span><button class="sbtn" data-s="todo" data-id="s15">To Do</button></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<div class="div"></div>
+
+<footer>
+  <div style="max-width:1200px;margin:0 auto">
+    <p class="eyebrow r" style="opacity:.45;color:var(--base)">Strategie Small · The Pizzary</p>
+    <h2 class="r d1">15 AUFGABEN.<br><em>EIN ZIEL.</em></h2>
+    <div class="row r d2">
+      <div class="meta">
+        <span class="marker" style="color:var(--green-ink)">Fast. Fresh. Pizza.</span><br>
+        📍 [Adresse] · Berlin · 28.08.<br>
+        📲 @thepizzary
+      </div>
+      <img src="assets/logo-white.png" alt="THE PIZZARY" onerror="this.style.display='none'"/>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* overlay farbband */
+(function(){
+  const order=['--cheesy','--veggie','--blue','--tomato','--pink','--asphalt','--cheesy','--blue'];
+  const cs=getComputedStyle(document.documentElement);
+  const ob=document.getElementById('ob');
+  order.forEach(c=>{const s=document.createElement('span');s.style.background=cs.getPropertyValue(c).trim();s.style.display='block';s.style.height='100%';ob.appendChild(s);});
+})();
+
+/* burger */
+(function(){
+  const b=document.getElementById('burger'),ov=document.getElementById('ov');
+  const tog=o=>{const on=o??!document.body.classList.contains('mo');document.body.classList.toggle('mo',on);b.setAttribute('aria-expanded',on);};
+  b.addEventListener('click',()=>tog());
+  ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>tog(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')tog(false);});
+})();
+
+/* status + counts */
+const TOTAL=15;
+function recount(){
+  let d=0,w=0;
+  document.querySelectorAll('.sbtn').forEach(b=>{if(b.dataset.s==='done')d++;else if(b.dataset.s==='wip')w++;});
+  const t=TOTAL-d-w;
+  document.getElementById('cnt-d').textContent=d;
+  document.getElementById('cnt-w').textContent=w;
+  document.getElementById('cnt-t').textContent=t;
+  const dp=Math.round(d/TOTAL*100),wp=Math.round(w/TOTAL*100);
+  const pd=document.getElementById('pbd'),pw=document.getElementById('pbw');
+  pd.style.width=dp+'%';pd.textContent=dp>8?dp+'%':'';
+  pw.style.width=wp+'%';
+}
+const SL={todo:'To Do',wip:'In Progress ⚡',done:'Erledigt ✓'},CY=['todo','wip','done'];
+document.querySelectorAll('.sbtn').forEach(btn=>{
+  // restore
+  try{const sv=localStorage.getItem('pzs_'+btn.dataset.id);if(sv){btn.dataset.s=sv;btn.textContent=SL[sv];const t=btn.closest('.t');if(t){t.classList.toggle('done',sv==='done');t.classList.toggle('wip',sv==='wip');}}}catch(_){}
+  btn.addEventListener('click',()=>{
+    const nx=CY[(CY.indexOf(btn.dataset.s)+1)%3];
+    btn.dataset.s=nx;btn.textContent=SL[nx];
+    const t=btn.closest('.t');if(t){t.classList.toggle('done',nx==='done');t.classList.toggle('wip',nx==='wip');}
+    try{localStorage.setItem('pzs_'+btn.dataset.id,nx);}catch(_){}
+    recount();
+  });
+});
+recount();
+
+/* reveal */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -4% 0px'});
+document.querySelectorAll('.r').forEach(el=>io.observe(el));
+
+/* progress bar */
+const pg=document.getElementById('prog');
+addEventListener('scroll',()=>{const h=document.documentElement;pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+</script>
+</body>
+</html>

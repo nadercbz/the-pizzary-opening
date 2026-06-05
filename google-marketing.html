@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>THE PIZZARY — Google Marketing · Reviews & Local</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --base:#F1F2EC;--cheesy:#E8EC8B;--veggie:#9FC8A0;--blue:#5B6FD6;--tomato:#C9202A;
+  --black:#0A0A0A;--pink:#D87ACF;--asphalt:#A99FC2;--green-ink:#2EA24B;--ink:#0A0A0A;
+  --google-blue:#4285F4;--google-red:#EA4335;--google-yellow:#FBBC05;--google-green:#34A853;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--base);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5;}
+h1,h2,h3{font-family:'Archivo',sans-serif;font-weight:900;letter-spacing:-.02em;line-height:.92;text-transform:uppercase;}
+.marker{font-family:'Permanent Marker',cursive;font-weight:400;text-transform:none;letter-spacing:0;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,64px);mix-blend-mode:difference;color:#fff;pointer-events:none;}
+nav .wm{font-family:'Archivo';font-weight:900;font-size:1.1rem;letter-spacing:.02em;pointer-events:auto;}
+nav .links{display:flex;gap:clamp(8px,1.6vw,24px);font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;pointer-events:auto;align-items:center;}
+nav .links a{opacity:.7;transition:opacity .25s;white-space:nowrap;}
+nav .links a:hover,nav .links a.active{opacity:1;}
+.burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:36px;height:30px;background:none;border:none;cursor:pointer;pointer-events:auto;padding:0;}
+.burger span{display:block;height:3px;width:100%;background:#fff;border-radius:3px;transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .2s;}
+body.menu-open .burger span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+body.menu-open .burger span:nth-child(2){opacity:0;}
+body.menu-open .burger span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:1100px){nav .links{display:none;}.burger{display:flex;}}
+
+.overlay{position:fixed;inset:0;z-index:99;background:var(--black);color:var(--base);display:flex;flex-direction:column;justify-content:center;padding:90px clamp(24px,8vw,110px) 0;transform:translateY(-101%);transition:transform .6s cubic-bezier(.76,0,.24,1);overflow:hidden;}
+body.menu-open{overflow:hidden;}
+body.menu-open .overlay{transform:none;}
+.overlay .om-eyebrow{font-weight:800;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5;margin-bottom:24px;}
+.overlay a.ol{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(1.6rem,6.5vw,3.8rem);line-height:1.06;color:var(--base);display:flex;align-items:baseline;gap:18px;padding:3px 0;opacity:0;transform:translateY(30px);transition:opacity .45s ease,transform .45s cubic-bezier(.16,1,.3,1),color .2s;}
+.overlay a.ol .idx{font-family:'Hanken Grotesk';font-weight:700;font-size:.82rem;opacity:.4;letter-spacing:.05em;}
+body.menu-open .overlay a.ol{opacity:1;transform:none;}
+body.menu-open .overlay a.ol:nth-child(2){transition-delay:.12s}body.menu-open .overlay a.ol:nth-child(3){transition-delay:.17s}
+body.menu-open .overlay a.ol:nth-child(4){transition-delay:.22s}body.menu-open .overlay a.ol:nth-child(5){transition-delay:.27s}
+body.menu-open .overlay a.ol:nth-child(6){transition-delay:.32s}body.menu-open .overlay a.ol:nth-child(7){transition-delay:.37s}
+body.menu-open .overlay a.ol:nth-child(8){transition-delay:.42s}body.menu-open .overlay a.ol:nth-child(9){transition-delay:.47s}
+body.menu-open .overlay a.ol:nth-child(10){transition-delay:.52s}
+.overlay a.ol:hover{color:var(--tomato);}
+.overlay .om-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:20px 0;flex-wrap:wrap;gap:12px;}
+.overlay .om-band{position:absolute;bottom:0;left:0;right:0;height:14px;display:grid;grid-template-columns:repeat(8,1fr);}
+.progress{position:fixed;top:0;left:0;height:4px;background:var(--google-blue);width:0;z-index:101;}
+
+/* LAYOUT */
+section{padding:clamp(56px,9vh,120px) clamp(20px,5vw,64px);}
+.wide{max-width:1380px;margin:0 auto;}
+.eyebrow{font-weight:800;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-bottom:18px;}
+.lead{font-size:clamp(1.05rem,2vw,1.35rem);font-weight:500;max-width:60ch;}
+.r{opacity:0;transform:translateY(36px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.r.in{opacity:1;transform:none;}
+.r.d1{transition-delay:.07s}.r.d2{transition-delay:.14s}.r.d3{transition-delay:.21s}
+.r.d4{transition-delay:.28s}.r.d5{transition-delay:.35s}
+@media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none;}}
+
+/* HERO */
+.hero{min-height:88svh;display:flex;flex-direction:column;justify-content:center;padding-top:120px;padding-bottom:clamp(70px,13vh,130px);overflow:hidden;position:relative;}
+.farbband{position:absolute;bottom:0;left:0;right:0;height:clamp(70px,12vh,130px);display:grid;grid-template-columns:repeat(8,1fr);}
+.farbband span{transform:scaleY(0);transform-origin:bottom;animation:tile .8s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes tile{to{transform:scaleY(1);}}
+.hero-inner{position:relative;z-index:2;}
+.hero h1{font-size:clamp(2.8rem,11vw,9rem);}
+.hero h1 .g{background:linear-gradient(135deg,var(--google-blue),var(--google-red),var(--google-yellow),var(--google-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero .tag{display:inline-block;margin-top:26px;background:var(--google-blue);color:#fff;font-family:'Archivo';font-weight:900;font-size:clamp(.85rem,2vw,1.1rem);padding:8px 18px;text-transform:uppercase;}
+
+/* GOOGLE STARS */
+.stars-strip{background:var(--black);padding:clamp(28px,5vh,50px) clamp(20px,5vw,64px);}
+.stars-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.star-block{padding:20px 26px;border-right:1px solid rgba(255,255,255,.12);}
+.star-block:last-child{border-right:none;}
+.star-block .sv{font-family:'Archivo';font-weight:900;font-size:clamp(2rem,5vw,3.4rem);line-height:.85;}
+.star-block .sv.blue{color:var(--google-blue);}
+.star-block .sv.red{color:var(--google-red);}
+.star-block .sv.yellow{color:var(--google-yellow);}
+.star-block .sv.green{color:var(--google-green);}
+.star-block .sl{font-weight:700;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--base);opacity:.65;margin-top:8px;}
+
+/* SECTION HEAD */
+.shead{margin-bottom:38px;}
+.shead h2{font-size:clamp(1.9rem,5vw,3.6rem);margin-top:8px;}
+.snum{font-family:'Archivo';font-weight:900;font-size:clamp(1.9rem,5vw,3.6rem);line-height:.85;}
+
+/* REVIEW MACHINE */
+.rev-machine{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.rm-card{background:#fff;border:2.5px solid var(--ink);border-radius:10px;padding:28px 26px;display:flex;flex-direction:column;gap:14px;}
+.rm-card.full{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:flex-start;gap:24px 36px;}
+.rm-card.full .rm-content{flex:1;min-width:240px;}
+.rm-card .rm-icon{font-size:2rem;}
+.rm-card h3{font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.05;text-transform:none;letter-spacing:-.01em;}
+.rm-card p{font-weight:500;font-size:.92rem;opacity:.8;line-height:1.4;}
+.rm-card .tag{font-weight:800;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px;align-self:flex-start;margin-top:4px;}
+.tag-must{background:var(--tomato);color:#fff;}
+.tag-quick{background:var(--cheesy);color:#000;}
+.tag-auto{background:var(--google-green);color:#fff;}
+.tag-later{background:var(--asphalt);color:#fff;}
+.rm-card .status{align-self:flex-start;font-weight:800;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;border-radius:999px;border:2px solid var(--ink);cursor:pointer;transition:background .18s,color .18s,transform .1s;background:var(--base);margin-top:auto;}
+.rm-card .status:active{transform:scale(.94);}
+.rm-card .status[data-s="todo"]{background:var(--base);}
+.rm-card .status[data-s="wip"]{background:var(--cheesy);color:#000;border-color:var(--cheesy);}
+.rm-card .status[data-s="done"]{background:var(--google-green);color:#fff;border-color:var(--google-green);}
+
+/* GOAL BAR */
+.goal-bar-wrap{background:var(--black);border-radius:10px;padding:30px 28px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;}
+.goal-bar-wrap .gbn{font-family:'Archivo';font-weight:900;font-size:clamp(2.8rem,8vw,5.5rem);color:var(--google-yellow);line-height:.85;white-space:nowrap;}
+.goal-bar-wrap .gbn small{font-size:.22em;color:var(--base);opacity:.6;display:block;font-family:'Hanken Grotesk';font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:4px;}
+.goal-track{flex:1;min-width:200px;}
+.goal-track .gt-label{color:var(--base);font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;opacity:.7;}
+.track{height:52px;background:rgba(255,255,255,.1);border-radius:8px;overflow:hidden;border:2px solid rgba(255,255,255,.2);}
+.track .fill{height:100%;width:0;background:linear-gradient(90deg,var(--google-blue),var(--google-green));border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:14px;font-weight:800;color:#fff;font-size:.82rem;transition:width 1.6s cubic-bezier(.16,1,.3,1);}
+.goal-track .gt-note{color:var(--base);font-size:.75rem;opacity:.6;margin-top:8px;font-weight:600;}
+
+/* TACTICS */
+.tactics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:0;}
+.tcard{border-radius:10px;padding:24px 22px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .35s cubic-bezier(.16,1,.3,1);}
+.tcard:hover{transform:translateY(-7px);}
+.tcard .tn{font-weight:800;font-size:.78rem;opacity:.5;letter-spacing:.06em;}
+.tcard h3{font-size:clamp(1.05rem,1.7vw,1.3rem);text-transform:uppercase;line-height:1.05;}
+.tcard p{font-weight:600;font-size:.82rem;opacity:.85;margin-top:6px;}
+.tc1{background:var(--google-blue);color:#fff;}
+.tc2{background:var(--google-red);color:#fff;}
+.tc3{background:var(--google-yellow);color:var(--black);}
+.tc4{background:var(--google-green);color:#fff;}
+.tc5{background:var(--blue);color:#fff;}
+.tc6{background:var(--black);color:var(--base);}
+.tc7{background:#fff;border:2.5px solid var(--ink);color:var(--ink);}
+.tc8{background:var(--asphalt);color:#fff;}
+
+/* REPLY GUIDE */
+.reply-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:0;}
+.reply-card{border-radius:10px;padding:26px 24px;}
+.reply-card h3{font-size:clamp(1.1rem,2vw,1.35rem);text-transform:none;letter-spacing:-.01em;margin-bottom:10px;}
+.reply-card p{font-weight:500;font-size:.88rem;line-height:1.45;opacity:.9;}
+.reply-card .rc-tag{font-weight:800;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:12px;display:inline-block;}
+.reply-card.pos{background:var(--veggie);color:var(--black);}
+.reply-card.neg{background:var(--tomato);color:#fff;}
+.reply-card.pos .rc-tag{background:var(--black);color:#fff;}
+.reply-card.neg .rc-tag{background:#fff;color:var(--tomato);}
+.reply-card blockquote{font-style:italic;font-size:.88rem;opacity:.8;border-left:3px solid currentColor;padding-left:12px;margin-top:12px;line-height:1.5;}
+
+/* DIVIDER */
+.div-band{height:6px;background:linear-gradient(90deg,var(--google-blue),var(--google-red),var(--google-yellow),var(--google-green),var(--google-blue),var(--google-red),var(--google-yellow),var(--google-green));}
+
+/* MARQ */
+.marq{background:var(--google-blue);color:#fff;overflow:hidden;padding:14px 0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);}
+.marq div{display:inline-flex;white-space:nowrap;animation:roll 26s linear infinite;font-family:'Archivo';font-weight:900;font-size:clamp(.95rem,2vw,1.5rem);text-transform:uppercase;}
+.marq span{padding:0 22px;}
+.marq .o{color:var(--google-yellow);}
+@keyframes roll{to{transform:translateX(-50%);}}
+
+/* FOOTER */
+footer{background:var(--black);color:var(--base);padding:clamp(56px,8vh,100px) clamp(20px,5vw,64px) 36px;}
+footer .big{font-size:clamp(1.9rem,6.5vw,5rem);font-family:'Archivo';font-weight:900;text-transform:uppercase;line-height:.9;}
+footer .big em{font-style:normal;color:var(--google-yellow);}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:flex-end;margin-top:36px;padding-top:26px;border-top:1px solid rgba(255,255,255,.2);}
+footer .meta{font-weight:600;font-size:.92rem;opacity:.8;line-height:1.8;}
+footer .logo{width:140px;}
+
+@media(max-width:900px){
+  .rev-machine{grid-template-columns:1fr;}.rm-card.full{grid-column:span 1;}
+  .tactics{grid-template-columns:1fr 1fr;}.reply-grid{grid-template-columns:1fr;}
+  .stars-inner{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:520px){.tactics{grid-template-columns:1fr;}.stars-inner{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+<nav>
+  <a href="onepager.html" class="wm">THE PIZZARY</a>
+  <div class="links">
+    <a href="onepager.html#plan">Fahrplan</a>
+    <a href="menuekarte.html">Menükarte</a>
+    <a href="grafikarbeiten.html">Grafik</a>
+    <a href="google-marketing.html" class="active">Google</a>
+    <a href="strategie.html">Strategie</a>
+    <a href="strategie-small.html">Strategie Small</a>
+    <a href="glücksrad.html">Glücksrad</a>
+    <a href="onepager.html#go">28.08.</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="om-eyebrow">Navigation</div>
+  <a class="ol" href="onepager.html#top"><span class="idx">01</span> Start</a>
+  <a class="ol" href="onepager.html#ziele"><span class="idx">02</span> Ziele</a>
+  <a class="ol" href="onepager.html#plan"><span class="idx">03</span> Fahrplan</a>
+  <a class="ol" href="onepager.html#kanaele"><span class="idx">04</span> Kanäle</a>
+  <a class="ol" href="menuekarte.html"><span class="idx">05</span> Menükarte</a>
+  <a class="ol" href="grafikarbeiten.html"><span class="idx">06</span> Grafik</a>
+  <a class="ol" href="google-marketing.html"><span class="idx">07</span> Google</a>
+  <a class="ol" href="glücksrad.html"><span class="idx">09</span> Glücksrad</a>
+  <a class="ol" href="onepager.html#go"><span class="idx">10</span> 28.08.</a>
+  <div class="om-foot">
+    <span class="marker" style="color:var(--green-ink);font-size:1.4rem">Fast. Fresh. Pizza.</span>
+    <span style="font-weight:700;opacity:.6;font-size:.8rem">@thepizzary · Berlin</span>
+  </div>
+  <div class="om-band" id="omband" aria-hidden="true"></div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="farbband" id="heroband" aria-hidden="true"></div>
+  <div class="hero-inner wide">
+    <div class="eyebrow r">Google Marketing · Reviews & Local</div>
+    <h1 class="r d1">GOOGLE<br><span class="g">DOMINIEREN</span></h1>
+    <span class="tag r d2">Google Reviews · Business Profile · Local SEO · Ads</span>
+    <p class="lead r d3" style="margin-top:22px">Der erste Platz, den Leute nach dem Opening checken: Google. 100+ Reviews in 2 Wochen ist das Ziel. Wie wir das schaffen und was noch dazugehört steht hier.</p>
+  </div>
+</header>
+
+<!-- STATS STRIP -->
+<div class="stars-strip">
+  <div class="stars-inner">
+    <div class="star-block r"><div class="sv blue">4.8★</div><div class="sl">Ziel-Bewertung</div></div>
+    <div class="star-block r d1"><div class="sv red">100+</div><div class="sl">Reviews in 2 Wochen</div></div>
+    <div class="star-block r d2"><div class="sv yellow">★ ★ ★</div><div class="sl">sehen Leute zuerst</div></div>
+    <div class="star-block r d3"><div class="sv green">#1</div><div class="sl">Ziel in Berlin Maps</div></div>
+  </div>
+</div>
+
+<!-- 01 REVIEW MACHINE -->
+<section id="reviews">
+  <div class="wide">
+    <div class="shead r">
+      <span class="snum" style="color:var(--tomato)">01</span>
+      <h2>DIE REVIEW-<br>MASCHINE</h2>
+      <span class="marker r d1" style="color:var(--green-ink);font-size:clamp(1.1rem,2.5vw,1.7rem);display:block;margin-top:10px">Wie wir 100+ Reviews in 2 Wochen holen.</span>
+    </div>
+    <div class="rev-machine">
+      <div class="rm-card full r d1">
+        <div class="rm-content">
+          <div class="rm-icon">🎯</div>
+          <h3>Das Ziel-Review-System</h3>
+          <p>Nicht einfach hoffen, dass Leute eine Review hinterlassen. Es braucht einen Prozess: richtiger Moment + einfacher Weg + kleiner Anreiz. Alle drei zusammen bringen 100+ Reviews in den ersten 14 Tagen.</p>
+          <div class="tag tag-must" style="margin-top:14px">Prio 1 · Opening</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;align-self:stretch;justify-content:flex-end;min-width:200px">
+          <div style="background:var(--black);color:var(--base);border-radius:10px;padding:16px 18px">
+            <div style="font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:8px">Ziel-Formel</div>
+            <div style="font-family:'Archivo';font-weight:900;font-size:1.1rem;line-height:1.2">Richtiger Moment<br>+ Einfacher QR<br>+ Kleiner Anreiz<br><span style="color:var(--google-yellow)">=  100+ Reviews</span></div>
+          </div>
+          <button class="status" data-s="todo" style="width:100%;justify-content:center">To Do</button>
+        </div>
+      </div>
+
+      <div class="rm-card r d1">
+        <div class="rm-icon">📱</div>
+        <h3>QR-Aufsteller am Tisch & Theke</h3>
+        <p>Direkt-Link zum Google-Review-Formular als schön gestalteter QR. Auf jedem Tisch, an der Theke, auf dem Kassenbon. Kein Suchen, 2 Sekunden zum Review.</p>
+        <div class="tag tag-must">Opening Must</div>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+
+      <div class="rm-card r d2">
+        <div class="rm-icon">🎡</div>
+        <h3>Glücksrad als Review-Anreiz</h3>
+        <p>Wer nach dem Besuch eine Google-Review hinterlässt und die im Store zeigt, darf nochmal am Glücksrad drehen. Einfachster Anreiz, stärkste Wirkung.</p>
+        <div class="tag tag-quick">Quick Win</div>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+
+      <div class="rm-card r d1">
+        <div class="rm-icon">🗣️</div>
+        <h3>Team-Briefing: Das Fragen-Skript</h3>
+        <p>Jede/r im Team kennt den Satz: <em>„Wenn's dir geschmeckt hat, freuen wir uns über eine kurze Google-Bewertung — der QR ist auf dem Tisch."</em> Nach dem Essen, freundlich, einmal.</p>
+        <div class="tag tag-must">Opening Must</div>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+
+      <div class="rm-card r d2">
+        <div class="rm-icon">📄</div>
+        <h3>Review-Link auf dem Kassenbon</h3>
+        <p>Kurz-URL + QR direkt auf jedem Kassenbon. Der Beleg geht mit nach Hause — die Review kommt später. Automatisch, ohne Aufwand.</p>
+        <div class="tag tag-auto">Automatisch</div>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+
+      <div class="rm-card r d1">
+        <div class="rm-icon">📸</div>
+        <h3>Creator Reviews am Pre-Opening</h3>
+        <p>Beim First Taste Club (27.08.) die Creator freundlich bitten, auch eine Google-Review zu hinterlassen. 20+ Creator = 20+ qualitative Erstreview.</p>
+        <div class="tag tag-quick">Quick Win</div>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+
+      <div class="rm-card r d2">
+        <div class="rm-icon">📲</div>
+        <h3>WhatsApp & Instagram Story Review-Push</h3>
+        <p>3–5 Tage nach Eröffnung: Story mit Review-QR + „Ihr habt uns besucht — sagt uns eure Meinung!" Direkt-Link in der Bio.</p>
+        <div class="tag tag-later">Woche 1</div>
+        <button class="status" data-s="todo">To Do</button>
+      </div>
+    </div>
+
+    <div style="margin-top:26px" class="r">
+      <div class="goal-bar-wrap">
+        <div class="gbn">100+<small>Ziel Reviews</small></div>
+        <div class="goal-track">
+          <div class="gt-label">Fortschritt zur 100-Review-Marke</div>
+          <div class="track"><div class="fill" id="reviewfill">0 Reviews</div></div>
+          <div class="gt-note">Wird manuell aktualisiert · Stand: vor der Eröffnung</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-band"></div>
+
+<!-- 02 GOOGLE BUSINESS PROFIL -->
+<section id="profile" style="background:#fff">
+  <div class="wide">
+    <div class="shead r">
+      <span class="snum" style="color:var(--google-blue)">02</span>
+      <h2>GOOGLE BUSINESS<br>PROFIL</h2>
+      <span class="marker r d1" style="color:var(--green-ink);font-size:clamp(1.1rem,2.5vw,1.7rem);display:block;margin-top:10px">Das Schaufenster in der Google-Suche.</span>
+    </div>
+    <div class="tactics">
+      <div class="tcard tc1 r d1">
+        <div class="tn">01</div>
+        <div><h3>Profil vollständig ausfüllen</h3><p>Name, Adresse, Öffnungszeiten, Kategorien, Beschreibung, Telefon, Website — alles lückenlos.</p></div>
+      </div>
+      <div class="tcard tc2 r d2">
+        <div class="tn">02</div>
+        <div><h3>Starke Food-Fotos hochladen</h3><p>Mindestens 10 eigene Fotos: Pizza, Innenraum, Team, Store-Außenansicht. Qualität schlägt Quantität.</p></div>
+      </div>
+      <div class="tcard tc3 r d3">
+        <div class="tn">03</div>
+        <div><h3>Öffnungszeiten & Feiertage</h3><p>Reguläre Zeiten + Sonder-Öffnungszeiten für den Eröffnungstag. Nichts ist ärgerlicher als falsche Infos.</p></div>
+      </div>
+      <div class="tcard tc4 r d4">
+        <div class="tn">04</div>
+        <div><h3>Google Posts nutzen</h3><p>Wöchentlich ein Post: Angebot, Event, neues Produkt. Erscheint direkt im Google-Suchergebnis.</p></div>
+      </div>
+      <div class="tcard tc5 r d1">
+        <div class="tn">05</div>
+        <div><h3>Produkte & Menü eintragen</h3><p>Google Business erlaubt eine Menü-Übersicht. Einmal einrichten, dauerhafter SEO-Vorteil.</p></div>
+      </div>
+      <div class="tcard tc6 r d2">
+        <div class="tn">06</div>
+        <div><h3>Attribute setzen</h3><p>„Outdoor-Sitzplätze", „Takeaway", „bargeldlose Zahlung" etc. Filtert Kunden, die genau das suchen.</p></div>
+      </div>
+      <div class="tcard tc7 r d3">
+        <div class="tn">07</div>
+        <div><h3>Q&A-Sektion befüllen</h3><p>Selbst die häufigsten Fragen stellen und beantworten (Parken, Allergene, Lieferung). Verhindert falsche Antworten von anderen.</p></div>
+      </div>
+      <div class="tcard tc8 r d4">
+        <div class="tn">08</div>
+        <div><h3>Insights wöchentlich checken</h3><p>Wie finden Leute das Profil? Wonach suchen sie? Daten-Grundlage für jede weitere Optimierung.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marq" aria-hidden="true"><div>
+  <span>GOOGLE REVIEWS</span><span class="o">★</span><span>LOCAL SEO</span><span class="o">★</span><span>GOOGLE MAPS</span><span class="o">★</span><span>BUSINESS PROFIL</span><span class="o">★</span><span>GOOGLE ADS</span><span class="o">★</span><span>4.8 STERNE</span><span class="o">★</span>
+  <span>GOOGLE REVIEWS</span><span class="o">★</span><span>LOCAL SEO</span><span class="o">★</span><span>GOOGLE MAPS</span><span class="o">★</span><span>BUSINESS PROFIL</span><span class="o">★</span><span>GOOGLE ADS</span><span class="o">★</span><span>4.8 STERNE</span><span class="o">★</span>
+</div></div>
+
+<!-- 03 AUF REVIEWS ANTWORTEN -->
+<section id="replies">
+  <div class="wide">
+    <div class="shead r">
+      <span class="snum" style="color:var(--google-green)">03</span>
+      <h2>AUF REVIEWS<br>ANTWORTEN</h2>
+      <span class="marker r d1" style="color:var(--green-ink);font-size:clamp(1.1rem,2.5vw,1.7rem);display:block;margin-top:10px">Jede Antwort ist öffentliches Marketing.</span>
+    </div>
+    <p class="lead r d1" style="margin-bottom:30px">Google bewertet es, wenn du antwortest. Kunden lesen die Antworten. Hier zwei Templates — positiv und negativ.</p>
+    <div class="reply-grid">
+      <div class="reply-card pos r d1">
+        <span class="rc-tag">Positive Review · Vorlage</span>
+        <h3>So antwortest du auf 5 Sterne</h3>
+        <p>Danke, persönlich und kurz. Name erwähnen wenn möglich. Auf ein Detail eingehen. Auf Wiederkommen freuen.</p>
+        <blockquote>„Danke [Name]! Das freut uns riesig — [Detail aus der Review] ist genau das was wir machen wollen. Bis zum nächsten Besuch! 🍕 — Das THE PIZZARY Team"</blockquote>
+      </div>
+      <div class="reply-card neg r d2">
+        <span class="rc-tag">Negative Review · Vorlage</span>
+        <h3>So antwortest du auf 1–3 Sterne</h3>
+        <p>Nie defensiv. Danken, Verständnis zeigen, Lösung anbieten, offline führen. Kein Streit in der Öffentlichkeit.</p>
+        <blockquote>„Danke für dein Feedback. Das tut uns leid — das entspricht nicht unserem Anspruch. Meld dich direkt bei uns: [E-Mail] — wir möchten das gerne für dich klären."</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-band"></div>
+
+<!-- 04 GOOGLE ADS LOCAL -->
+<section id="ads" style="background:var(--black);color:var(--base)">
+  <div class="wide">
+    <div class="shead r">
+      <span class="snum" style="color:var(--google-yellow)">04</span>
+      <h2 style="color:var(--base)">GOOGLE ADS<br>LOCAL</h2>
+      <span class="marker r d1" style="color:var(--google-yellow);font-size:clamp(1.1rem,2.5vw,1.7rem);display:block;margin-top:10px">Sichtbar, wenn jemand „Pizza Berlin" sucht.</span>
+    </div>
+    <div class="tactics" style="margin-top:0">
+      <div class="tcard r d1" style="background:var(--google-blue);color:#fff">
+        <div class="tn">01</div>
+        <div><h3>Google Local Campaigns</h3><p>Anzeigen, die direkt im Maps-Ergebnis erscheinen. Perfekt für „Pizza in der Nähe"-Suchen.</p></div>
+      </div>
+      <div class="tcard r d2" style="background:var(--google-red);color:#fff">
+        <div class="tn">02</div>
+        <div><h3>Search Ads</h3><p>Keywords: „Pizza Berlin [Kiez]", „Fast Fresh Pizza", „THE PIZZARY". Geo-Radius um den Store.</p></div>
+      </div>
+      <div class="tcard r d3" style="background:var(--google-yellow);color:var(--black)">
+        <div class="tn">03</div>
+        <div><h3>Performance Max</h3><p>Automatische Kampagne die Google selbst optimiert. Kombiniert Search, Display, Maps und YouTube.</p></div>
+      </div>
+      <div class="tcard r d4" style="background:var(--google-green);color:#fff">
+        <div class="tn">04</div>
+        <div><h3>Opening-Boost 28.08.</div>
+        <p>Für den Eröffnungstag Budget erhöhen, alle Kampagnen aktiv, Radius auf 5 km ausweiten.</p></div>
+      </div>
+    </div>
+    <div style="margin-top:22px;background:rgba(255,255,255,.07);border-radius:10px;padding:22px 24px;border:1px solid rgba(255,255,255,.15)" class="r">
+      <p style="font-weight:700;font-size:.82rem;color:var(--base);opacity:.8">💡 <strong style="color:var(--google-yellow)">Empfehlung:</strong> Google Ads ist eine Ergänzung, kein Ersatz. Erst organisch aufbauen (Reviews + GMB), dann Ads für den Extra-Push zur Eröffnung schalten. Budget: 100–150 € für die Eröffnungswoche gut angelegt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wide">
+    <div class="eyebrow r" style="opacity:.5">Google Marketing · The Pizzary Berlin</div>
+    <div class="big r d1">100 REVIEWS.<br><em>IN 2 WOCHEN.</em></div>
+    <div class="row r d2">
+      <div class="meta">
+        <span class="marker" style="color:var(--green-ink)">Fast. Fresh. Pizza.</span><br>
+        📍 [Adresse] · Berlin · 28.08.<br>
+        📲 @thepizzary
+      </div>
+      <img class="logo" src="assets/logo-white.png" alt="THE PIZZARY" onerror="this.style.display='none'"/>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* farbbands */
+(function(){
+  const order=['--google-blue','--google-red','--google-yellow','--google-green','--google-blue','--google-red','--google-yellow','--google-green'];
+  const fixed={
+    '--google-blue':'#4285F4','--google-red':'#EA4335',
+    '--google-yellow':'#FBBC05','--google-green':'#34A853'
+  };
+  ['heroband','omband'].forEach(id=>{
+    const m=document.getElementById(id);if(!m)return;
+    order.forEach((c,i)=>{
+      const s=document.createElement('span');
+      s.style.background=fixed[c];
+      if(id==='heroband'){s.style.animationDelay=(0.15+i*0.07)+'s';}
+      else{s.style.transform='scaleY(1)';}
+      m.appendChild(s);
+    });
+  });
+})();
+
+/* burger */
+(function(){
+  const b=document.getElementById('burger');const ov=document.getElementById('overlay');if(!b)return;
+  const toggle=open=>{const o=open??!document.body.classList.contains('menu-open');document.body.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o);ov.setAttribute('aria-hidden',!o);};
+  b.addEventListener('click',()=>toggle());
+  ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggle(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')toggle(false);});
+})();
+
+/* status cycle */
+(function(){
+  const cycle=['todo','wip','done'];const lbl={todo:'To Do',wip:'In Progress ⚡',done:'Done ✓'};
+  document.querySelectorAll('.status').forEach(el=>{
+    el.addEventListener('click',()=>{const nx=cycle[(cycle.indexOf(el.dataset.s)+1)%cycle.length];el.dataset.s=nx;el.textContent=lbl[nx];});
+  });
+})();
+
+/* review bar */
+const bar=document.getElementById('reviewfill');
+const bio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>{bar.style.width='4%';bar.textContent='0 Reviews';},300);bio.unobserve(e.target);}});},{threshold:.5});
+if(bar)bio.observe(bar);
+
+/* reveal */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.13,rootMargin:'0px 0px -5% 0px'});
+document.querySelectorAll('.r').forEach(el=>io.observe(el));
+
+/* progress */
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
