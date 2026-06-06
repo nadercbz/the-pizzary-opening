@@ -175,9 +175,12 @@ input:checked+.slider::before{transform:translateX(20px);}
 @media(max-width:600px){.ueb-cards{grid-template-columns:1fr;}}
 
 /* SAVE */
+.save-group{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
 .save-btn{font-family:'Archivo';font-weight:900;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:10px 22px;background:var(--cheesy);color:var(--black);border:2px solid var(--ink);border-radius:999px;cursor:pointer;transition:transform .15s,box-shadow .15s;}
 .save-btn:hover{transform:translateY(-2px);box-shadow:3px 3px 0 var(--ink);}
 .save-btn:active{transform:translateY(1px);box-shadow:none;}
+.exp-btn{background:var(--veggie);}
+.imp-btn{background:var(--blue);color:#fff;}
 
 @media(max-width:600px){
   .tabs{flex-direction:column;}
@@ -617,7 +620,11 @@ input:checked+.slider::before{transform:translateX(20px);}
     <small>Gesamt aktiv</small><br>
     <span id="total-all">0 €</span>
   </div>
-  <button class="save-btn" onclick="saveData()">💾 Speichern</button>
+  <div class="save-group">
+    <button class="save-btn" onclick="saveData()">💾 Speichern</button>
+    <button class="save-btn exp-btn" onclick="exportData()">⬆ Export</button>
+    <button class="save-btn imp-btn" onclick="importData()">⬇ Import</button>
+  </div>
 </div>
 
 <script>
@@ -839,6 +846,49 @@ function restoreData(){
     });
   }catch(_){}
 }
+function exportData(){
+  const data={};
+  document.querySelectorAll('tr[data-id]').forEach(row=>{
+    data[row.dataset.id]={
+      active:row.querySelector('input[type="checkbox"]')?.checked,
+      val:row.querySelector('.amt-input')?.value,
+      notiz:row.querySelector('.notiz-input')?.value||''
+    };
+  });
+  const json=JSON.stringify(data,null,2);
+  const blob=new Blob([json],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='pizzary-kosten.json';
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
+  const btn=document.querySelector('.exp-btn');
+  btn.textContent='✅ Exportiert';
+  setTimeout(()=>btn.textContent='⬆ Export',1800);
+}
+
+function importData(){
+  const inp=document.createElement('input');
+  inp.type='file';inp.accept='.json,application/json';
+  inp.onchange=e=>{
+    const file=e.target.files[0];
+    if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const data=JSON.parse(ev.target.result);
+        localStorage.setItem('pz_kosten',JSON.stringify(data));
+        restoreData();recalc();
+        const btn=document.querySelector('.imp-btn');
+        btn.textContent='✅ Importiert';
+        setTimeout(()=>btn.textContent='⬇ Import',1800);
+      }catch(_){alert('Datei konnte nicht gelesen werden.');}
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
+}
+
 restoreData();
 recalc();
 
