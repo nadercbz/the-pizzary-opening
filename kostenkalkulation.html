@@ -815,11 +815,15 @@ function saveData(){
   }catch(_){}
 }
 
+/* Seed: Naders zuletzt eingetragene Werte/Notizen (Stand 06.06.).
+   Wird genutzt, wenn lokal noch nichts gespeichert ist (z.B. GitHub Pages). */
+const SEED_DATA={"gfp-0":{"active":true,"val":"100","notiz":"20€ Pro Plakat (Drickerei)"},"gfp-1":{"active":true,"val":"100","notiz":"5.000 Flyer (Menukarte 1 Seite)"},"gfp-2":{"active":false,"val":"320","notiz":""},"gfp-3":{"active":true,"val":"40","notiz":"2 Stück"},"gfp-4":{"active":false,"val":"250","notiz":"Design und Druckvorbereitung"},"gfp-5":{"active":true,"val":"60","notiz":""},"gfp-gest":{"active":true,"val":"380","notiz":"6 Stück - https://www.amazon.de/AITEE-Acryl-Tischaufsteller-Aufsteller-Fotorahme"},"gpos-0":{"active":true,"val":"60","notiz":"https://www.wir-machen-druck.de/aufkleber-rund-95-cm-x-95-cm.html"},"gpos-1":{"active":true,"val":"50","notiz":"https://www.wir-machen-druck.de/visitenkarten-quer-44-farbig-85-x-55-mm-beidseit"},"gpos-2":{"active":false,"val":"480","notiz":""},"gpos-3":{"active":false,"val":"280","notiz":""},"gpos-4":{"active":true,"val":"100","notiz":"https://www.wir-machen-druck.de/shopper-aus-laminierter-jute-und-baumwolle-mit-l"},"gpos-5":{"active":true,"val":"50","notiz":"https://www.wir-machen-druck.de/eintrittskarte-din-a6-quer-perforiert-44-beidsei"},"gpos-6":{"active":true,"val":"0","notiz":""},"gpos-gest":{"active":true,"val":"320","notiz":""},"gfd-0":{"active":true,"val":"0","notiz":""},"gfd-1":{"active":true,"val":"0","notiz":""},"gfd-2":{"active":false,"val":"260","notiz":""},"gfd-3":{"active":true,"val":"50","notiz":"Umfasst das Design + Installation aller Monitore"},"gfd-4":{"active":false,"val":"400","notiz":""},"gfd-5":{"active":false,"val":"150","notiz":""},"gfd-gest":{"active":true,"val":"500","notiz":""},"mads-0":{"active":true,"val":"400","notiz":""},"mads-1":{"active":false,"val":"450","notiz":""},"mads-2":{"active":true,"val":"150","notiz":""},"mev-0":{"active":false,"val":"500","notiz":""},"mev-1":{"active":true,"val":"0","notiz":"Nader übernimmt"},"mev-2":{"active":false,"val":"450","notiz":"Grobe Schätzung"},"mev-3":{"active":false,"val":"450","notiz":"Grobe Schätzung"},"mev-4":{"active":false,"val":"350","notiz":""},"mev-5":{"active":true,"val":"0","notiz":"Von The Pizzary"},"mord-0":{"active":true,"val":"130","notiz":"amazon.de/Dreifke-Kundenstopper-entspiegelte-Schutzscheiben-Plakatständer/dp/B0G"},"mord-1":{"active":false,"val":"0","notiz":"schon unter Grafikarbeiten zu finden"},"mord-2":{"active":false,"val":"500","notiz":""},"mord-3":{"active":false,"val":"200","notiz":""},"mpr-0":{"active":true,"val":"250","notiz":""},"mpr-1":{"active":false,"val":"500","notiz":""},"mpr-2":{"active":false,"val":"200","notiz":""}};
+
 function restoreData(){
   try{
     const raw=localStorage.getItem('pz_kosten');
-    if(!raw)return;
-    const data=JSON.parse(raw);
+    const data=raw?JSON.parse(raw):SEED_DATA;
+    if(!data)return;
     // Legacy: array-format (index-based) → migrate by position
     if(Array.isArray(data)){
       document.querySelectorAll('tr[data-id]').forEach((row,i)=>{
