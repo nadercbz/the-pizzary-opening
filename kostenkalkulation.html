@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>THE PIZZARY — Kostenkalkulation · Opening 26.–28.08.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --base:#F1F2EC;--cheesy:#E8EC8B;--veggie:#9FC8A0;--blue:#5B6FD6;
+  --tomato:#C9202A;--black:#0A0A0A;--pink:#D87ACF;--asphalt:#A99FC2;
+  --green-ink:#2EA24B;--ink:#0A0A0A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--base);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:120px;}
+h1,h2,h3{font-family:'Archivo',sans-serif;font-weight:900;letter-spacing:-.02em;line-height:.92;text-transform:uppercase;}
+.marker{font-family:'Permanent Marker',cursive;font-weight:400;text-transform:none;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,64px);mix-blend-mode:difference;color:#fff;pointer-events:none;}
+nav .wm{font-family:'Archivo';font-weight:900;font-size:1.05rem;pointer-events:auto;}
+nav .links{display:flex;gap:clamp(7px,1.2vw,18px);font-weight:700;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;pointer-events:auto;align-items:center;}
+nav .links a{opacity:.65;transition:opacity .2s;white-space:nowrap;}
+nav .links a:hover,nav .links a.active{opacity:1;}
+.burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:32px;height:26px;background:none;border:none;cursor:pointer;pointer-events:auto;}
+.burger span{display:block;height:2.5px;width:100%;background:#fff;border-radius:3px;transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .2s;}
+body.mo .burger span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+body.mo .burger span:nth-child(2){opacity:0;}
+body.mo .burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+@media(max-width:1200px){nav .links{display:none;}.burger{display:flex;}}
+.ov{position:fixed;inset:0;z-index:99;background:var(--black);color:var(--base);display:flex;flex-direction:column;justify-content:center;padding:90px clamp(24px,8vw,100px) 0;transform:translateY(-101%);transition:transform .6s cubic-bezier(.76,0,.24,1);overflow:hidden;}
+body.mo{overflow:hidden;}
+body.mo .ov{transform:none;}
+.ov .oe{font-weight:800;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.45;margin-bottom:20px;}
+.ov a.ol{font-family:'Archivo';font-weight:900;text-transform:uppercase;font-size:clamp(1.4rem,5.5vw,3.2rem);line-height:1.06;color:var(--base);display:flex;align-items:baseline;gap:14px;padding:3px 0;opacity:0;transform:translateY(24px);transition:opacity .42s,transform .42s cubic-bezier(.16,1,.3,1),color .2s;}
+.ov a.ol span{font-family:'Hanken Grotesk';font-weight:700;font-size:.76rem;opacity:.4;}
+body.mo .ov a.ol{opacity:1;transform:none;}
+body.mo .ov a.ol:nth-child(2){transition-delay:.10s}body.mo .ov a.ol:nth-child(3){transition-delay:.14s}
+body.mo .ov a.ol:nth-child(4){transition-delay:.18s}body.mo .ov a.ol:nth-child(5){transition-delay:.22s}
+body.mo .ov a.ol:nth-child(6){transition-delay:.26s}body.mo .ov a.ol:nth-child(7){transition-delay:.30s}
+body.mo .ov a.ol:nth-child(8){transition-delay:.34s}body.mo .ov a.ol:nth-child(9){transition-delay:.38s}
+body.mo .ov a.ol:nth-child(10){transition-delay:.42s}body.mo .ov a.ol:nth-child(11){transition-delay:.46s}
+.ov a.ol:hover{color:var(--tomato);}
+.ov .of{margin-top:auto;padding:18px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.ov .ob{position:absolute;bottom:0;left:0;right:0;height:10px;display:grid;grid-template-columns:repeat(8,1fr);}
+.prog{position:fixed;top:0;left:0;height:3px;background:var(--tomato);width:0;z-index:101;}
+
+/* PAGE LAYOUT */
+.page-wrap{max-width:1100px;margin:0 auto;padding:clamp(90px,14vh,130px) clamp(20px,5vw,48px) 20px;}
+
+/* HERO MINI */
+.hero-mini{margin-bottom:36px;}
+.hero-mini .eyebrow{font-weight:800;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5;margin-bottom:10px;}
+.hero-mini h1{font-size:clamp(2.2rem,8vw,5.5rem);}
+.hero-mini h1 em{font-style:normal;color:var(--tomato);}
+.hero-mini p{font-weight:500;font-size:clamp(.95rem,1.8vw,1.15rem);max-width:56ch;margin-top:14px;opacity:.75;}
+
+/* TABS */
+.tabs{display:flex;gap:0;border:2.5px solid var(--ink);border-radius:12px;overflow:hidden;margin-bottom:32px;background:#fff;}
+.tab-btn{flex:1;padding:16px 24px;font-family:'Archivo';font-weight:900;font-size:clamp(.9rem,2vw,1.1rem);text-transform:uppercase;background:transparent;border:none;cursor:pointer;border-right:2.5px solid var(--ink);transition:background .2s,color .2s;}
+.tab-btn:last-child{border-right:none;}
+.tab-btn.active{background:var(--ink);color:var(--base);}
+.tab-btn:not(.active):hover{background:var(--base);}
+
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* CATEGORY HEADER */
+.cat-head{background:var(--black);color:var(--base);padding:13px 20px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;margin:24px 0 0;cursor:pointer;user-select:none;}
+.cat-head h3{font-size:clamp(.95rem,2vw,1.2rem);letter-spacing:.04em;}
+.cat-head .cat-sum{font-family:'Archivo';font-weight:900;font-size:1.1rem;color:var(--cheesy);}
+.cat-head .chevron{font-size:.7rem;transition:transform .25s;opacity:.6;}
+.cat-head.open .chevron{transform:rotate(180deg);}
+
+/* TABLE */
+.cost-table{width:100%;border-collapse:collapse;margin-bottom:4px;}
+.cost-table thead th{font-weight:800;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;border-bottom:2px solid rgba(0,0,0,.1);text-align:left;opacity:.55;}
+.cost-table thead th:nth-child(2){text-align:right;}
+.cost-table thead th:last-child{text-align:center;}
+.cost-table tbody tr{border-bottom:1px solid rgba(0,0,0,.07);transition:background .15s;}
+.cost-table tbody tr:hover{background:rgba(0,0,0,.02);}
+.cost-table tbody tr.inactive{opacity:.38;}
+.cost-table td{padding:10px 12px;vertical-align:middle;}
+.cost-table .item-name{font-weight:600;font-size:.92rem;}
+.cost-table .item-note{font-size:.74rem;color:rgba(0,0,0,.5);margin-top:2px;}
+.cost-table .item-tag{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:6px;}
+.tag-print{background:#E8EC8B;color:#000;}
+.tag-digital{background:#5B6FD6;color:#fff;}
+.tag-order{background:#E0432A;color:#fff;}
+.tag-service{background:#9FC8A0;color:#000;}
+.tag-ads{background:#D87ACF;color:#fff;}
+
+/* AMOUNT CELL */
+.amt-cell{text-align:right;white-space:nowrap;}
+.amt-wrap{display:inline-flex;align-items:center;gap:4px;background:#fff;border:2px solid rgba(0,0,0,.15);border-radius:8px;padding:4px 8px;transition:border-color .2s,box-shadow .2s;}
+.amt-wrap:focus-within{border-color:var(--tomato);box-shadow:0 0 0 3px rgba(201,32,42,.12);}
+.amt-wrap span{font-size:.82rem;font-weight:700;opacity:.5;}
+.amt-input{font-family:'Archivo';font-weight:700;font-size:.95rem;width:72px;border:none;outline:none;background:transparent;text-align:right;color:var(--ink);}
+.amt-input::-webkit-inner-spin-button,.amt-input::-webkit-outer-spin-button{-webkit-appearance:none;}
+.inactive .amt-wrap{background:rgba(0,0,0,.05);}
+
+/* TOGGLE */
+.toggle-cell{text-align:center;}
+.toggle{position:relative;width:44px;height:24px;display:inline-block;}
+.toggle input{opacity:0;width:0;height:0;position:absolute;}
+.slider{position:absolute;inset:0;background:#D0D0D0;border-radius:999px;cursor:pointer;transition:background .2s;}
+.slider::before{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .25s cubic-bezier(.16,1,.3,1);}
+input:checked+.slider{background:var(--green-ink);}
+input:checked+.slider::before{transform:translateX(20px);}
+
+/* STICKY TOTAL */
+.sticky-total{position:fixed;bottom:0;left:0;right:0;z-index:80;background:var(--black);color:var(--base);padding:14px clamp(20px,5vw,48px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:3px solid var(--tomato);box-shadow:0 -6px 30px rgba(0,0,0,.25);}
+.sticky-total .cols{display:flex;gap:28px;flex-wrap:wrap;align-items:center;}
+.sticky-total .col .lbl{font-size:.64rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.55;}
+.sticky-total .col .val{font-family:'Archivo';font-weight:900;font-size:1.3rem;}
+.sticky-total .col .val.g{color:var(--green-ink);}
+.sticky-total .col .val.y{color:var(--cheesy);}
+.sticky-total .col .val.r{color:var(--tomato);}
+.sticky-total .combined{font-family:'Archivo';font-weight:900;font-size:clamp(1.4rem,3vw,2rem);color:#fff;}
+.sticky-total .combined small{font-size:.5em;opacity:.55;font-family:'Hanken Grotesk';font-weight:700;text-transform:uppercase;letter-spacing:.1em;}
+
+/* SELECT ALL / NONE */
+.bulk{display:flex;gap:8px;margin:12px 0 0;}
+.bulk button{font-weight:800;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px;border:2px solid var(--ink);cursor:pointer;background:var(--base);transition:background .15s,color .15s;}
+.bulk button:hover{background:var(--ink);color:var(--base);}
+
+/* COLLAPSIBLE body */
+.cat-body{display:none;background:#fff;border:2px solid rgba(0,0,0,.09);border-top:none;border-radius:0 0 8px 8px;overflow:hidden;}
+.cat-body.open{display:block;}
+
+/* NOTE */
+.note-row td{font-size:.76rem;font-style:italic;color:rgba(0,0,0,.45);padding:6px 12px 10px;font-weight:500;}
+
+/* NOTIZ INPUT */
+.notiz-cell{min-width:140px;}
+.notiz-input{width:100%;font-family:'Hanken Grotesk',sans-serif;font-size:.82rem;font-weight:500;color:var(--ink);background:rgba(0,0,0,.04);border:1.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 9px;outline:none;transition:border-color .2s,background .2s,box-shadow .2s;}
+.notiz-input::placeholder{color:rgba(0,0,0,.3);font-style:italic;}
+.notiz-input:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(91,111,214,.12);}
+.inactive .notiz-input{opacity:.45;pointer-events:none;}
+
+
+/* ÜBERSICHT TAB */
+.ueb-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+.ueb-card{border-radius:12px;padding:22px 20px;border:2.5px solid var(--ink);}
+.ueb-card.prod{background:var(--base);}
+.ueb-card.honor{background:var(--cheesy);}
+.ueb-card.total{background:var(--ink);color:var(--base);}
+.ueb-card .uc-lbl{font-weight:800;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-bottom:6px;}
+.ueb-card.total .uc-lbl{opacity:.55;color:var(--base);}
+.ueb-card .uc-val{font-family:'Archivo';font-weight:900;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1;}
+.ueb-card.honor .uc-val{color:var(--ink);}
+.ueb-card.total .uc-val{color:var(--cheesy);}
+
+.ueb-section{margin-bottom:28px;}
+.ueb-sec-head{background:var(--black);color:var(--base);padding:13px 20px;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between;}
+.ueb-sec-head h3{font-family:'Archivo';font-weight:900;font-size:clamp(.95rem,2vw,1.2rem);letter-spacing:.04em;text-transform:uppercase;}
+.ueb-sec-head .ueb-sec-sum{font-family:'Archivo';font-weight:900;font-size:1.1rem;color:var(--cheesy);}
+.ueb-tbl{width:100%;border-collapse:collapse;background:#fff;border:2px solid rgba(0,0,0,.09);border-top:none;border-radius:0 0 8px 8px;overflow:hidden;}
+.ueb-tbl thead th{font-weight:800;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-bottom:2px solid rgba(0,0,0,.08);text-align:left;opacity:.5;}
+.ueb-tbl thead th.ra{text-align:right;}
+.ueb-tbl tbody tr{border-bottom:1px solid rgba(0,0,0,.06);}
+.ueb-tbl tbody tr:last-child{border-bottom:none;}
+.ueb-tbl td{padding:9px 12px;font-size:.88rem;vertical-align:middle;}
+.ueb-tbl td.ra{text-align:right;font-family:'Archivo';font-weight:700;white-space:nowrap;}
+.ueb-tbl .ueb-cat-row td{font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.04);padding:6px 12px;opacity:.7;}
+.ueb-tbl .ueb-subtotal td{font-weight:700;font-size:.8rem;background:rgba(0,0,0,.03);border-top:1.5px solid rgba(0,0,0,.1);}
+.ueb-tbl .ueb-subtotal td.ra{color:var(--ink);}
+.ueb-honor-row td:first-child{font-weight:600;}
+.ueb-honor-row td:first-child small{display:block;font-size:.74rem;font-weight:400;opacity:.55;margin-top:1px;}
+.ueb-honor-row.highlight{background:rgba(232,236,139,.25);}
+@media(max-width:600px){.ueb-cards{grid-template-columns:1fr;}}
+
+/* SAVE */
+.save-btn{font-family:'Archivo';font-weight:900;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:10px 22px;background:var(--cheesy);color:var(--black);border:2px solid var(--ink);border-radius:999px;cursor:pointer;transition:transform .15s,box-shadow .15s;}
+.save-btn:hover{transform:translateY(-2px);box-shadow:3px 3px 0 var(--ink);}
+.save-btn:active{transform:translateY(1px);box-shadow:none;}
+
+@media(max-width:600px){
+  .tabs{flex-direction:column;}
+  .tab-btn{border-right:none;border-bottom:2.5px solid var(--ink);}
+  .tab-btn:last-child{border-bottom:none;}
+  .cost-table thead .note-col{display:none;}
+  .sticky-total .cols{gap:14px;}
+}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<nav>
+  <a href="onepager.html" class="wm">THE PIZZARY</a>
+  <div class="links">
+    <a href="onepager.html#plan">Fahrplan</a>
+    <a href="menuekarte.html">Menükarte</a>
+    <a href="grafikarbeiten.html">Grafik</a>
+    <a href="google-marketing.html">Google</a>
+    <a href="strategie.html">Strategie</a>
+    <a href="strategie-small.html">Strategie Small</a>
+    <a href="kostenkalkulation.html" class="active">Kosten</a>
+    <a href="onepager.html#go">26.–28.08.</a>
+  </div>
+  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+<div class="ov" id="ov">
+  <div class="oe">Navigation</div>
+  <a class="ol" href="onepager.html#top"><span>01</span> Start</a>
+  <a class="ol" href="onepager.html#plan"><span>02</span> Fahrplan</a>
+  <a class="ol" href="menuekarte.html"><span>03</span> Menükarte</a>
+  <a class="ol" href="grafikarbeiten.html"><span>04</span> Grafik</a>
+  <a class="ol" href="google-marketing.html"><span>05</span> Google</a>
+  <a class="ol" href="strategie.html"><span>06</span> Strategie</a>
+  <a class="ol" href="strategie-small.html"><span>07</span> Strategie Small</a>
+  <a class="ol" href="kostenkalkulation.html"><span>08</span> Kosten</a>
+  <a class="ol" href="onepager.html#go"><span>10</span> 26.–28.08.</a>
+  <div class="of">
+    <span class="marker" style="color:var(--green-ink);font-size:1.2rem">Fast. Fresh. Pizza.</span>
+    <span style="font-weight:700;opacity:.55;font-size:.74rem">@thepizzary · Berlin</span>
+  </div>
+  <div class="ob" id="ob"></div>
+</div>
+
+<div class="page-wrap">
+  <div class="hero-mini">
+    <div class="eyebrow">Kostenkalkulation · Opening 26.–28.08.</div>
+    <h1>KOSTEN<br><em>ÜBERSICHT</em></h1>
+    <p>Beträge anpassen, Posten aktivieren oder deaktivieren. Nur aktive Posten werden berechnet. Wird automatisch lokal gespeichert.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('grafik')">🎨 Grafikarbeiten</button>
+    <button class="tab-btn" onclick="switchTab('marketing')">🚀 Marketing-Eröffnung</button>
+    <button class="tab-btn" onclick="switchTab('uebersicht')">📊 Übersicht</button>
+  </div>
+
+  <!-- ═══════ TAB: GRAFIK ═══════ -->
+  <div class="tab-panel active" id="tab-grafik">
+    <div class="bulk">
+      <button onclick="bulkToggle('grafik',true)">Alle aktivieren</button>
+      <button onclick="bulkToggle('grafik',false)">Alle deaktivieren</button>
+    </div>
+
+    <!-- PRINT -->
+    <div class="cat-head open" onclick="toggleCat(this)">
+      <h3>🖨️ Print & Outdoor</h3>
+      <span><span class="cat-sum" id="cs-grafik-print">0 €</span> &nbsp;<span class="chevron">▲</span></span>
+    </div>
+    <div class="cat-body open" id="cb-grafik-print">
+      <table class="cost-table">
+        <thead><tr><th>Posten</th><th>Betrag</th><th class="note-col">Notiz</th><th>Aktiv</th></tr></thead>
+        <tbody>
+          <tr data-tab="grafik" data-cat="grafik-print" data-active="1" data-id="gfp-0">
+            <td><div class="item-name">Werbeposter A1 <span class="item-tag tag-print">Print</span></div><div class="item-note">Druck, 5 Stück, inkl. Versand</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="180" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-print" data-active="1" data-id="gfp-1">
+            <td><div class="item-name">Flyer A5 <span class="item-tag tag-print">Print</span></div><div class="item-note">Druck 500 Stück, beidseitig, mit QR</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="260" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-print" data-active="1" data-id="gfp-2">
+            <td><div class="item-name">Menükarte Print <span class="item-tag tag-print">Print</span></div><div class="item-note">Laminatdruck, 20 Stück</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="320" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-print" data-active="1" data-id="gfp-3">
+            <td><div class="item-name">Kundenstopper Poster A1 <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Starkes Angebot, 1 Stück, Großformat</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="220" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-print" data-active="1" data-id="gfp-4">
+            <td><div class="item-name">Fensterbeklebung <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Folie + Montage, ca. 2m²</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="420" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-print" data-active="1" data-id="gfp-5">
+            <td><div class="item-name">Opening Event Poster <span class="item-tag tag-print">Print</span></div><div class="item-note">28.08. Sonderposter, 3 Stück A1</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="120" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-print" data-active="1" data-id="gfp-gest" style="background:rgba(232,236,139,.18);border-top:2px solid rgba(0,0,0,.12);">
+            <td><div class="item-name">Gestaltungsarbeit / Grafik Design <span class="item-tag tag-service">Service</span></div><div class="item-note">Mein Honorar für Design-Arbeit in dieser Kategorie</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="0" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- STORE & POS -->
+    <div class="cat-head open" onclick="toggleCat(this)">
+      <h3>🏪 Store & POS</h3>
+      <span><span class="cat-sum" id="cs-grafik-pos">0 €</span> &nbsp;<span class="chevron">▲</span></span>
+    </div>
+    <div class="cat-body open" id="cb-grafik-pos">
+      <table class="cost-table">
+        <thead><tr><th>Posten</th><th>Betrag</th><th class="note-col">Notiz</th><th>Aktiv</th></tr></thead>
+        <tbody>
+          <tr data-tab="grafik" data-cat="grafik-pos" data-active="1" data-id="gpos-0">
+            <td><div class="item-name">Tischaufsteller / Table Tent <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">A5, 30 Stück, mit Google-Review-QR, laminiert</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="160" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-pos" data-active="1" data-id="gpos-1">
+            <td><div class="item-name">Sticker & Aufkleber <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Logo-Sticker, 500 Stück, für Boxen & Tüten</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="140" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-pos" data-active="1" data-id="gpos-2">
+            <td><div class="item-name">Loyalty Card / Stempelkarte <span class="item-tag tag-print">Print</span></div><div class="item-note">Druck, 500 Stück, laminiert</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="190" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-pos" data-active="1" data-id="gpos-3">
+            <td><div class="item-name">Packaging (Boxen + Tüten) <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Logo-Boxen + Papiertüten, 200 Stück je</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="480" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-pos" data-active="0" data-id="gpos-4">
+            <td><div class="item-name">Staff Shirts <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Bedruckt, 10 Stück, Logoprint Brust + Rücken</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="280" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-pos" data-active="1" data-id="gpos-5">
+            <td><div class="item-name">Goodie Bag Produktion <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Branded Tasche, 25 Stück für Creator</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="175" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-pos" data-active="1" data-id="gpos-6">
+            <td><div class="item-name">First Taste Club Ticket <span class="item-tag tag-print">Print</span></div><div class="item-note">Digitaldruck, 30 Stück, edel</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="110" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-pos" data-active="1" data-id="gpos-gest" style="background:rgba(232,236,139,.18);border-top:2px solid rgba(0,0,0,.12);">
+            <td><div class="item-name">Gestaltungsarbeit / Grafik Design <span class="item-tag tag-service">Service</span></div><div class="item-note">Mein Honorar für Design-Arbeit in dieser Kategorie</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="0" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- DIGITAL -->
+    <div class="cat-head open" onclick="toggleCat(this)">
+      <h3>📱 Digital & Social</h3>
+      <span><span class="cat-sum" id="cs-grafik-digital">0 €</span> &nbsp;<span class="chevron">▲</span></span>
+    </div>
+    <div class="cat-body open" id="cb-grafik-digital">
+      <table class="cost-table">
+        <thead><tr><th>Posten</th><th>Betrag</th><th class="note-col">Notiz</th><th>Aktiv</th></tr></thead>
+        <tbody>
+          <tr data-tab="grafik" data-cat="grafik-digital" data-active="1" data-id="gfd-0">
+            <td><div class="item-name">Instagram Templates <span class="item-tag tag-digital">Digital</span></div><div class="item-note">Post 1:1, Story 9:16, Reels-Cover, je 5 Varianten</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="220" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-digital" data-active="1" data-id="gfd-1">
+            <td><div class="item-name">Wolt / Lieferando Hero Banner <span class="item-tag tag-digital">Digital</span></div><div class="item-note">Wolt 1920×1080 + Lieferando 1024×200</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="160" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-digital" data-active="1" data-id="gfd-2">
+            <td><div class="item-name">Google My Business Fotos <span class="item-tag tag-service">Service</span></div><div class="item-note">Professionelles Food-Shooting für GMB, min. 10 Bilder</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="350" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-digital" data-active="1" data-id="gfd-3">
+            <td><div class="item-name">Bildschirm-Menu (iiyama) <span class="item-tag tag-digital">Digital</span></div><div class="item-note">Layout für Menuboards, je Bildschirm-Setup</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="180" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-digital" data-active="0" data-id="gfd-4">
+            <td><div class="item-name">Website Grafiken <span class="item-tag tag-digital">Digital</span></div><div class="item-note">Hero-Banner, Menü-Sektion, About-Bilder</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="260" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-digital" data-active="0" data-id="gfd-5">
+            <td><div class="item-name">E-Mail Newsletter Header <span class="item-tag tag-digital">Digital</span></div><div class="item-note">Branded Template, 600px, ready-to-use</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="90" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-digital" data-active="1" data-id="gfd-6">
+            <td><div class="item-name">Display-Screens iiyama (5×) <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">5 Stück à ca. 750 €, Menüboard-Displays für den Store</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="3750" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-digital" data-active="1" data-id="gfd-7">
+            <td><div class="item-name">Display-Halterungen (5×) <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Wandhalterungen für die 5 Screens, inkl. Montage</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="200" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="grafik" data-cat="grafik-digital" data-active="1" data-id="gfd-gest" style="background:rgba(232,236,139,.18);border-top:2px solid rgba(0,0,0,.12);">
+            <td><div class="item-name">Gestaltungsarbeit / Grafik Design <span class="item-tag tag-service">Service</span></div><div class="item-note">Mein Honorar für Design-Arbeit in dieser Kategorie</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="0" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- /tab grafik -->
+
+  <!-- ═══════ TAB: MARKETING ═══════ -->
+  <div class="tab-panel" id="tab-marketing">
+    <div class="bulk">
+      <button onclick="bulkToggle('marketing',true)">Alle aktivieren</button>
+      <button onclick="bulkToggle('marketing',false)">Alle deaktivieren</button>
+    </div>
+
+    <!-- PAID ADS -->
+    <div class="cat-head open" onclick="toggleCat(this)">
+      <h3>💸 Paid Advertising</h3>
+      <span><span class="cat-sum" id="cs-marketing-ads">0 €</span> &nbsp;<span class="chevron">▲</span></span>
+    </div>
+    <div class="cat-body open" id="cb-marketing-ads">
+      <table class="cost-table">
+        <thead><tr><th>Posten</th><th>Betrag</th><th class="note-col">Notiz</th><th>Aktiv</th></tr></thead>
+        <tbody>
+          <tr data-tab="marketing" data-cat="marketing-ads" data-active="1" data-id="mads-0">
+            <td><div class="item-name">Meta Ads (Instagram / Facebook) <span class="item-tag tag-ads">Ads</span></div><div class="item-note">2 Assets, 2 Wochen, Berlin Geo-Targeting</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="400" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-ads" data-active="0" data-id="mads-1">
+            <td><div class="item-name">Google Ads Local <span class="item-tag tag-ads">Ads</span></div><div class="item-note">Opening-Boost Woche, Local Campaigns + Search</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="150" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-ads" data-active="0" data-id="mads-2">
+            <td><div class="item-name">TikTok / YouTube Ads <span class="item-tag tag-ads">Ads</span></div><div class="item-note">Optionaler Push über weitere Kanäle</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="100" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- EVENT & LOCATION -->
+    <div class="cat-head open" onclick="toggleCat(this)">
+      <h3>🎉 Event & Opening</h3>
+      <span><span class="cat-sum" id="cs-marketing-event">0 €</span> &nbsp;<span class="chevron">▲</span></span>
+    </div>
+    <div class="cat-body open" id="cb-marketing-event">
+      <table class="cost-table">
+        <thead><tr><th>Posten</th><th>Betrag</th><th class="note-col">Notiz</th><th>Aktiv</th></tr></thead>
+        <tbody>
+          <tr data-tab="marketing" data-cat="marketing-event" data-active="1" data-id="mev-0">
+            <td><div class="item-name">Entertainment / DJ <span class="item-tag tag-service">Service</span></div><div class="item-note">Für Pre-Opening 27.08. + Eröffnung 28.08.</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="400" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-event" data-active="1" data-id="mev-1">
+            <td><div class="item-name">Foto- und Video-Crew Opening <span class="item-tag tag-service">Service</span></div><div class="item-note">Professioneller Dreh am 28.08. für Hero-Reel</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="450" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-event" data-active="1" data-id="mev-2">
+            <td><div class="item-name">Deko (Ballons, Banner, Foto-Wand) <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Markenfarben, Backdrop für Content-Ecke</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="180" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-event" data-active="1" data-id="mev-3">
+            <td><div class="item-name">Goodie Bag Inhalt (Creator) <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Voucher, Merch-Items, Signature-Produkt, 25 Sets</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="250" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-event" data-active="1" data-id="mev-4">
+            <td><div class="item-name">Free Merch (Caps / Totes) <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Glücksrad-Gewinn + Creator-Bags, 30 Stück</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="380" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-event" data-active="1" data-id="mev-5">
+            <td><div class="item-name">Catering Pre-Opening (Crew & Presse) <span class="item-tag tag-service">Service</span></div><div class="item-note">Food & Drinks für 27.08. Creator-Event</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="280" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-event" data-active="1" data-id="mev-6">
+            <td><div class="item-name">Organisation &amp; Controlling · Event-Tag <span class="item-tag tag-service">Service</span></div><div class="item-note">Call-Sheet, Ablaufplan &amp; Regie am Tag, Gästelisten-Übersicht, Vorbereitung, Korrespondenz &amp; Kommunikation</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="500" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-event" data-active="1" data-id="mev-7">
+            <td><div class="item-name">Influencer-Budget Opening <span class="item-tag tag-service">Service</span></div><div class="item-note">Einladung &amp; Honorar Creator/Influencer · Spanne: 500–1.000 €, je nach Anzahl &amp; Reichweite</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="1000" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PRINT & PHYSICAL -->
+    <div class="cat-head open" onclick="toggleCat(this)">
+      <h3>📦 Bestellungen & Aufsteller</h3>
+      <span><span class="cat-sum" id="cs-marketing-order">0 €</span> &nbsp;<span class="chevron">▲</span></span>
+    </div>
+    <div class="cat-body open" id="cb-marketing-order">
+      <table class="cost-table">
+        <thead><tr><th>Posten</th><th>Betrag</th><th class="note-col">Notiz</th><th>Aktiv</th></tr></thead>
+        <tbody>
+          <tr data-tab="marketing" data-cat="marketing-order" data-active="1" data-id="mord-0">
+            <td><div class="item-name">Kundenstopper Aufsteller <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Aluminium-Kundenstopper A1, 1 Stück inkl. Druck</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="130" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-order" data-active="1" data-id="mord-1">
+            <td><div class="item-name">Tresenkarten-Aufsteller <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Acryl-Aufsteller A5, 20 Stück für Tische & Theke</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="95" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-order" data-active="1" data-id="mord-2">
+            <td><div class="item-name">Google Review QR Aufsteller <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Acryl oder Hartschaum, 10 Stück</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="60" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-order" data-active="1" data-id="mord-3">
+            <td><div class="item-name">Glücksrad physisch (Pizza-Scheibe) <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">Große Drehscheibe, Sonderproduktion</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="320" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-order" data-active="1" data-id="mord-4">
+            <td><div class="item-name">Glücksrad · Amazon <span class="item-tag tag-order">Bestellen</span></div><div class="item-note">ca. 120 €, Bestellung über Amazon, inkl. Aufbau am Event-Tag</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="120" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- DISTRIBUTION -->
+    <div class="cat-head open" onclick="toggleCat(this)">
+      <h3>🪧 Verteilung & PR</h3>
+      <span><span class="cat-sum" id="cs-marketing-pr">0 €</span> &nbsp;<span class="chevron">▲</span></span>
+    </div>
+    <div class="cat-body open" id="cb-marketing-pr">
+      <table class="cost-table">
+        <thead><tr><th>Posten</th><th>Betrag</th><th class="note-col">Notiz</th><th>Aktiv</th></tr></thead>
+        <tbody>
+          <tr data-tab="marketing" data-cat="marketing-pr" data-active="1" data-id="mpr-0">
+            <td><div class="item-name">Flyering (Personal) <span class="item-tag tag-service">Service</span></div><div class="item-note">2 Personen × 3 Std. Verteilung, T-4 Tage</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="80" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" checked onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-pr" data-active="0" data-id="mpr-1">
+            <td><div class="item-name">PR-Agentur / Presse-Service <span class="item-tag tag-service">Service</span></div><div class="item-note">Optional: externe Unterstützung für Medien-Kontakte</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="500" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+          <tr data-tab="marketing" data-cat="marketing-pr" data-active="0" data-id="mpr-2">
+            <td><div class="item-name">Influencer-Honorar <span class="item-tag tag-service">Service</span></div><div class="item-note">Bezahlte Creator (falls benötigt), pro Person</div></td>
+            <td class="amt-cell"><div class="amt-wrap"><span>€</span><input class="amt-input" type="number" value="200" min="0"></div></td>
+            <td class="notiz-cell note-col"><input class="notiz-input" type="text" placeholder="Notiz…" maxlength="80"></td>
+            <td class="toggle-cell"><label class="toggle"><input type="checkbox" onchange="recalc()"><span class="slider"></span></label></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /tab marketing -->
+
+  <!-- ═══════ TAB: ÜBERSICHT ═══════ -->
+  <div class="tab-panel" id="tab-uebersicht">
+    <div id="ueb-content"></div>
+  </div>
+</div>
+
+<!-- STICKY TOTAL BAR -->
+<div class="sticky-total">
+  <div class="cols">
+    <div class="col"><div class="lbl">🎨 Grafik</div><div class="val g" id="total-grafik">0 €</div></div>
+    <div class="col"><div class="lbl">🚀 Marketing</div><div class="val y" id="total-marketing">0 €</div></div>
+  </div>
+  <div class="combined">
+    <small>Gesamt aktiv</small><br>
+    <span id="total-all">0 €</span>
+  </div>
+  <button class="save-btn" onclick="saveData()">💾 Speichern</button>
+</div>
+
+<script>
+/* farbband overlay */
+(function(){
+  const order=['--cheesy','--veggie','--blue','--tomato','--pink','--asphalt','--cheesy','--blue'];
+  const cs=getComputedStyle(document.documentElement);
+  const ob=document.getElementById('ob');
+  order.forEach(c=>{const s=document.createElement('span');s.style.background=cs.getPropertyValue(c).trim();s.style.display='block';s.style.height='100%';ob.appendChild(s);});
+})();
+
+/* burger */
+(function(){
+  const b=document.getElementById('burger'),ov=document.getElementById('ov');
+  const tog=o=>{const on=o??!document.body.classList.contains('mo');document.body.classList.toggle('mo',on);b.setAttribute('aria-expanded',on);};
+  b.addEventListener('click',()=>tog());
+  ov.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>tog(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')tog(false);});
+})();
+
+/* tabs */
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const idx={grafik:0,marketing:1,uebersicht:2}[id]??0;
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  if(id==='uebersicht') buildUebersicht();
+  else recalc();
+}
+
+/* collapsible categories */
+function toggleCat(head){
+  head.classList.toggle('open');
+  const id=head.nextElementSibling?.id;
+  if(id)document.getElementById(id)?.classList.toggle('open');
+}
+
+/* bulk toggle */
+function bulkToggle(tab,state){
+  document.querySelectorAll(`tr[data-tab="${tab}"] input[type="checkbox"]`).forEach(cb=>{cb.checked=state;});
+  recalc();
+}
+
+/* formatting */
+const fmt=n=>n.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0})+' €';
+
+/* RECALC */
+function recalc(){
+  const cats={};
+  const tabTotals={grafik:0,marketing:0};
+
+  document.querySelectorAll('tr[data-tab]').forEach(row=>{
+    const cb=row.querySelector('input[type="checkbox"]');
+    const inp=row.querySelector('.amt-input');
+    const tab=row.dataset.tab;
+    const cat=row.dataset.cat;
+    const active=cb?.checked;
+    const val=active?(parseFloat(inp?.value)||0):0;
+
+    // row styling
+    row.classList.toggle('inactive',!active);
+
+    if(!cats[cat])cats[cat]=0;
+    cats[cat]+=val;
+    tabTotals[tab]+=val;
+  });
+
+  // update category sums
+  Object.entries(cats).forEach(([cat,sum])=>{
+    const el=document.getElementById('cs-'+cat);
+    if(el)el.textContent=fmt(sum);
+  });
+
+  // update totals
+  document.getElementById('total-grafik').textContent=fmt(tabTotals.grafik);
+  document.getElementById('total-marketing').textContent=fmt(tabTotals.marketing);
+  document.getElementById('total-all').textContent=fmt(tabTotals.grafik+tabTotals.marketing);
+  if(document.getElementById('tab-uebersicht')?.classList.contains('active')) buildUebersicht();
+}
+
+
+/* ── ÜBERSICHT ─────────────────────────────────────────────────────── */
+const CAT_LABELS={
+  'grafik-print':'🖨️ Print & Outdoor',
+  'grafik-pos':'🏪 Store & POS',
+  'grafik-digital':'📱 Digital & Social',
+  'marketing-ads':'💸 Paid Advertising',
+  'marketing-event':'🎉 Event & Opening',
+  'marketing-order':'📦 Bestellungen & Aufsteller',
+  'marketing-pr':'🪧 Verteilung & PR',
+};
+const fmt2=n=>n.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0})+' €';
+
+function buildUebersicht(){
+  const allRows=[...document.querySelectorAll('tr[data-id]')];
+  const gestRows=allRows.filter(r=>r.dataset.id.endsWith('-gest'));
+  const prodRows=allRows.filter(r=>!r.dataset.id.endsWith('-gest'));
+
+  const rowVal=r=>r.querySelector('input[type=checkbox]').checked?(parseFloat(r.querySelector('.amt-input').value)||0):0;
+  const rowName=r=>r.querySelector('.item-name')?.childNodes[0]?.textContent?.trim()||'';
+  const rowNote=r=>r.querySelector('.item-note')?.textContent?.trim()||'';
+
+  const gestTotal=gestRows.reduce((s,r)=>s+rowVal(r),0);
+  const prodTotal=prodRows.reduce((s,r)=>s+rowVal(r),0);
+  const grandTotal=gestTotal+prodTotal;
+
+  // Group prod rows by cat
+  const byCat={};
+  prodRows.forEach(r=>{
+    const cat=r.dataset.cat;
+    if(!byCat[cat])byCat[cat]=[];
+    byCat[cat].push(r);
+  });
+
+  let html='';
+
+  // Summary cards
+  html+=`<div class="ueb-cards">
+    <div class="ueb-card prod"><div class="uc-lbl">Produktionskosten</div><div class="uc-val">${fmt2(prodTotal)}</div></div>
+    <div class="ueb-card honor"><div class="uc-lbl">Mein Honorar</div><div class="uc-val">${fmt2(gestTotal)}</div></div>
+    <div class="ueb-card total"><div class="uc-lbl">Gesamt aktiv</div><div class="uc-val">${fmt2(grandTotal)}</div></div>
+  </div>`;
+
+  // PRODUKTION section
+  let prodRows_html='';
+  Object.entries(byCat).forEach(([cat,rows])=>{
+    const activeRows=rows.filter(r=>r.querySelector('input[type=checkbox]').checked);
+    if(!activeRows.length)return;
+    const catSum=activeRows.reduce((s,r)=>s+rowVal(r),0);
+    prodRows_html+=`<tr class="ueb-cat-row"><td colspan="3">${CAT_LABELS[cat]||cat}</td></tr>`;
+    activeRows.forEach(r=>{
+      const note=rowNote(r);
+      prodRows_html+=`<tr><td>${rowName(r)}${note?`<br><small style="font-size:.72rem;opacity:.5">${note}</small>`:''}</td><td></td><td class="ra">${fmt2(rowVal(r))}</td></tr>`;
+    });
+    prodRows_html+=`<tr class="ueb-subtotal"><td colspan="2" style="font-size:.75rem;opacity:.6">Summe ${CAT_LABELS[cat]?.replace(/^../,'').trim()||cat}</td><td class="ra">${fmt2(catSum)}</td></tr>`;
+  });
+
+  html+=`<div class="ueb-section">
+    <div class="ueb-sec-head"><h3>📦 Produktionskosten</h3><span class="ueb-sec-sum">${fmt2(prodTotal)}</span></div>
+    <table class="ueb-tbl"><thead><tr><th>Posten</th><th></th><th class="ra">Betrag</th></tr></thead>
+    <tbody>${prodRows_html||'<tr><td colspan="3" style="padding:16px;opacity:.5;font-style:italic">Keine aktiven Posten.</td></tr>'}</tbody></table>
+  </div>`;
+
+  // GESTALTUNG section
+  let gestRows_html='';
+  gestRows.forEach(r=>{
+    const val=rowVal(r);
+    const active=r.querySelector('input[type=checkbox]').checked;
+    const label=CAT_LABELS[r.dataset.cat]?.replace(/^../,'').trim()||r.dataset.cat;
+    const notiz=r.querySelector('.notiz-input')?.value||'';
+    gestRows_html+=`<tr class="ueb-honor-row${active?' highlight':''}">
+      <td><strong>${label}</strong>${notiz?`<small>${notiz}</small>`:''}</td>
+      <td style="font-size:.76rem;opacity:.5">${active?'aktiv':'inaktiv'}</td>
+      <td class="ra" style="${active?'':'opacity:.3'}">${fmt2(val)}</td>
+    </tr>`;
+  });
+
+  html+=`<div class="ueb-section">
+    <div class="ueb-sec-head" style="background:var(--green-ink)"><h3>✏️ Gestaltungsarbeiten – Mein Honorar</h3><span class="ueb-sec-sum">${fmt2(gestTotal)}</span></div>
+    <table class="ueb-tbl"><thead><tr><th>Kategorie</th><th>Status</th><th class="ra">Honorar</th></tr></thead>
+    <tbody>${gestRows_html}</tbody></table>
+  </div>`;
+
+  document.getElementById('ueb-content').innerHTML=html;
+}
+
+/* live input update */
+document.querySelectorAll('.amt-input').forEach(inp=>{
+  inp.addEventListener('input',recalc);
+});
+
+/* save + restore */
+function saveData(){
+  const data={};
+  document.querySelectorAll('tr[data-id]').forEach(row=>{
+    data[row.dataset.id]={
+      active:row.querySelector('input[type="checkbox"]')?.checked,
+      val:row.querySelector('.amt-input')?.value,
+      notiz:row.querySelector('.notiz-input')?.value||''
+    };
+  });
+  try{
+    localStorage.setItem('pz_kosten',JSON.stringify(data));
+    const btn=document.querySelector('.save-btn');
+    btn.textContent='✅ Gespeichert';
+    setTimeout(()=>btn.textContent='💾 Speichern',1800);
+  }catch(_){}
+}
+
+function restoreData(){
+  try{
+    const raw=localStorage.getItem('pz_kosten');
+    if(!raw)return;
+    const data=JSON.parse(raw);
+    // Legacy: array-format (index-based) → migrate by position
+    if(Array.isArray(data)){
+      document.querySelectorAll('tr[data-id]').forEach((row,i)=>{
+        if(!data[i])return;
+        const cb=row.querySelector('input[type="checkbox"]');
+        const inp=row.querySelector('.amt-input');
+        const ntz=row.querySelector('.notiz-input');
+        if(cb&&data[i].active!==undefined)cb.checked=data[i].active;
+        if(inp&&data[i].val!==undefined)inp.value=data[i].val;
+        if(ntz&&data[i].notiz!==undefined)ntz.value=data[i].notiz;
+      });
+      return;
+    }
+    // Current: object-format (data-id keyed)
+    document.querySelectorAll('tr[data-id]').forEach(row=>{
+      const d=data[row.dataset.id];
+      if(!d)return;
+      const cb=row.querySelector('input[type="checkbox"]');
+      const inp=row.querySelector('.amt-input');
+      const ntz=row.querySelector('.notiz-input');
+      if(cb&&d.active!==undefined)cb.checked=d.active;
+      if(inp&&d.val!==undefined)inp.value=d.val;
+      if(ntz&&d.notiz!==undefined)ntz.value=d.notiz;
+    });
+  }catch(_){}
+}
+restoreData();
+recalc();
+
+/* progress */
+const pg=document.getElementById('prog');
+addEventListener('scroll',()=>{const h=document.documentElement;pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
